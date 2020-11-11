@@ -40,39 +40,39 @@ body {
 	background-color: #00b354;
 }
 
-.item8 {
+.itemA {
   grid-area: 2 / 2 / 4 / 4;
 }
 
-.item10 {
+.itemB {
 grid-area: 2 / 5 / 4 / 7;
 }
 
-.item16 {
+.itemC {
 grid-area: 2 / 10 / 4 / 8;
 }
 
-.itemx {
+.itemD {
   grid-area: 7 / 2 / 5 / 4;
 }
 
-.itemc {
+.itemE {
 grid-area: 7 / 5 / 5 / 7;
 }
 
-.itemv {
+.itemF {
 grid-area: 7 / 10 / 5 / 8;
 }
 
-.itemz {
+.itemG {
   grid-area: 10 / 2 / 8 / 4;
 }
 
-.itema {
+.itemH {
 grid-area: 10 / 5 / 8 / 7;
 }
 
-.items {
+.itemI {
 grid-area: 10 / 10 / 8 / 8;
 }
 
