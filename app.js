@@ -1,3 +1,5 @@
+
+
 // automatically generate html for playboard
 const generatePlayboard = function(){
 
@@ -6,25 +8,31 @@ const generatePlayboard = function(){
      *  { "grid-row-start" → "1", "grid-row-end" → "5", "grid-column-start" → "1", "grid-column-end" → "5" }
      *  */ 
 
+    // this is the pointer to the html playboard
     let playboard = document.getElementById("playboard");
 
+    // starting coordinates within grid-lines
     let xCoordinate = 1;
     let yCoordinate = 1;
 
+    // TODO: make this number choosable
     let numberOfFields = 100;
     let allFields = [];
 
+    // create and add all the fields onto the playboard
     for(let field = 1;field <= numberOfFields;field++){
-
-        // let html = `<div class="item">${field}</div>`;
         let element = document.createElement('div');
         element.classList.add("item");
         element.id = `field-${field}`;
-        // element.innerHTML = `${field}`;
-        //playboard.innerHTML = html;
+        element.innerHTML = `${field}`;
         playboard.appendChild(element);
+    }
 
-
+    // define all the fields around each field
+    for(let field = 1;field <= numberOfFields;field++){
+        let targetID = `field-${field}`;
+        let targetElement = document.getElementById(targetID);
+        findOutNeighbours(targetElement,field,numberOfFields);    
     }
 
     // set properties
@@ -39,8 +47,36 @@ const generatePlayboard = function(){
 
 
 // find out neighbours (of a field)
-const findOutNeighbours = function(){
+const findOutNeighbours = function(element,fieldNumber,numberOfFields){
+
+    let id = element.id;
+
+    // neighbour variables
+    let rightNeighbour;
+    let leftNeighbour;
+    let topNeighbour;
+    let bottomNeighbour;
+
+    if(fieldNumber%10 == 0){
+        rightNeighbour = null;
+    }else{
+        rightNeighbour = (fieldNumber +1);
+    }
+
+    console.log(`id = ${id}, rightNeighbour=${rightNeighbour}`);
+
+    let style = window.getComputedStyle(element);
+
+    let xStart = style.getPropertyValue('grid-row-start');
+    let xEnd = style.getPropertyValue('grid-row-end');
+    let yStart = style.getPropertyValue('grid-column-start');
+    let yEnd = style.getPropertyValue('grid-column-end');
+
+    let coordinates = `${yStart} / ${xStart} / ${yEnd} / ${xEnd}`;
+    console.log(`coordinates = ${coordinates}`);
+    console.table([coordinates]);
 
 }
 
 generatePlayboard();
+
