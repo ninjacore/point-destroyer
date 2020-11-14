@@ -64,6 +64,7 @@ const findOutNeighbours = function(element,fieldNumber,numberOfFields){
         rightNeighbour = (fieldNumber +1);
     }
 
+    // same for left neighbour but -1
     if((fieldNumber-1)%10 == 0){
         leftNeighbour = null;
 
@@ -71,7 +72,21 @@ const findOutNeighbours = function(element,fieldNumber,numberOfFields){
         leftNeighbour = (fieldNumber -1);
     }
 
-    console.log(`id = ${id}, leftNeighbour=${leftNeighbour}, rightNeighbour=${rightNeighbour}`);
+    // first row has no neighbours on top
+    if(fieldNumber-10 <= 0){
+        topNeighbour = null;
+    }else{
+        topNeighbour = fieldNumber - 10;
+    }
+
+    // last row has no neighbours bellow
+    if(fieldNumber + 10 > numberOfFields){
+        bottomNeighbour = null;
+    }else{
+        bottomNeighbour = fieldNumber + 10;
+    }
+
+    console.log(`id = ${id}, leftNeighbour=${leftNeighbour}, rightNeighbour=${rightNeighbour}, topNeighbour=${topNeighbour}, bottomNeighbour=${bottomNeighbour}`);
 
     let style = window.getComputedStyle(element);
 
