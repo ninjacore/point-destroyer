@@ -57,13 +57,21 @@ const findOutNeighbours = function(element,fieldNumber,numberOfFields){
     let topNeighbour;
     let bottomNeighbour;
 
+    // every multiple of 10 has no right neighbour (e.g. 30)
     if(fieldNumber%10 == 0){
         rightNeighbour = null;
     }else{
         rightNeighbour = (fieldNumber +1);
     }
 
-    console.log(`id = ${id}, rightNeighbour=${rightNeighbour}`);
+    if((fieldNumber-1)%10 == 0){
+        leftNeighbour = null;
+
+    }else{
+        leftNeighbour = (fieldNumber -1);
+    }
+
+    console.log(`id = ${id}, leftNeighbour=${leftNeighbour}, rightNeighbour=${rightNeighbour}`);
 
     let style = window.getComputedStyle(element);
 
