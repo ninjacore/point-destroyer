@@ -42,6 +42,7 @@ body {
 
 .itemA {
   grid-area: 2 / 2 / 4 / 4;
+/* co-ord. Y-start / X-start / Y-end / X-end */
 }
 
 .itemB {
