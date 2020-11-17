@@ -41,6 +41,26 @@ body {
 	background-color: #00b354;
 }
 
+.start-field{
+  color: #ff6600;
+}
+
+.end-field{
+  color: #ff0000;
+}
+
+.point-field{
+  color: #0000e6;
+}
+
+.cut-out-field{
+  color: #00b354;
+}
+
+
+
+
+
 .itemA {
   grid-area: 2 / 2 / 4 / 4;
 /* co-ord. Y-start / X-start / Y-end / X-end */

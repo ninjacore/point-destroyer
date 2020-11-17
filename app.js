@@ -45,6 +45,37 @@ const generatePlayboard = function(){
 
 }
 
+// mark fields according to game
+const markFields = function(startFields,endFields,cutOutFields,pointFields){
+
+    // set start fields
+    for(let i = 0; i < startFields.length;i++){
+        console.log(`%c field-${startFields[i]}`,'color:blue;font-weight:bold;');
+        let currentField = document.getElementById(`field-${startFields[i]}`);
+        currentField.classList.add("start-field");
+    }
+
+    // set end field
+    for(let i = 0; i < endFields.length ;i++){
+        let currentField = document.getElementById(`field-${endFields[i]}`);
+        currentField.classList.add("end-field");
+    }
+
+    // set cut-out fields
+    for(let i = 0; i < cutOutFields.length; i++){
+        let currentField = document.getElementById(`field-${cutOutFields[i]}`);
+        currentField.classList.add('cut-out-field');        
+    }
+
+    // set point fields
+    for(let i = 0; i < pointFields.length; i++){
+        let currentField = document.getElementById(`field-${pointFields[i]}`);
+        currentField.classList.add('point-field');
+    }
+
+
+
+}
 
 // find out neighbours (of a field)
 const findOutNeighbours = function(element,fieldNumber,numberOfFields){
@@ -103,3 +134,9 @@ const findOutNeighbours = function(element,fieldNumber,numberOfFields){
 
 generatePlayboard();
 
+let startFields = [7,10,70];
+let endFields = [31];
+let cutOutFields = [1,2,3,11,12,13,21,22,23,15,16,25,26,18,19,28,29,38,39,42,43,45,46,48,49,52,53,55,56,58,59,72,73,75,76,77,78,79,82,83,85,86,87,88,89];
+let pointFields = [14,40,66,90,93];
+
+markFields(startFields,endFields,cutOutFields,pointFields);
