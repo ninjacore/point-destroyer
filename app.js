@@ -24,7 +24,7 @@ const generatePlayboard = function(){
         let element = document.createElement('div');
         element.classList.add("item");
         element.id = `field-${field}`;
-        element.innerHTML = `${field}`;
+        element.innerHTML = ''; //`${field}`;
         playboard.appendChild(element);
     }
 

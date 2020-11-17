@@ -15,15 +15,16 @@ body {
 }
 
 #container{
-  /*border: 2px solid red;*/
+  /*background-color: red;*/
 }
 
 .grid-container {
   margin: auto;
   display: grid;
   grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
-  grid-gap: 2px;
+  /*grid-gap: 2px;*/
   background-color: #00b354;
+  /*border: 2px solid red;*/
   padding: 10px;
   height: 900px;
   width: 900px;
@@ -31,30 +32,30 @@ body {
 }
 
 .grid-container > div {
-  background-color: #008033;
+  /*background-color: #008033;*/
   text-align: center;
   padding: 20px 0;
   font-size: 30px;
 }
 
 .item {
-	background-color: #00b354;
+  background-color: #008033;
 }
 
 .start-field{
-  color: #ff6600;
+  background-color: #ff6600;
 }
 
 .end-field{
-  color: #ff0000;
+  background-color: #ff0000;
 }
 
 .point-field{
-  color: #0000e6;
+  background-color: #0000e6;
 }
 
 .cut-out-field{
-  color: #00b354;
+  background-color: #00b354;
 }
 
 
