@@ -1,7 +1,8 @@
 /* css style file */
 h1 {
- text-align: center;
+ text-align: left;
  margin-top: 50px;
+ margin-left: 2em;
  font-family: OCR A Std, monospace;
  font-size: 50px;
 }
