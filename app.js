@@ -148,9 +148,36 @@ const startGame = function(){
     // start game
     console.log("GAME HAS STARTED!!!");
 
+    let fields = document.getElementsByClassName("item");
+    let validFields = []
+    Array.from(fields).forEach(function(field){
+        
+        if(field.classList.contains("cut-out-field")){
+            // for testing
+            console.log("%c invalid field:","color: red; font-weight: bolld;");
+            console.table([field.classList]);
+        }else{
+            // for testing
+            console.log("%c valid field:","color: green; font-weight:bold;")
+            console.table([field.classList]);
+
+            validFields.push(field);
+        }
+
+    })
+
+    Array.from(validFields).forEach(function(field){
+        field.addEventListener('mouseover', (ev) => {           
+            // draw path when field is hovered 
+            ev.target.classList.add('path-field');            
+        }
+        
+        
+        );
+
+    })
+
 }
-
-
 
 
 // MAIN 
