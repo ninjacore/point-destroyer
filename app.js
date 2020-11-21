@@ -1,4 +1,4 @@
-
+// DECLARATIONS
 
 // automatically generate html for playboard
 const generatePlayboard = function(){
@@ -73,7 +73,8 @@ const markFields = function(startFields,endFields,cutOutFields,pointFields){
         currentField.classList.add('point-field');
     }
 
-
+    // activate all event listeners on ready board
+    addAllEventListeners();
 
 }
 
@@ -132,6 +133,29 @@ const findOutNeighbours = function(element,fieldNumber,numberOfFields){
 
 }
 
+
+const addAllEventListeners = function(){
+    // event listener configurations
+    let startElements = document.getElementsByClassName("start-field");
+
+    Array.from(startElements).forEach(function(startElement) {
+        startElement.addEventListener('click', startGame);
+    });
+}
+
+
+const startGame = function(){
+    // start game
+    console.log("GAME HAS STARTED!!!");
+
+}
+
+
+
+
+// MAIN 
+
+
 generatePlayboard();
 
 let startFields = [7,10,70];
@@ -140,3 +164,4 @@ let cutOutFields = [1,2,3,11,12,13,21,22,23,15,16,25,26,18,19,28,29,38,39,42,43,
 let pointFields = [14,40,66,90,93];
 
 markFields(startFields,endFields,cutOutFields,pointFields);
+// TODO: possibly need to removeEventListener() -> use former startFields / "start-field" elements before loading new playboard
