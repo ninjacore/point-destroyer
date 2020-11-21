@@ -167,9 +167,14 @@ const startGame = function(){
     })
 
     Array.from(validFields).forEach(function(field){
-        field.addEventListener('mouseover', (ev) => {           
+        field.addEventListener('mouseover', (ev) => {   
+            // TODO: check if field is neighbour to a 'path-field'
+            //  and only then:
+            
             // draw path when field is hovered 
-            ev.target.classList.add('path-field');            
+            ev.target.classList.add('path-field');
+
+            // TODO: maybe remove path if going back?
         }
         
         
