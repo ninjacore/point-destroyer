@@ -220,33 +220,6 @@ const startGame = function(event){
 
     })
 
-//     // create "mouseout" event listener for each field that is not cut-out
-//     Array.from(validFields).forEach(function(field){
-//         field.addEventListener('mouseout', (ev) => {
-// 
-// 
-//             // clear path if going backwards
-//             let numberOfPathFields = currentPathFields.length;
-//             console.log(`%c 🐸 testing if: ${currentPathFields[numberOfPathFields-1]} == ${ev.target.id}`,'font-weight:bold;');
-// 
-//             if(currentPathFields[numberOfPathFields-1] == ev.target.id){
-//                 // for testing
-//                 console.log(`%c 🐼 removing ${ev.target.id} from currentPathFields...`,'font-weight:bold;');
-// 
-//                 // remove last element from path
-//                 currentPathFields.pop();
-//                 ev.target.classList.remove('path-field');
-//             }                            
-            // 
-//             console.table([currentPathFields]);
-// 
-// 
-// 
-//         })
-// 
-// 
-//     })
-
 }
 
 
