@@ -173,6 +173,12 @@ const startGame = function(){
             
             // draw path when field is hovered 
             ev.target.classList.add('path-field');
+            
+            // to make sure the start-field also counts as path
+            if(ev.relatedTarget.classList.contains("start-field")){
+                ev.relatedTarget.classList.add('path-field');
+            }
+            
 
             // TODO: maybe remove path if going back?
         }
