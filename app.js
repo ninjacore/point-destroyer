@@ -147,9 +147,14 @@ const addAllEventListeners = function(){
 }
 
 
-const startGame = function(){
+const startGame = function(event){
     // start game
     console.log("GAME HAS STARTED!!!");
+
+    event.target.classList.add('path-field');
+    currentPathFields.push(event.target.id);
+
+                
 
     let fields = document.getElementsByClassName("item");
     let validFields = []
@@ -177,11 +182,6 @@ const startGame = function(){
             // TODO: check if field is neighbour to a 'path-field'
             //  and only then:
             
-
-            // for testing
-            // console.log(`%c 🐸 last one: ${currentPathFields[numberOfPathFields-1]}`,'font-weight:bold;color:purple;');
-            // console.log(`%c 🐸 second last: ${currentPathFields[numberOfPathFields-2]}`,'font-weight:bold;color:purple;');
-            // console.log(`%c 🐸 ev.relatedTarget.id: ${ev.relatedTarget.id}`,'font-weight:bold;');
             
             let lastIndex = numberOfPathFields-1;
 
@@ -206,36 +206,6 @@ const startGame = function(){
 
                 currentPathFields.push(fieldMovedInUpon.id);
                 fieldMovedInUpon.classList.add('path-field');
-            }
-            
-         //    if(currentPathFields[lastIndex] == ev.relatedTarget.id){
-                // 
-        //                 // removing the field we just hovered out from
-        //                 let elementToRemoveFromPath = currentPathFields.pop();
-        //                 document.getElementById(elementToRemoveFromPath).classList.remove('path-field');
-                        // 
-        //                 console.log(`%c 🐼 removed ${elementToRemoveFromPath} from currentPathFields`,'font-weight:bold;');
-                        // 
-        // 
-        //             }else{
-        //                 console.log(`%c 👹 n: ${currentPathFields[numberOfPathFields-1]} is not ev.target:${ev.relatedTarget.id}`,"color:red; font-weight:bold;");
-                        // 
-        //                 // draw path when field is hovered 
-        //                 currentPathFields.push(ev.target.id);
-        //                 ev.target.classList.add('path-field');
-        // 
-        // 
-        //             }
-        // 
-        // 
-        //             console.log(`%c 🦄 adding ${ev.target.id} to currentPathFields...`,'font-weight:bold;color:cyan;');
-        //             console.table([currentPathFields]);
-
-
-            
-            // to make sure the start-field also counts as path
-            if(ev.relatedTarget.classList.contains("start-field")){
-                ev.relatedTarget.classList.add('path-field');
             }
             
 
