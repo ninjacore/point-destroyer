@@ -204,12 +204,15 @@ const startGame = function(event){
                 // going forward
                 console.log("going forward");
 
-                currentPathFields.push(fieldMovedInUpon.id);
-                fieldMovedInUpon.classList.add('path-field');
+                // skipping fields is not allowed
+                if(lastIndex >= 1 && fieldMovedOutFrom.id != currentPathFields[lastIndex]){
+                    console.log("skipping fields is not allowed");
+                }else{
+                    currentPathFields.push(fieldMovedInUpon.id);
+                    fieldMovedInUpon.classList.add('path-field');    
+                }
             }
             
-
-            // TODO: maybe remove path if going back?
         }
         
         
