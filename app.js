@@ -1,4 +1,7 @@
-// DECLARATIONS
+// DECLARATIONS - variables
+var currentPathFields = [];
+
+// DECLARATIONS - functions
 
 // automatically generate html for playboard
 const generatePlayboard = function(){
@@ -166,13 +169,69 @@ const startGame = function(){
 
     })
 
+    // create "mouseover" event listener for each field that is not cut-out
     Array.from(validFields).forEach(function(field){
         field.addEventListener('mouseover', (ev) => {   
+            let numberOfPathFields = currentPathFields.length;
+
             // TODO: check if field is neighbour to a 'path-field'
             //  and only then:
             
-            // draw path when field is hovered 
-            ev.target.classList.add('path-field');
+
+            // for testing
+            // console.log(`%c 🐸 last one: ${currentPathFields[numberOfPathFields-1]}`,'font-weight:bold;color:purple;');
+            // console.log(`%c 🐸 second last: ${currentPathFields[numberOfPathFields-2]}`,'font-weight:bold;color:purple;');
+            // console.log(`%c 🐸 ev.relatedTarget.id: ${ev.relatedTarget.id}`,'font-weight:bold;');
+            
+            let lastIndex = numberOfPathFields-1;
+
+            let fieldMovedInUpon = ev.target;
+            let fieldMovedOutFrom = ev.relatedTarget;
+
+            if(fieldMovedInUpon.id == currentPathFields[lastIndex-1]){
+                // going backwards
+                console.log("going backwards");
+
+                if(currentPathFields[lastIndex] == fieldMovedOutFrom.id){
+                    let idLastElement = currentPathFields.pop();   // currentPathFields[lastIndex]                
+                    let undrawnElement = document.getElementById(idLastElement);
+                    undrawnElement.classList.remove('path-field');
+                }else{
+                    console.log(`last element = ${currentPathFields[lastIndex]}, fieldMovedOutFrom.id = ${fieldMovedOutFrom.id}`);
+                }
+
+            }else{
+                // going forward
+                console.log("going forward");
+
+                currentPathFields.push(fieldMovedInUpon.id);
+                fieldMovedInUpon.classList.add('path-field');
+            }
+            
+         //    if(currentPathFields[lastIndex] == ev.relatedTarget.id){
+                // 
+        //                 // removing the field we just hovered out from
+        //                 let elementToRemoveFromPath = currentPathFields.pop();
+        //                 document.getElementById(elementToRemoveFromPath).classList.remove('path-field');
+                        // 
+        //                 console.log(`%c 🐼 removed ${elementToRemoveFromPath} from currentPathFields`,'font-weight:bold;');
+                        // 
+        // 
+        //             }else{
+        //                 console.log(`%c 👹 n: ${currentPathFields[numberOfPathFields-1]} is not ev.target:${ev.relatedTarget.id}`,"color:red; font-weight:bold;");
+                        // 
+        //                 // draw path when field is hovered 
+        //                 currentPathFields.push(ev.target.id);
+        //                 ev.target.classList.add('path-field');
+        // 
+        // 
+        //             }
+        // 
+        // 
+        //             console.log(`%c 🦄 adding ${ev.target.id} to currentPathFields...`,'font-weight:bold;color:cyan;');
+        //             console.table([currentPathFields]);
+
+
             
             // to make sure the start-field also counts as path
             if(ev.relatedTarget.classList.contains("start-field")){
@@ -187,6 +246,33 @@ const startGame = function(){
         );
 
     })
+
+//     // create "mouseout" event listener for each field that is not cut-out
+//     Array.from(validFields).forEach(function(field){
+//         field.addEventListener('mouseout', (ev) => {
+// 
+// 
+//             // clear path if going backwards
+//             let numberOfPathFields = currentPathFields.length;
+//             console.log(`%c 🐸 testing if: ${currentPathFields[numberOfPathFields-1]} == ${ev.target.id}`,'font-weight:bold;');
+// 
+//             if(currentPathFields[numberOfPathFields-1] == ev.target.id){
+//                 // for testing
+//                 console.log(`%c 🐼 removing ${ev.target.id} from currentPathFields...`,'font-weight:bold;');
+// 
+//                 // remove last element from path
+//                 currentPathFields.pop();
+//                 ev.target.classList.remove('path-field');
+//             }                            
+            // 
+//             console.table([currentPathFields]);
+// 
+// 
+// 
+//         })
+// 
+// 
+//     })
 
 }
 
