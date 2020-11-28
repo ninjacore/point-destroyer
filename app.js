@@ -209,6 +209,7 @@ const startGame = function(event){
                     console.log("skipping fields is not allowed");
                 }else if(fieldIsInPathAlready(fieldMovedInUpon.id)){
                     console.log("field is already in path, cannot cross path!");
+                    alert(" 🧚 Listen! You cannot cross paths in this game!");
 
                 }else{
                     // check ok, field can be drawn
