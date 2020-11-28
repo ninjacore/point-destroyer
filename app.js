@@ -189,11 +189,11 @@ const startGame = function(event){
             let fieldMovedOutFrom = ev.relatedTarget;
 
             if(fieldMovedInUpon.id == currentPathFields[lastIndex-1]){
-                // going backwards
+                // player going backwards
                 console.log("going backwards");
 
                 if(currentPathFields[lastIndex] == fieldMovedOutFrom.id){
-                    let idLastElement = currentPathFields.pop();   // currentPathFields[lastIndex]                
+                    let idLastElement = currentPathFields.pop();   // removes currentPathFields[lastIndex]
                     let undrawnElement = document.getElementById(idLastElement);
                     undrawnElement.classList.remove('path-field');
                 }else{
@@ -201,13 +201,17 @@ const startGame = function(event){
                 }
 
             }else{
-                // going forward
+                // player going forward
                 console.log("going forward");
 
-                // skipping fields is not allowed
+                // skipping fields is not allowed, rule can be applied after first field is marked as path
                 if(lastIndex >= 1 && fieldMovedOutFrom.id != currentPathFields[lastIndex]){
                     console.log("skipping fields is not allowed");
+                }else if(fieldIsInPathAlready(fieldMovedInUpon.id)){
+                    console.log("field is already in path, cannot cross path!");
+
                 }else{
+                    // check ok, field can be drawn
                     currentPathFields.push(fieldMovedInUpon.id);
                     fieldMovedInUpon.classList.add('path-field');    
                 }
@@ -220,6 +224,19 @@ const startGame = function(event){
 
     })
 
+}
+
+const fieldIsInPathAlready = function(fieldId){
+
+    fieldIsInPath = false;
+
+    Array.from(currentPathFields).forEach(function(pathFieldId){
+        if(fieldId == pathFieldId){
+            fieldIsInPath = true;
+        }
+    })
+
+    return fieldIsInPath;
 }
 
 
