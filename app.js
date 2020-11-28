@@ -1,5 +1,6 @@
 // DECLARATIONS - variables
 var currentPathFields = [];
+let pointsDestroyed = [];
 
 // DECLARATIONS - functions
 
@@ -204,6 +205,7 @@ const startGame = function(event){
                 // player going forward
                 console.log("going forward");
 
+
                 // skipping fields is not allowed, rule can be applied after first field is marked as path
                 if(lastIndex >= 1 && fieldMovedOutFrom.id != currentPathFields[lastIndex]){
                     console.log("skipping fields is not allowed");
@@ -212,24 +214,78 @@ const startGame = function(event){
                     alert(" 🧚 Listen! You cannot cross paths in this game!");
 
                 }else{
-                    // check ok, field can be drawn
+                    // checks ok, field can be drawn
                     currentPathFields.push(fieldMovedInUpon.id);
-                    fieldMovedInUpon.classList.add('path-field');    
+                    fieldMovedInUpon.classList.add('path-field');
+
+                    // check if point destroyed
+                    if(isPointField(fieldMovedInUpon.id)){
+                        // TODO: check if not destroyed already - just in case
+                        pointsDestroyed.push(fieldMovedInUpon.id);
+                    }
+
+                    // check if end-field
+                    else if(isEndField(fieldMovedInUpon.id)){
+                        
+                        // player has collected all points if both array have the same size
+                        if(pointsDestroyed.length === pointFields.length){
+                            alert("You've won!");
+                            // TODO: add button to load next board
+
+                        }
+                    }
+
                 }
             }
             
-        }
-        
-        
-        );
+        });
 
-    })
+    });
 
+}
+
+// const allPointsDestroyed = function(){
+//     console.log("allPointsDestroyed is running...");
+
+    
+//     let allPointsAreDestroyed = false;
+
+//     if(pointsDestroyed.length === pointFields.length){
+//         // allPointsAreDestroyed = true;
+//         console.log(`pointsDestroyed.length: ${pointsDestroyed.length} == pointFields.length: ${pointFields.length}`);
+//     }
+
+//     return allPointsAreDestroyed;
+// }
+
+const isEndField = function(fieldId){
+
+    let isEndField = false;
+
+    let element = document.getElementById(fieldId);
+    if(element.classList.contains("end-field")){
+        isEndField = true;
+    }
+
+    return isEndField;
+
+}
+
+const isPointField = function(fieldId){
+
+    let fieldIsPoint = false;
+
+    let element = document.getElementById(fieldId);
+    if(element.classList.contains("point-field")){
+        fieldIsPoint = true;
+    }
+
+    return fieldIsPoint;
 }
 
 const fieldIsInPathAlready = function(fieldId){
 
-    fieldIsInPath = false;
+    let fieldIsInPath = false;
 
     Array.from(currentPathFields).forEach(function(pathFieldId){
         if(fieldId == pathFieldId){
@@ -253,3 +309,6 @@ let pointFields = [14,40,66,90,93];
 
 markFields(startFields,endFields,cutOutFields,pointFields);
 // TODO: possibly need to removeEventListener() -> use former startFields / "start-field" elements before loading new playboard
+
+
+let allStartFieldValues = [[7,10,70],[7,11,72],[9,1,7]];
