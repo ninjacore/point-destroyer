@@ -1,6 +1,49 @@
-// DECLARATIONS - variables
+/****************************************
+ *       DECLARATIONS - variables       *
+ *                                      *
+ ****************************************/ 
+
+/* Game Values */
+/*
+let startFields = [7,10,70];
+let endFields = [31];
+let cutOutFields = [1,2,3,11,12,13,21,22,23,15,16,25,26,18,19,28,29,38,39,42,43,45,46,48,49,52,53,55,56,58,59,72,73,75,76,77,78,79,82,83,85,86,87,88,89];
+let pointFields = [14,40,66,90,93];
+*/
+
+let allStartFieldValues = [
+    [91],
+    [91],
+    [7,10,70]
+];
+
+let allEndFieldValues = [
+    [],
+    [],
+    [31]
+];
+
+let allCutOutFieldValues = [
+    [],
+    [],
+    [1,2,3,11,12,13,21,22,23,15,16,25,26,18,19,28,29,38,39,42,43,45,46,48,49,52,53,55,56,58,59,72,73,75,76,77,78,79,82,83,85,86,87,88,89]
+];
+
+let allPointFieldValues = [
+    [],
+    [],
+    [14,40,66,90,93]
+];
+
+ /* Current Session Values */
+let gameNumber = 2;
+
 var currentPathFields = [];
 let pointsDestroyed = [];
+
+
+
+
 
 // DECLARATIONS - functions
 
@@ -15,6 +58,9 @@ const generatePlayboard = function(){
     // this is the pointer to the html playboard
     let playboard = document.getElementById("playboard");
 
+    // delete all child-elements of current playboard to load new game configs
+    //playboard.innerHTML = '';
+
     // starting coordinates within grid-lines
     let xCoordinate = 1;
     let yCoordinate = 1;
@@ -28,7 +74,7 @@ const generatePlayboard = function(){
         let element = document.createElement('div');
         element.classList.add("item");
         element.id = `field-${field}`;
-        element.innerHTML = ''; //`${field}`;
+        element.innerHTML = ``; //`${field}`;
         playboard.appendChild(element);
     }
 
@@ -204,6 +250,9 @@ const startGame = function(event){
             }else{
                 // player going forward
                 console.log("going forward");
+                // for testing
+                console.log("points destroyed:");
+                console.table([pointsDestroyed]);
 
 
                 // skipping fields is not allowed, rule can be applied after first field is marked as path
@@ -228,9 +277,11 @@ const startGame = function(event){
                     else if(isEndField(fieldMovedInUpon.id)){
                         
                         // player has collected all points if both array have the same size
-                        if(pointsDestroyed.length === pointFields.length){
+                        if(pointsDestroyed.length === allPointFieldValues[gameNumber].length){
                             alert("You've won!");
                             // TODO: add button to load next board
+                            // gameNumber++;
+                            // -> loadNextGame();
 
                         }
                     }
@@ -296,19 +347,28 @@ const fieldIsInPathAlready = function(fieldId){
     return fieldIsInPath;
 }
 
+const loadNextGame = function(){
+    // reset board
+    generatePlayboard();
+
+    // check gameNumber variable for board configs
+
+    // objective: markFields(startFields,endFields,cutOutFields,pointFields);
+    markFields(allStartFieldValues[gameNumber],allEndFieldValues[gameNumber],allCutOutFieldValues[gameNumber],allPointFieldValues[gameNumber]);
+
+}
+
 
 // MAIN 
 
 
-generatePlayboard();
+loadNextGame();
 
-let startFields = [7,10,70];
-let endFields = [31];
-let cutOutFields = [1,2,3,11,12,13,21,22,23,15,16,25,26,18,19,28,29,38,39,42,43,45,46,48,49,52,53,55,56,58,59,72,73,75,76,77,78,79,82,83,85,86,87,88,89];
-let pointFields = [14,40,66,90,93];
 
-markFields(startFields,endFields,cutOutFields,pointFields);
+
+
+
 // TODO: possibly need to removeEventListener() -> use former startFields / "start-field" elements before loading new playboard
 
 
-let allStartFieldValues = [[7,10,70],[7,11,72],[9,1,7]];
+
