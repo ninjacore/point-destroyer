@@ -16,6 +16,8 @@ body {
 
 #container{
   /*background-color: red;*/
+  display: flex;
+  flex-flow: row;
 }
 
 .grid-container {
@@ -24,7 +26,7 @@ body {
   grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
   /*grid-gap: 2px;*/
   background-color: #00b354;
-  /*border: 2px solid red;*/
+  border: 2px solid yellow;
   padding: 10px;
   height: 900px;
   width: 900px;
@@ -62,43 +64,34 @@ body {
   background-color: #d7dadc;
 }
 
-
-
-.itemA {
-  grid-area: 2 / 2 / 4 / 4;
-/* co-ord. Y-start / X-start / Y-end / X-end */
+.left-side, .right-side{
+  min-width: 10%;
+  margin: auto;
 }
 
-.itemB {
-grid-area: 2 / 5 / 4 / 7;
+.left-side{
+  background-color: cyan;
+  border: 2px solid blue;
 }
 
-.itemC {
-grid-area: 2 / 10 / 4 / 8;
+.right-side{
+  background-color: purple;
+  border: 2px solid red;
 }
 
-.itemD {
-  grid-area: 7 / 2 / 5 / 4;
+.button{
+  padding: auto;
+  margin: auto;
+  display: inline-block;
+  
+  background-color: white; /* Green */
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
 }
 
-.itemE {
-grid-area: 7 / 5 / 5 / 7;
-}
-
-.itemF {
-grid-area: 7 / 10 / 5 / 8;
-}
-
-.itemG {
-  grid-area: 10 / 2 / 8 / 4;
-}
-
-.itemH {
-grid-area: 10 / 5 / 8 / 7;
-}
-
-.itemI {
-grid-area: 10 / 10 / 8 / 8;
-}
 
 /* Wurde übernommen und angepasst von: https://www.w3schools.com/css/css_grid_item.asp; */
