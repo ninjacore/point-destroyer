@@ -328,12 +328,13 @@ const startGame = function(event){
 
 const showNextLevelButton = function(){
 
-    let element = document.getElementById("right-side");
+    let nextLevelButton = document.getElementById("next-level-button");
     //let element = document.createElement('div');
     //element.classList.add("right-side");
     //element.id = `field-${field}`;
-    element.innerHTML = `<button type="button" class="button" onclick="loadNextGame()">next level</button>`; //`${field}`;
+    //element.innerHTML = `<button type="button" class="button" onclick="loadNextGame()">next level</button>`; //`${field}`;
     //container.appendChild(element);
+    nextLevelButton.style.visibility = 'visible';
 
 
 
@@ -386,6 +387,10 @@ const resetPlayboard = function(){
     // reset view        
     generatePlayboard();
     markFields(allStartFieldValues[gameNumber],allEndFieldValues[gameNumber],allCutOutFieldValues[gameNumber],allPointFieldValues[gameNumber]);
+
+    // hide next level button
+    let nextLevelButton = document.getElementById("next-level-button");
+    nextLevelButton.style.visibility = 'hidden';
 }
 
 const loadNextGame = function(){
@@ -401,6 +406,11 @@ const loadNextGame = function(){
 
     // draw fields
     markFields(allStartFieldValues[gameNumber],allEndFieldValues[gameNumber],allCutOutFieldValues[gameNumber],allPointFieldValues[gameNumber]);
+
+    // hide next level button
+    let nextLevelButton = document.getElementById("next-level-button");
+    nextLevelButton.style.visibility = 'hidden';
+
 
 }
 

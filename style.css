@@ -26,7 +26,7 @@ body {
   grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
   /*grid-gap: 2px;*/
   background-color: #00b354;
-  border: 2px solid yellow;
+  /*border: 2px solid yellow;*/ /* for testing */
   padding: 10px;
   height: 900px;
   width: 900px;
@@ -67,16 +67,6 @@ body {
 .left-side, .right-side{
   min-width: 10%;
   margin: auto;
-}
-
-.left-side{
-  background-color: cyan;
-  border: 2px solid blue;
-}
-
-.right-side{
-  background-color: purple;
-  border: 2px solid red;
 }
 
 .button{
