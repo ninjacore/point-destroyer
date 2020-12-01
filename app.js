@@ -11,9 +11,7 @@ let cutOutFields = [1,2,3,11,12,13,21,22,23,15,16,25,26,18,19,28,29,38,39,42,43,
 let pointFields = [14,40,66,90,93];
 */
 
-// TODO: delete test playboard (first row)
 let allStartFieldValues = [
-    [1],
     [91],
     [91],
     [7,10,70],
@@ -23,9 +21,7 @@ let allStartFieldValues = [
     [1,41]
 ];
 
-// TODO: delete test playboard (first row)
 let allEndFieldValues = [
-    [3],
     [10],
     [10],
     [31],
@@ -35,9 +31,7 @@ let allEndFieldValues = [
     [95,99]
 ];
 
-// TODO: delete test playboard (first row)
 let allCutOutFieldValues = [
-    [12,13,15,16,18,19,22,23,25,26,28,29,42,43,45,46,48,49,52,53,55,56,58,59,72,73,75,76,78,79,82,83,85,86,88,89],
     [12,13,15,16,18,19,22,23,25,26,28,29,42,43,45,46,48,49,52,53,55,56,58,59,72,73,75,76,78,79,82,83,85,86,88,89],
     [1,2,3,11,12,13,21,22,23,15,16,25,26,18,19,28,29,38,39,42,43,45,46,48,49,52,53,55,56,58,59,72,73,75,76,77,78,79,82,83,85,86,87,88,89],
     [1,2,3,11,12,13,21,22,23,15,16,25,26,18,19,28,29,38,39,42,43,45,46,48,49,52,53,55,56,58,59,72,73,75,76,77,78,79,82,83,85,86,87,88,89],
@@ -47,9 +41,7 @@ let allCutOutFieldValues = [
     [10,12,14,16,18,20,32,33,35,37,39,52,54,56,58,60,71,73,75,77,86,89,91,92,94,98]
 ];
 
-// TODO: delete test playboard (first row)
 let allPointFieldValues = [
-    [2],
     [9,35,62,87,92],
     [5,35,62,68,97],
     [14,40,66,90,93],
@@ -83,7 +75,7 @@ const generatePlayboard = function(){
     let playboard = document.getElementById("playboard");
 
     // delete all child-elements of current playboard to load new game configs
-    //playboard.innerHTML = '';
+    playboard.innerHTML = '';
 
     // starting coordinates within grid-lines
     let xCoordinate = 1;
@@ -340,7 +332,7 @@ const showNextLevelButton = function(){
     //let element = document.createElement('div');
     //element.classList.add("right-side");
     //element.id = `field-${field}`;
-    element.innerHTML = `<button type="button" class="button">next level</button>`; //`${field}`;
+    element.innerHTML = `<button type="button" class="button" onclick="loadNextGame()">next level</button>`; //`${field}`;
     //container.appendChild(element);
 
 
@@ -385,13 +377,29 @@ const fieldIsInPathAlready = function(fieldId){
     return fieldIsInPath;
 }
 
+const resetPlayboard = function(){
+
+    // reset variables
+    currentPathFields = [];
+    pointsDestroyed = [];
+
+    // reset view        
+    generatePlayboard();
+    markFields(allStartFieldValues[gameNumber],allEndFieldValues[gameNumber],allCutOutFieldValues[gameNumber],allPointFieldValues[gameNumber]);
+}
+
 const loadNextGame = function(){
+    // reset variables
+    currentPathFields = [];
+    pointsDestroyed = [];
+
+    // set to next level
+    gameNumber++;
+
     // reset board
     generatePlayboard();
 
-    // check gameNumber variable for board configs
-
-    // objective: markFields(startFields,endFields,cutOutFields,pointFields);
+    // draw fields
     markFields(allStartFieldValues[gameNumber],allEndFieldValues[gameNumber],allCutOutFieldValues[gameNumber],allPointFieldValues[gameNumber]);
 
 }
@@ -400,7 +408,10 @@ const loadNextGame = function(){
 // MAIN 
 
 
-loadNextGame();
+//loadNextGame();
+
+// load first game
+resetPlayboard();
 
 
 
