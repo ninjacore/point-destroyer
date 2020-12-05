@@ -379,7 +379,7 @@ const startGame = function(event){
                         
                         // player has collected all points if both array have the same size
                         if(pointsDestroyed.length === allPointFieldValues[gameNumber].length){
-                            alert("You've won!");
+                            alert("You've cleared the level!");
                             // TODO: add button to load next board
                             showNextLevelButton();
                             //gameNumber++;
@@ -474,8 +474,8 @@ const resetPlayboard = function(){
     markFields(allStartFieldValues[gameNumber],allEndFieldValues[gameNumber],allCutOutFieldValues[gameNumber],allPointFieldValues[gameNumber]);
 
     // hide next level button
-    /*let nextLevelButton = document.getElementById("next-level-button");
-    nextLevelButton.style.visibility = 'hidden';*/
+    let nextLevelButton = document.getElementById("next-level-button");
+    nextLevelButton.style.visibility = 'hidden';
 }
 
 const loadNextGame = function(){
@@ -493,8 +493,8 @@ const loadNextGame = function(){
     markFields(allStartFieldValues[gameNumber],allEndFieldValues[gameNumber],allCutOutFieldValues[gameNumber],allPointFieldValues[gameNumber]);
 
     // hide next level button
-    /*let nextLevelButton = document.getElementById("next-level-button");
-    nextLevelButton.style.visibility = 'hidden';*/
+    let nextLevelButton = document.getElementById("next-level-button");
+    nextLevelButton.style.visibility = 'hidden';
 
 
 }
