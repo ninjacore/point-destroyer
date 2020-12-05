@@ -16,11 +16,25 @@
 	<h1>Point Destroyer</h1>
 	<div id="container">
             <div class="left-side" id="left-side">
-                  <button type="button" class="button" onclick="resetPlayboard()">reload board</button>
+                <button type="button" class="button" onclick="resetPlayboard()">reload board</button>
             </div>
-	      <div class="grid-container" id="playboard"></div>
+	      <div class="text-container" id="playboard">
+			<div class="tutorial-box">
+				<div class="proto-start-field"></div>
+				<div class="tutorial-text">this is the start field</div>
+			</div>
+			<div class="tutorial-box">
+				<div class="proto-end-field"></div>
+				<div class="tutorial-text">this is the end field</div>
+			</div>
+			<div class="tutorial-box">
+				<div class="proto-point-field"></div>
+				<div class="tutorial-text">these are the points you need to collect</div>
+			</div>			
+		</div>
             <div class="right-side" id="right-side">
-                  <button id="next-level-button" type="button" class="button" onclick="loadNextGame()">next level</button>
+				<button id="start-game-button" type="button" class="button" onclick="startGame()">start game</button>
+                <button id="next-level-button" type="button" class="button" onclick="loadNextGame()">next level</button>
             </div>
 	</div>
 </body>

@@ -20,6 +20,52 @@ body {
   flex-flow: row;
 }
 
+/** text-container is an alternative to the playboard **/
+.text-container{
+  display: flex;
+  flex-direction: column;
+  height: 450px;
+  width: 900px;
+  padding: 5em;
+  font-size: 30px;
+}
+
+.tutorial-box{
+  /*background-color: #008033;*/
+  /*text-align: center;*/
+  padding: 20px;
+  /*font-size: 30px;*/
+  display: flex;
+  flex-direction: row;
+}
+
+.tutorial-text{
+  padding: 1em;
+}
+
+.proto-start-field{
+  background-color: #8000ff; /*#ff6600;*/
+  width: 90px;
+  height: 90px;
+}
+
+.proto-end-field{
+  background-color: #00ff00 ; /* #ff0000;*/
+  width: 90px;
+  height: 90px;
+
+}
+
+.proto-point-field{
+  background-color: #2DE2E6; /* #0000e6;*/
+  width: 90px;
+  height: 90px;
+
+}
+
+
+
+
 .grid-container {
   margin: auto;
   display: grid;
@@ -53,7 +99,7 @@ body {
 }
 
 .point-field{
-  background-color: #2DE2E6 /* #0000e6;*/
+  background-color: #2DE2E6; /* #0000e6;*/
 }
 
 .cut-out-field{

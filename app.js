@@ -493,16 +493,43 @@ const loadNextGame = function(){
     markFields(allStartFieldValues[gameNumber],allEndFieldValues[gameNumber],allCutOutFieldValues[gameNumber],allPointFieldValues[gameNumber]);
 
     // hide next level button
-    let nextLevelButton = document.getElementById("next-level-button");
-    nextLevelButton.style.visibility = 'hidden';
+    hideNextLevelButton();
+
 
 
 }
 
+const startGame = function(){
+    // element with id "playboard":
+    let playboardElement = document.getElementById("playboard");
+
+    // element with id "playboard": remove class "text-container"
+    playboardElement.classList.remove("text-container");
+    // element with id "playboard": remove class "grid-container"
+    playboardElement.classList.add("grid-container");
+
+    //  innerHtml = '' (removes content from tutorial)
+    resetPlayboard();
+
+    // delete "start-game" button
+    let nextLevelButton = document.getElementById("start-game-button");
+    let parent = nextLevelButton.parentElement;
+    parent.removeChild(nextLevelButton);
+
+}
+
+const hideNextLevelButton = function(){
+    let nextLevelButton = document.getElementById("next-level-button");
+    nextLevelButton.style.visibility = 'hidden';
+}
+
 
 // MAIN 
+hideNextLevelButton();
 
 // load first game
+
+
 
 // TODO: add classlist to id playboard "grid-container"
 
