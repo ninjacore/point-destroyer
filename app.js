@@ -325,7 +325,11 @@ const startGame = function(event){
                     // for final level
                     if(gameNumber == 7){
                         undrawnElement.classList.remove('final-path-field');
-                        undrawnElement.classList.add('final-item');
+                        
+                        // if not a marked field
+                        if(!undrawnElement.classList.contains('start-field') && !undrawnElement.classList.contains('end-field') && !undrawnElement.classList.contains('point-field')){
+                            undrawnElement.classList.add('final-item');                            
+                        }
                     }
                 }else{
                     console.log(`last element = ${currentPathFields[lastIndex]}, fieldMovedOutFrom.id = ${fieldMovedOutFrom.id}`);
