@@ -322,6 +322,13 @@ const startGame = function(event){
                     let undrawnElement = document.getElementById(idLastElement);
                     undrawnElement.classList.remove('path-field');
 
+                    // if point field is undrawn, remove for list
+                    if(undrawnElement.classList.contains('point-field')){
+                        // pop the latest point in the list since it must have been this one
+                        pointsDestroyed.pop();
+                    }
+
+
                     // for final level
                     if(gameNumber == 7){
                         undrawnElement.classList.remove('final-path-field');
