@@ -267,14 +267,14 @@ const addAllEventListeners = function(){
     let startElements = document.getElementsByClassName("start-field");
 
     Array.from(startElements).forEach(function(startElement) {
-        startElement.addEventListener('click', startGame);
+        startElement.addEventListener('click', startLevel);
     });
 }
 
 
-const startGame = function(event){
-    // start game
-    console.log("GAME HAS STARTED!!!");
+const startLevel = function(event){
+    // start level
+    console.log("Level started");
 
     event.target.classList.add('path-field');
     currentPathFields.push(event.target.id);
@@ -502,17 +502,10 @@ const loadNextGame = function(){
 
 // MAIN 
 
-
-//loadNextGame();
-
 // load first game
-resetPlayboard();
 
+// TODO: add classlist to id playboard "grid-container"
 
-
-
-
-// TODO: possibly need to removeEventListener() -> use former startFields / "start-field" elements before loading new playboard
-
+// resetPlayboard();
 
 
