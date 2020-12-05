@@ -25,7 +25,7 @@ body {
   display: grid;
   grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
   /*grid-gap: 2px;*/
-  background-color: #00b354;
+  background-color: #FF2079; /* #00b354;*/
   /*border: 2px solid yellow;*/ /* for testing */
   padding: 10px;
   height: 900px;
@@ -41,27 +41,27 @@ body {
 }
 
 .item {
-  background-color: #008033;
+  background-color: #0D0221; /*#713df5; */ /*#008033;*/
 }
 
 .start-field{
-  background-color: #ff6600;
+  background-color: #8000ff; /*#ff6600;*/
 }
 
 .end-field{
-  background-color: #ff0000;
+  background-color: #00ff00 ; /* #ff0000;*/
 }
 
 .point-field{
-  background-color: #0000e6;
+  background-color: #2DE2E6 /* #0000e6;*/
 }
 
 .cut-out-field{
-  background-color: #00b354;
+  background-color: #FF2079; /*#440bd4;*/
 }
 
 .path-field{
-  background-color: #d7dadc;
+  background-color:  #fef900 ;
 }
 
 .left-side, .right-side{
@@ -83,5 +83,3 @@ body {
   font-size: 16px;
 }
 
-
-/* Wurde übernommen und angepasst von: https://www.w3schools.com/css/css_grid_item.asp; */
