@@ -146,6 +146,64 @@ const markFields = function(startFields,endFields,cutOutFields,pointFields){
     // activate all event listeners on ready board
     addAllEventListeners();
 
+    // if final level, change colors
+    if(gameNumber == 7){
+        // for testing:
+        console.log("FINAL LEVEL!!");
+        colorFieldsForFinalLevel();
+    }
+
+}
+
+const colorFieldsForFinalLevel = function(){
+
+    // change border color
+    let playboardElement = document.getElementById("playboard");
+    playboardElement.classList.add("final-border");
+    
+    // change default fields
+    let allItems = document.getElementsByClassName("item");
+    Array.from(allItems).forEach(function(element){
+
+        element.classList.add("final-item");
+
+    });   
+    
+    // change color of all marked fields
+    console.table([allStartFieldValues[gameNumber]]);
+    Array.from(allStartFieldValues[gameNumber]).forEach(function(idNumber) {
+        // get element by id
+        let element = document.getElementById(`field-${idNumber}`);
+        // add classlist final-field...
+        element.classList.remove("final-item");
+        element.classList.add("final-start-field");
+    });
+
+    Array.from(allEndFieldValues[gameNumber]).forEach(function(idNumber) {
+        // get element by id
+        let element = document.getElementById(`field-${idNumber}`);
+        // add classlist final-field...
+        element.classList.remove("final-item");
+        element.classList.add("final-end-field");
+    });
+
+    Array.from(allCutOutFieldValues[gameNumber]).forEach(function(idNumber) {
+        // get element by id
+        let element = document.getElementById(`field-${idNumber}`);
+        // add classlist final-field...
+        element.classList.remove("final-item");
+        element.classList.add("final-cut-out-field");
+    });
+
+    Array.from(allPointFieldValues[gameNumber]).forEach(function(idNumber) {
+        // get element by id
+        let element = document.getElementById(`field-${idNumber}`);
+        // add classlist final-field...
+        element.classList.remove("final-item");
+        element.classList.add("final-point-field");
+    });
+
+
 }
 
 // find out neighbours (of a field)
@@ -263,6 +321,12 @@ const startGame = function(event){
                     let idLastElement = currentPathFields.pop();   // removes currentPathFields[lastIndex]
                     let undrawnElement = document.getElementById(idLastElement);
                     undrawnElement.classList.remove('path-field');
+
+                    // for final level
+                    if(gameNumber == 7){
+                        undrawnElement.classList.remove('final-path-field');
+                        undrawnElement.classList.add('final-item');
+                    }
                 }else{
                     console.log(`last element = ${currentPathFields[lastIndex]}, fieldMovedOutFrom.id = ${fieldMovedOutFrom.id}`);
                 }
@@ -286,6 +350,12 @@ const startGame = function(event){
                     // checks ok, field can be drawn
                     currentPathFields.push(fieldMovedInUpon.id);
                     fieldMovedInUpon.classList.add('path-field');
+
+                    // for final level
+                    if(gameNumber == 7){
+                        fieldMovedInUpon.classList.remove('final-item');
+                        fieldMovedInUpon.classList.add('final-path-field');
+                    }
 
                     // check if point destroyed
                     if(isPointField(fieldMovedInUpon.id)){
@@ -393,8 +463,8 @@ const resetPlayboard = function(){
     markFields(allStartFieldValues[gameNumber],allEndFieldValues[gameNumber],allCutOutFieldValues[gameNumber],allPointFieldValues[gameNumber]);
 
     // hide next level button
-    let nextLevelButton = document.getElementById("next-level-button");
-    nextLevelButton.style.visibility = 'hidden';
+    /*let nextLevelButton = document.getElementById("next-level-button");
+    nextLevelButton.style.visibility = 'hidden';*/
 }
 
 const loadNextGame = function(){
@@ -412,8 +482,8 @@ const loadNextGame = function(){
     markFields(allStartFieldValues[gameNumber],allEndFieldValues[gameNumber],allCutOutFieldValues[gameNumber],allPointFieldValues[gameNumber]);
 
     // hide next level button
-    let nextLevelButton = document.getElementById("next-level-button");
-    nextLevelButton.style.visibility = 'hidden';
+    /*let nextLevelButton = document.getElementById("next-level-button");
+    nextLevelButton.style.visibility = 'hidden';*/
 
 
 }

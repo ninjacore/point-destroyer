@@ -83,3 +83,31 @@ body {
   font-size: 16px;
 }
 
+
+/* * * * * * * * * * * * * * * * * 
+* special colors for final level *
+* * * * * * * * * * * * * * * * */
+
+.final-start-field{
+ background-color: #fff;
+}
+.final-end-field{
+ background-color: #b30000;
+}
+.final-point-field{
+ background-color: #990073;
+}
+.final-cut-out-field{
+  background-color: #000;
+}
+.final-path-field{
+  background-color: #fff;
+}
+
+.final-border{
+  background-color: #ff0000;
+}
+
+.final-item{
+  background-color: #69871324;
+}
