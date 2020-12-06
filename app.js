@@ -358,13 +358,20 @@ const startLevel = function(event){
 
                     // special text for last level
                     if(gameNumber == 7){
-                        setAlertMessage("💀 You fool! You cannot cross paths in this game!","Sorry");
+                        setAlertMessage("💀 YOU FOOL! YOU CANNOT <br>CROSS PATHS IN THIS GAME!","Sorry");
 
                     }else{
                         setAlertMessage("🧚 Listen! You cannot cross paths in this game!","OK");
                     }
 
+                    // show the alert box
                     functionAlert();
+
+                    if(gameNumber == 7){
+                        // red text for final level
+                        let alertText = document.getElementById("confirm");
+                        alertText.classList.add("red-alert");
+                    }
 
                 }else{
                     // checks ok, field can be drawn
@@ -391,12 +398,21 @@ const startLevel = function(event){
                             
                             // special text for last level
                             if(gameNumber == 7){
-                                setAlertMessage("💀 You've bested me!<br><b>Go on, Champion</b>!","THX");
+                                setAlertMessage("💀 YOU'VE BESTED ME!<br>GO ON, CHAMPION!","THX");
 
                             }else{
                                 setAlertMessage("You've cleared the level! <br>Well done!!","THX");
                             }
+
+                            // show the alert box
                             functionAlert();
+
+                            if(gameNumber == 7){
+                                // golden text if final level cleared
+                                let alertText = document.getElementById("confirm");
+                                alertText.classList.add("golden-alert");
+                            }
+
 
                             // TODO: add button to load next board
                             showButton("next-level-button");
@@ -498,22 +514,28 @@ const loadNextGame = function(){
         console.log("showFinalMessage:");
         showFinalMessage();
     }else{
-
         // reset board
         generatePlayboard();
 
         // draw fields
-        markFields(allStartFieldValues[gameNumber],allEndFieldValues[gameNumber],allCutOutFieldValues[gameNumber],allPointFieldValues[gameNumber]);
+        markFields(allStartFieldValues[gameNumber],allEndFieldValues[gameNumber],allCutOutFieldValues[gameNumber],allPointFieldValues[gameNumber]);    
+  
     }
 
     // hide next level button
     hideButton("next-level-button");
 
-    // don't show tutorial box if final level
-    let miniTutorialBox = document.getElementById("mini-tutorial")
-    miniTutorialBox.innerHTML = '';
+    if(gameNumber > 6){
+        // don't show tutorial box if final level
+        let miniTutorialBox = document.getElementById("mini-tutorial");
+        miniTutorialBox.innerHTML = '';
 
-    // show mean message
+        // show mean message
+        miniTutorialBox.innerHTML = "<div class='not-a-tutorial-box'>💀 YOU'RE ON <br>YOUR OWN NOW. <br>FIGHT FOR <br>YOUR LIFE!</div>";
+
+    }
+
+    
 
 
 
@@ -601,7 +623,7 @@ const showFinalMessage = function(){
     leftBox.innerHTML = '';
 
     // add final message
-    element.innerHTML = `<p>You did it, get the fuck out!</p>`;
+    element.innerHTML = `<p>You did it, ...</p>`;
 }
 
 

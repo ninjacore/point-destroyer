@@ -82,6 +82,22 @@ body {
   /* fancy adaptions . end */
 }
 
+.not-a-tutorial-box{
+  margin: auto;
+  padding: 2em;
+  text-align: justify;
+  text-justify: inter-word;
+
+    /* fancy adaptions . start */
+    text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #FF2079, 0 0 30px #FF2079, 0 0 40px #FF2079, 0 0 55px #FF2079, 0 0 75px #FF2079;
+    outline:none;
+      border-color:#F148FB;
+      box-shadow:0 0 10px #F148FB;
+    /* fancy adaptions . end */
+}
+
+
+
 .mini-proto-start-field{
   background-color: #8000ff; /*#ff6600;*/
   width: 45px;
@@ -278,7 +294,7 @@ body {
 
 /* special css for better alert boxes 
 source: https://html-css-js.com/css/generator/text-shadow/ */
-#confirm {
+.confirm-box {
   display: none;
   background-color: #0D0221;
   opacity: 100%;
@@ -295,8 +311,9 @@ source: https://html-css-js.com/css/generator/text-shadow/ */
   outline:none;
        border-color:#F148FB;
        box-shadow:0 0 20px #F148FB;
-
 }
+
+
 #confirm button {
   background-color: #0D0221;
   display: inline-block;
@@ -320,3 +337,13 @@ source: https://html-css-js.com/css/generator/text-shadow/ */
 }
 
 
+.red-alert{
+  text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 55px #ff0000, 0 0 75px #ff0000;
+  outline:none;
+    border-color:#F148FB;
+    box-shadow:0 0 10px #F148FB;
+}
+
+.golden-alert{
+  text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #ff0, 0 0 30px #ff0, 0 0 40px #ff0, 0 0 55px #ff0, 0 0 75px #ff0; 
+}
