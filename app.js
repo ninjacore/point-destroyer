@@ -493,14 +493,27 @@ const loadNextGame = function(){
     // set to next level
     gameNumber++;
 
-    // reset board
-    generatePlayboard();
+    // the game is over if all levels have been cleared
+    if(gameNumber > 7){
+        console.log("showFinalMessage:");
+        showFinalMessage();
+    }else{
 
-    // draw fields
-    markFields(allStartFieldValues[gameNumber],allEndFieldValues[gameNumber],allCutOutFieldValues[gameNumber],allPointFieldValues[gameNumber]);
+        // reset board
+        generatePlayboard();
+
+        // draw fields
+        markFields(allStartFieldValues[gameNumber],allEndFieldValues[gameNumber],allCutOutFieldValues[gameNumber],allPointFieldValues[gameNumber]);
+    }
 
     // hide next level button
     hideButton("next-level-button");
+
+    // don't show tutorial box if final level
+    let miniTutorialBox = document.getElementById("mini-tutorial")
+    miniTutorialBox.innerHTML = '';
+
+    // show mean message
 
 
 
@@ -551,6 +564,9 @@ const showMiniTutorial = function(){
 }
 
 const hideButton = function(buttonId){
+    // for testing
+    console.log(`hiding button, gameNumber is ${gameNumber}`);
+
     let nextLevelButton = document.getElementById(buttonId);
     nextLevelButton.style.visibility = 'hidden';
 }
@@ -565,6 +581,27 @@ function functionAlert(msg, myYes) {
     });
     confirmBox.find(".yes").click(myYes);
     confirmBox.show();
+}
+
+const showFinalMessage = function(){
+
+    let element = document.getElementById("playboard");
+
+    // element with id "playboard": remove classes "grid-container" and "final-border"
+    element.classList.remove("grid-container");
+    element.classList.remove("final-border");
+    
+    // element with id "playboard": remove class "text-container"
+    element.classList.add( "text-container");
+
+    // delete all fields
+    element.innerHTML = '';
+
+    let leftBox = document.getElementById("left-side");
+    leftBox.innerHTML = '';
+
+    // add final message
+    element.innerHTML = `<p>You did it, get the fuck out!</p>`;
 }
 
 
