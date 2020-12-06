@@ -355,7 +355,8 @@ const startLevel = function(event){
                     console.log("skipping fields is not allowed");
                 }else if(fieldIsInPathAlready(fieldMovedInUpon.id)){
                     console.log("field is already in path, cannot cross path!");
-                    alert(" 🧚 Listen! You cannot cross paths in this game!");
+                    //alert(" 🧚 Listen! You cannot cross paths in this game!");
+                    functionAlert();
 
                 }else{
                     // checks ok, field can be drawn
@@ -379,7 +380,9 @@ const startLevel = function(event){
                         
                         // player has collected all points if both array have the same size
                         if(pointsDestroyed.length === allPointFieldValues[gameNumber].length){
-                            alert("You've cleared the level!");
+                            //alert("You've cleared the level!");
+                            functionAlert();
+
                             // TODO: add button to load next board
                             showNextLevelButton();
                             //gameNumber++;
@@ -521,6 +524,18 @@ const startGame = function(){
 const hideNextLevelButton = function(){
     let nextLevelButton = document.getElementById("next-level-button");
     nextLevelButton.style.visibility = 'hidden';
+}
+
+/* special function for better alert boxes 
+source: https://www.tutorialspoint.com/How-to-create-and-apply-CSS-to-JavaScript-Alert-box */
+function functionAlert(msg, myYes) {
+    var confirmBox = $("#confirm");
+    confirmBox.find(".message").text(msg);
+    confirmBox.find(".yes").unbind().click(function() {
+    confirmBox.hide();
+    });
+    confirmBox.find(".yes").click(myYes);
+    confirmBox.show();
 }
 
 

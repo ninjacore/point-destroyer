@@ -157,3 +157,46 @@ body {
 .final-item{
   background-color: #69871324;
 }
+
+
+
+/* special css for better alert boxes 
+source: https://html-css-js.com/css/generator/text-shadow/ */
+#confirm {
+  display: none;
+  background-color: #0D0221;
+  opacity: 100%;
+  color: white;
+  text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
+  border: 4px ;
+  position: fixed;
+  width: 450px;
+  height: 200px;
+  left: 40%;
+  top: 40%;
+  box-sizing: border-box;
+  text-align: center;
+  outline:none;
+       border-color:#F148FB;
+       box-shadow:0 0 10px #F148FB;
+
+}
+#confirm button {
+  background-color: #0D0221;
+  display: inline-block;
+  border-radius: 12px;
+  border: 4px;
+  padding: 8px;
+  text-align: center;
+  width: 60px;
+  cursor: pointer;
+  outline:none;
+       border-color:#F148FB;
+       box-shadow:0 0 10px #F148FB;
+   color: #F148FB;
+   text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
+}
+#confirm .message {
+  margin: 3em auto;
+  /*text-align: left;*/
+}
