@@ -623,7 +623,7 @@ const showFinalMessage = function(){
     leftBox.innerHTML = '';
 
     // add final message
-    element.innerHTML = `<p>You did it, ...</p>`;
+    element.innerHTML = `<p>Thanks for playing our game. <br>Lead Game Designer &nbsp; Adrian W. Menti <br>Lead Programmer&nbsp; Lucien A. Haeller <br><br>Now, get out!</p>`;
 }
 
 
