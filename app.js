@@ -385,7 +385,7 @@ const startLevel = function(event){
                             functionAlert();
 
                             // TODO: add button to load next board
-                            showNextLevelButton();
+                            showButton("next-level-button");
                             //gameNumber++;
                             //loadNextGame();
 
@@ -422,9 +422,9 @@ const setAlertMessage = function(message,confirmationText){
 //     return allPointsAreDestroyed;
 // }
 
-const showNextLevelButton = function(){
+const showButton = function(buttonId){
 
-    let nextLevelButton = document.getElementById("next-level-button");
+    let nextLevelButton = document.getElementById(buttonId);
     //let element = document.createElement('div');
     //element.classList.add("right-side");
     //element.id = `field-${field}`;
@@ -504,7 +504,7 @@ const loadNextGame = function(){
     markFields(allStartFieldValues[gameNumber],allEndFieldValues[gameNumber],allCutOutFieldValues[gameNumber],allPointFieldValues[gameNumber]);
 
     // hide next level button
-    hideNextLevelButton();
+    hideButton("next-level-button");
 
 
 
@@ -527,10 +527,13 @@ const startGame = function(){
     let parent = nextLevelButton.parentElement;
     parent.removeChild(nextLevelButton);
 
+    // show "reload board" button
+    showButton("reload-board-button");
+
 }
 
-const hideNextLevelButton = function(){
-    let nextLevelButton = document.getElementById("next-level-button");
+const hideButton = function(buttonId){
+    let nextLevelButton = document.getElementById(buttonId);
     nextLevelButton.style.visibility = 'hidden';
 }
 
@@ -548,7 +551,8 @@ function functionAlert(msg, myYes) {
 
 
 // MAIN 
-hideNextLevelButton();
+hideButton("next-level-button");
+hideButton("reload-board-button");
 
 // load first game
 
