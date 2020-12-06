@@ -527,8 +527,30 @@ const startGame = function(){
     let parent = nextLevelButton.parentElement;
     parent.removeChild(nextLevelButton);
 
+    // show mini tutorial
+    showMiniTutorial();
+    
     // show "reload board" button
     showButton("reload-board-button");
+}
+
+const showMiniTutorial = function(){
+
+    let element = document.getElementById("mini-tutorial");
+    element.classList.add('mini-text-container');
+
+    element.innerHTML = `<div class="tutorial-box">
+                            <div class="proto-start-field"></div>
+                            <div class="tutorial-text">start</div>
+                        </div>
+                        <div class="tutorial-box">
+                            <div class="proto-end-field"></div>
+                            <div class="tutorial-text">end</div>
+                            </div>
+                        <div class="tutorial-box">
+                            <div class="proto-point-field"></div>
+                            <div class="tutorial-text">points</div>
+                        </div>`;
 
 }
 

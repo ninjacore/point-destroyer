@@ -30,6 +30,15 @@ body {
   font-size: 30px;
 }
 
+.mini-text-container{
+  display: flex;
+  flex-direction: column;
+  /*height: 450px;
+  width: 900px;*/
+  /*padding: 5em;*/
+  font-size: 30px;
+}
+
 .tutorial-box{
   /*background-color: #008033;*/
   /*text-align: center;*/
@@ -60,7 +69,6 @@ body {
   background-color: #2DE2E6; /* #0000e6;*/
   width: 90px;
   height: 90px;
-
 }
 
 
