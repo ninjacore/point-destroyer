@@ -355,7 +355,15 @@ const startLevel = function(event){
                     console.log("skipping fields is not allowed");
                 }else if(fieldIsInPathAlready(fieldMovedInUpon.id)){
                     console.log("field is already in path, cannot cross path!");
-                    setAlertMessage("🧚 Listen! You cannot cross paths in this game!","OK");
+
+                    // special text for last level
+                    if(gameNumber == 7){
+                        setAlertMessage("💀 You fool! You cannot cross paths in this game!","Sorry");
+
+                    }else{
+                        setAlertMessage("🧚 Listen! You cannot cross paths in this game!","OK");
+                    }
+
                     functionAlert();
 
                 }else{
@@ -380,8 +388,14 @@ const startLevel = function(event){
                         
                         // player has collected all points if both array have the same size
                         if(pointsDestroyed.length === allPointFieldValues[gameNumber].length){
-                            //alert("You've cleared the level!");
-                            setAlertMessage("You've cleared the level!","thx bruh");
+                            
+                            // special text for last level
+                            if(gameNumber == 7){
+                                setAlertMessage("💀 You've bested me!<br><b>Go on, Champion</b>!","Thx");
+
+                            }else{
+                                setAlertMessage("You've cleared the level! <br>Well done!!","Thx");
+                            }
                             functionAlert();
 
                             // TODO: add button to load next board
@@ -408,28 +422,10 @@ const setAlertMessage = function(message,confirmationText){
 
 }
 
-// const allPointsDestroyed = function(){
-//     console.log("allPointsDestroyed is running...");
-
-    
-//     let allPointsAreDestroyed = false;
-
-//     if(pointsDestroyed.length === pointFields.length){
-//         // allPointsAreDestroyed = true;
-//         console.log(`pointsDestroyed.length: ${pointsDestroyed.length} == pointFields.length: ${pointFields.length}`);
-//     }
-
-//     return allPointsAreDestroyed;
-// }
 
 const showButton = function(buttonId){
 
     let nextLevelButton = document.getElementById(buttonId);
-    //let element = document.createElement('div');
-    //element.classList.add("right-side");
-    //element.id = `field-${field}`;
-    //element.innerHTML = `<button type="button" class="button" onclick="loadNextGame()">next level</button>`; //`${field}`;
-    //container.appendChild(element);
     nextLevelButton.style.visibility = 'visible';
 
 
@@ -540,16 +536,16 @@ const showMiniTutorial = function(){
     element.classList.add('mini-text-container');
 
     element.innerHTML = `<div class="tutorial-box">
-                            <div class="proto-start-field"></div>
-                            <div class="tutorial-text">start</div>
+                            <div class="mini-proto-start-field"></div>
+                            <div class="mini-tutorial-text">start</div>
                         </div>
                         <div class="tutorial-box">
-                            <div class="proto-end-field"></div>
-                            <div class="tutorial-text">end</div>
+                            <div class="mini-proto-end-field"></div>
+                            <div class="mini-tutorial-text">end</div>
                             </div>
                         <div class="tutorial-box">
-                            <div class="proto-point-field"></div>
-                            <div class="tutorial-text">points</div>
+                            <div class="mini-proto-point-field"></div>
+                            <div class="mini-tutorial-text">points</div>
                         </div>`;
 
 }
