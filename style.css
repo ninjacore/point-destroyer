@@ -1,17 +1,15 @@
 /* css style file */
 h1 {
  text-align: left;
- margin-top: 50px;
  margin-left: 2em;
- font-family: OCR A Std, monospace;
+ font-family: Monospace, Arial;
  font-size: 50px;
 }
 
 body {
 	background-color: black;
 	color: white;
-	font-family: Arial;
-
+	font-family: Monospace, Arial;
 }
 
 #container{
@@ -269,14 +267,12 @@ body {
 
 #reload-board-button, #start-game-button, #next-level-button{
   background-color: #0D0221;
-  text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
+  text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #FF2079, 0 0 30px #FF2079, 0 0 40px #FF2079, 0 0 55px #FF2079, 0 0 75px #FF2079;
   outline:none;
-       border-color:#F148FB;
-       box-shadow:0 0 10px #F148FB;
-  font-weight: bold;
-  border: 4px ;
+       border-color: #F148FB;
+       box-shadow: 0 0 16px #F148FB;
   color: white;
-  border-radius: 12px;
+  border-radius: 8px;
   font-size: 20px;
 }
 
@@ -298,13 +294,13 @@ source: https://html-css-js.com/css/generator/text-shadow/ */
   text-align: center;
   outline:none;
        border-color:#F148FB;
-       box-shadow:0 0 10px #F148FB;
+       box-shadow:0 0 20px #F148FB;
 
 }
 #confirm button {
   background-color: #0D0221;
   display: inline-block;
-  border-radius: 12px;
+  border-radius: 8px;
   border: 4px;
   padding: 8px;
   text-align: center;
@@ -314,7 +310,7 @@ source: https://html-css-js.com/css/generator/text-shadow/ */
        border-color:#F148FB;
        box-shadow:0 0 10px #F148FB;
    color: white;
-   text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
+   text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #FF2079, 0 0 30px #FF2079, 0 0 40px #FF2079, 0 0 55px #FF2079, 0 0 75px #FF2079;
    font-weight: bold;
 }
 

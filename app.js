@@ -391,10 +391,10 @@ const startLevel = function(event){
                             
                             // special text for last level
                             if(gameNumber == 7){
-                                setAlertMessage("💀 You've bested me!<br><b>Go on, Champion</b>!","Thx");
+                                setAlertMessage("💀 You've bested me!<br><b>Go on, Champion</b>!","THX");
 
                             }else{
-                                setAlertMessage("You've cleared the level! <br>Well done!!","Thx");
+                                setAlertMessage("You've cleared the level! <br>Well done!!","THX");
                             }
                             functionAlert();
 
@@ -537,15 +537,15 @@ const showMiniTutorial = function(){
 
     element.innerHTML = `<div class="tutorial-box">
                             <div class="mini-proto-start-field"></div>
-                            <div class="mini-tutorial-text">start</div>
+                            <div class="mini-tutorial-text">START</div>
                         </div>
                         <div class="tutorial-box">
                             <div class="mini-proto-end-field"></div>
-                            <div class="mini-tutorial-text">end</div>
+                            <div class="mini-tutorial-text">END</div>
                             </div>
                         <div class="tutorial-box">
                             <div class="mini-proto-point-field"></div>
-                            <div class="mini-tutorial-text">points</div>
+                            <div class="mini-tutorial-text">POINTS</div>
                         </div>`;
 
 }
