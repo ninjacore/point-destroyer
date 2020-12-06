@@ -355,7 +355,7 @@ const startLevel = function(event){
                     console.log("skipping fields is not allowed");
                 }else if(fieldIsInPathAlready(fieldMovedInUpon.id)){
                     console.log("field is already in path, cannot cross path!");
-                    //alert(" 🧚 Listen! You cannot cross paths in this game!");
+                    setAlertMessage("🧚 Listen! You cannot cross paths in this game!","OK");
                     functionAlert();
 
                 }else{
@@ -381,6 +381,7 @@ const startLevel = function(event){
                         // player has collected all points if both array have the same size
                         if(pointsDestroyed.length === allPointFieldValues[gameNumber].length){
                             //alert("You've cleared the level!");
+                            setAlertMessage("You've cleared the level!","thx bruh");
                             functionAlert();
 
                             // TODO: add button to load next board
@@ -397,6 +398,13 @@ const startLevel = function(event){
         });
 
     });
+
+}
+
+const setAlertMessage = function(message,confirmationText){
+
+    let element = document.getElementById("confirm");
+    element.innerHTML = `<div class="message">${message}</div><br><button class="yes">${confirmationText}</button>`;
 
 }
 
