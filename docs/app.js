@@ -596,7 +596,7 @@ const showMiniTutorial = function(){
                             </div>
                         <div class="tutorial-box">
                             <div class="mini-proto-point-field"></div>
-                            <div class="mini-tutorial-text">POINTS</div>
+                            <div class="mini-tutorial-text">POINTS YOU NEED</div>
                         </div>`;
 
 }
