@@ -56,7 +56,7 @@ let allPointFieldValues = [
 ];
 
  /* Current Session Values */
-let gameNumber = 0;
+let gameNumber = 6;
 
 var currentPathFields = [];
 let pointsDestroyed = [];
@@ -363,8 +363,8 @@ const startLevel = function(event){
                 console.log(`idTo [${idTo}] == idFrom -10 [[${idFrom +10}]`);
 
 
-                // skipping fields is not allowed, rule can be applied after first field is marked as path
-                if(lastIndex >= 1 && fieldMovedOutFrom.id != currentPathFields[lastIndex]){
+                // skipping fields is not allowed, rule can be applied anytime due to new rules (+1, -1, +10, -10) below
+                if(fieldMovedOutFrom.id != currentPathFields[lastIndex]){
                     console.log("skipping fields is not allowed");
                 }else if(fieldIsInPathAlready(fieldMovedInUpon.id)){
                     console.log("field is already in path, cannot cross path!");
@@ -387,6 +387,9 @@ const startLevel = function(event){
                     }
 
                 }else if(idTo == idFrom +1 || idTo == idFrom -1 || idTo == idFrom +10 || idTo == idFrom -10){
+                    // this condition above fixes the issue of skipping fields or drawing diagonally. 
+
+
                     // checks ok, field can be drawn
                     currentPathFields.push(fieldMovedInUpon.id);
                     fieldMovedInUpon.classList.add('path-field');
