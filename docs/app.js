@@ -345,9 +345,22 @@ const startLevel = function(event){
             }else{
                 // player going forward
                 console.log("going forward");
+
+                // IDs for path checks
+                idTo = fieldMovedInUpon.id.split("field-");
                 // for testing
-                console.log("points destroyed:");
-                console.table([pointsDestroyed]);
+                console.table([idTo]);
+                idTo = idTo[1];
+                idFrom = fieldMovedOutFrom.id.split("field-");
+                // for testing
+                console.table([idFrom]);
+                idFrom = Number(idFrom[1]);
+
+                // for testing
+                console.log(`idTo [${idTo}] == idFrom +1 [${idFrom +1}]`);
+                console.log(`idTo [${idTo}] == idFrom -1 [[${idFrom -1}]]`);
+                console.log(`idTo [${idTo}] == idFrom +10 [[${idFrom +10}]`);
+                console.log(`idTo [${idTo}] == idFrom -10 [[${idFrom +10}]`);
 
 
                 // skipping fields is not allowed, rule can be applied after first field is marked as path
@@ -373,7 +386,7 @@ const startLevel = function(event){
                         alertText.classList.add("red-alert");
                     }
 
-                }else{
+                }else if(idTo == idFrom +1 || idTo == idFrom -1 || idTo == idFrom +10 || idTo == idFrom -10){
                     // checks ok, field can be drawn
                     currentPathFields.push(fieldMovedInUpon.id);
                     fieldMovedInUpon.classList.add('path-field');
