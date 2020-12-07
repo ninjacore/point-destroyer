@@ -56,7 +56,7 @@ let allPointFieldValues = [
 ];
 
  /* Current Session Values */
-let gameNumber = 6;
+let gameNumber = 0;
 
 var currentPathFields = [];
 let pointsDestroyed = [];
