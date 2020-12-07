@@ -44,7 +44,7 @@ body {
 }
 
 .proto-start-field{
-  background-color: #8000ff; /*#ff6600;*/
+  background-color: #00ff00 ; /* #ff0000;*/
   width: 90px;
   height: 90px;
 
@@ -57,7 +57,7 @@ body {
 }
 
 .proto-end-field{
-  background-color: #00ff00 ; /* #ff0000;*/
+  background-color: #8000ff; /*#ff6600;*/
   width: 90px;
   height: 90px;
 
@@ -99,7 +99,7 @@ body {
 
 
 .mini-proto-start-field{
-  background-color: #8000ff; /*#ff6600;*/
+  background-color: #00ff00 ; /* #ff0000;*/
   width: 45px;
   height: 45px;
 
@@ -112,7 +112,7 @@ body {
 }
 
 .mini-proto-end-field{
-  background-color: #00ff00 ; /* #ff0000;*/
+  background-color: #8000ff; /*#ff6600;*/
   width: 45px;
   height: 45px;
 
@@ -181,7 +181,8 @@ body {
 }
 
 .start-field{
-  background-color: #8000ff; /*#ff6600;*/
+  background-color: #00ff00 ; /* #ff0000;*/
+
   /* fancy adaptions . start */
   text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
   outline:none;
@@ -191,7 +192,7 @@ body {
 }
 
 .end-field{
-  background-color: #00ff00 ; /* #ff0000;*/
+  background-color: #8000ff; /*#ff6600;*/
   /* fancy adaptions . start */
   text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
   outline:none;
