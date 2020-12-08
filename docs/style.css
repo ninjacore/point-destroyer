@@ -45,8 +45,9 @@ body {
 
 .proto-start-field{
   background-color: #00ff00 ; /* #ff0000;*/
-  width: 90px;
-  height: 90px;
+  min-width: 90px;
+  min-height: 90px;
+  max-height: 90px; /* otherwise gets strechted because of long text in tutorial */
 
   /* fancy adaptions . start */
   text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
@@ -58,8 +59,9 @@ body {
 
 .proto-end-field{
   background-color: #8000ff; /*#ff6600;*/
-  width: 90px;
-  height: 90px;
+  min-width: 90px;
+  min-height: 90px;
+  max-height: 90px; /* otherwise gets strechted because of long text in tutorial */
 
   /* fancy adaptions . start */
   text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
@@ -71,8 +73,9 @@ body {
 
 .proto-point-field{
   background-color: #2DE2E6; /* #0000e6;*/
-  width: 90px;
-  height: 90px;
+  min-width: 90px;
+  min-height: 90px;
+  max-height: 90px; /* otherwise gets strechted because of long text in tutorial */
 
   /* fancy adaptions . start */
   text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
@@ -100,8 +103,8 @@ body {
 
 .mini-proto-start-field{
   background-color: #00ff00 ; /* #ff0000;*/
-  width: 45px;
-  height: 45px;
+  min-width: 45px;
+  min-height: 45px;
 
   /* fancy adaptions . start */
   text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
@@ -113,8 +116,8 @@ body {
 
 .mini-proto-end-field{
   background-color: #8000ff; /*#ff6600;*/
-  width: 45px;
-  height: 45px;
+  min-width: 45px;
+  min-height: 45px;
 
   /* fancy adaptions . start */
   text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
@@ -126,8 +129,8 @@ body {
 
 .mini-proto-point-field{
   background-color: #2DE2E6; /* #0000e6;*/
-  width: 45px;
-  height: 45px;
+  min-width: 45px;
+  min-height: 45px;
 
   /* fancy adaptions . start */
   text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
@@ -151,8 +154,10 @@ body {
   background-color: #FF2079; /* #00b354;*/
   /*border: 2px solid yellow;*/ /* for testing */
   padding: 10px;
-  height: 900px;
-  width: 900px;
+  /*height: 900px;
+  width: 900px;*/
+  min-height: 780px;
+  min-width: 780px;
 
   /* fancy adaptions . start */
   text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
