@@ -60,6 +60,7 @@ let gameNumber = 0;
 
 var currentPathFields = [];
 let pointsDestroyed = [];
+let levelCleared = false;
 
 
 
@@ -316,8 +317,8 @@ const startLevel = function(event){
             if(fieldMovedInUpon.id == currentPathFields[lastIndex-1]){
                 // player going backwards
                 console.log("going backwards");
-
-                if(currentPathFields[lastIndex] == fieldMovedOutFrom.id){
+                if((currentPathFields[lastIndex] == fieldMovedOutFrom.id) && levelCleared == false){
+                    // levelCleared fixes the issue that you can still draw when the level has been completed
                     let idLastElement = currentPathFields.pop();   // removes currentPathFields[lastIndex]
                     let undrawnElement = document.getElementById(idLastElement);
                     undrawnElement.classList.remove('path-field');
@@ -386,8 +387,9 @@ const startLevel = function(event){
                         alertText.classList.add("red-alert");
                     }
 
-                }else if(idTo == idFrom +1 || idTo == idFrom -1 || idTo == idFrom +10 || idTo == idFrom -10){
+                }else if(levelCleared == false && (idTo == idFrom +1 || idTo == idFrom -1 || idTo == idFrom +10 || idTo == idFrom -10)){
                     // this condition above fixes the issue of skipping fields or drawing diagonally. 
+                    // levelCleared fixes the issue that you can still draw when the level has been completed
 
 
                     // checks ok, field can be drawn
@@ -411,6 +413,10 @@ const startLevel = function(event){
                         
                         // player has collected all points if both array have the same size
                         if(pointsDestroyed.length === allPointFieldValues[gameNumber].length){
+
+                            // TODO: disable drawing if level cleared
+                            levelCleared = true;
+
                             
                             // special text for last level
                             if(gameNumber == 7){
@@ -521,6 +527,7 @@ const loadNextGame = function(){
     // reset variables
     currentPathFields = [];
     pointsDestroyed = [];
+    levelCleared = false;
 
     // set to next level
     gameNumber++;
