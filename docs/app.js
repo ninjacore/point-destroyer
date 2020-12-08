@@ -547,12 +547,13 @@ const loadNextGame = function(){
 
     // update and show level counter
     let levelCounter = document.getElementById("level-counter");
-    levelCounter.innerHTML = `<h2>GAME #${gameNumber+1} OF ${allStartFieldValues.length}</h2>`;
+    if(gameNumber+1 != allStartFieldValues.length+1){
+        levelCounter.innerHTML = `<h2>GAME #${gameNumber+1} OF ${allStartFieldValues.length}</h2>`;
+    }
 
 
-
-    if(gameNumber > 6){
-        // don't show tutorial box if final level
+    if(gameNumber > 6 && gameNumber < 8){
+        // don't show tutorial box if final level and don't show it beyond that, too
         let miniTutorialBox = document.getElementById("mini-tutorial");
         miniTutorialBox.innerHTML = '';
 
