@@ -6,6 +6,19 @@ h1 {
  font-size: 50px;
 }
 
+#level-counter {
+  font-family: Monospace, Arial;
+  text-align: center;
+  font-size: 15px; 
+  background-color: #0D0221;
+  text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #FF2079, 0 0 30px #FF2079, 0 0 40px #FF2079, 0 0 55px #FF2079, 0 0 75px #FF2079;
+  outline:none;
+       border-color: #F148FB;
+       box-shadow: 0 0 16px #F148FB;
+  border-radius: 8px;
+  
+}
+
 body {
 	background-color: black;
 	color: white;

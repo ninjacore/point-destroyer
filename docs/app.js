@@ -545,6 +545,11 @@ const loadNextGame = function(){
     let textBox = document.getElementById("confirm");
     textBox.style.display = 'none';
 
+    // update and show level counter
+    let levelCounter = document.getElementById("level-counter");
+    levelCounter.innerHTML = `<h2>GAME #${gameNumber+1} OF ${allStartFieldValues.length}</h2>`;
+
+
 
     if(gameNumber > 6){
         // don't show tutorial box if final level
@@ -584,6 +589,11 @@ const startGame = function(){
     
     // show "reload board" button
     showButton("reload-board-button");
+
+    // update and show level counter
+    let levelCounter = document.getElementById("level-counter");
+    levelCounter.innerHTML = `<h2>GAME #${gameNumber+1} OF ${allStartFieldValues.length}</h2>`;
+    
 }
 
 const showMiniTutorial = function(){
