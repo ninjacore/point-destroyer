@@ -541,6 +541,11 @@ const loadNextGame = function(){
     // hide next level button
     hideButton("next-level-button");
 
+    // hide the textbox if still showing
+    let textBox = document.getElementById("confirm");
+    textBox.style.display = 'none';
+
+
     if(gameNumber > 6){
         // don't show tutorial box if final level
         let miniTutorialBox = document.getElementById("mini-tutorial");
