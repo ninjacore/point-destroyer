@@ -1,4 +1,9 @@
-/* css style file */
+body {
+	background-color: black;
+	color: white;
+	font-family: Monospace, Arial;
+}
+
 h1 {
  text-align: left;
  margin-left: 2em;
@@ -6,23 +11,24 @@ h1 {
  font-size: 50px;
 }
 
+/** REMARK !
+ * all sections dubbed "fancy adaptions"
+ * have been based on this source: 
+ * https://html-css-js.com/css/generator/text-shadow/
+ */
+
 #level-counter {
   font-family: Monospace, Arial;
   text-align: center;
   font-size: 15px; 
   background-color: #0D0221;
+  /* fancy adaptions . start */
   text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #FF2079, 0 0 30px #FF2079, 0 0 40px #FF2079, 0 0 55px #FF2079, 0 0 75px #FF2079;
   outline:none;
        border-color: #F148FB;
        box-shadow: 0 0 16px #F148FB;
-  border-radius: 8px;
-  
-}
-
-body {
-	background-color: black;
-	color: white;
-	font-family: Monospace, Arial;
+  /* fancy adaptions . end */
+  border-radius: 8px;  
 }
 
 #container{
@@ -30,7 +36,7 @@ body {
   flex-flow: row;
 }
 
-/** text-container is an alternative to the playboard **/
+/** text-container is an alternative view to the playboard **/
 .text-container{
   display: flex;
   flex-direction: column;
@@ -57,7 +63,7 @@ body {
 }
 
 .proto-start-field{
-  background-color: #00ff00 ; /* #ff0000;*/
+  background-color: #00ff00 ;
   min-width: 90px;
   min-height: 90px;
   max-height: 90px; /* otherwise gets strechted because of long text in tutorial */
@@ -71,7 +77,7 @@ body {
 }
 
 .proto-end-field{
-  background-color: #8000ff; /*#ff6600;*/
+  background-color: #8000ff;
   min-width: 90px;
   min-height: 90px;
   max-height: 90px; /* otherwise gets strechted because of long text in tutorial */
@@ -85,7 +91,7 @@ body {
 }
 
 .proto-point-field{
-  background-color: #2DE2E6; /* #0000e6;*/
+  background-color: #2DE2E6;
   min-width: 90px;
   min-height: 90px;
   max-height: 90px; /* otherwise gets strechted because of long text in tutorial */
@@ -112,10 +118,8 @@ body {
     /* fancy adaptions . end */
 }
 
-
-
 .mini-proto-start-field{
-  background-color: #00ff00 ; /* #ff0000;*/
+  background-color: #00ff00 ;
   min-width: 45px;
   min-height: 45px;
 
@@ -128,7 +132,7 @@ body {
 }
 
 .mini-proto-end-field{
-  background-color: #8000ff; /*#ff6600;*/
+  background-color: #8000ff;
   min-width: 45px;
   min-height: 45px;
 
@@ -141,7 +145,7 @@ body {
 }
 
 .mini-proto-point-field{
-  background-color: #2DE2E6; /* #0000e6;*/
+  background-color: #2DE2E6; 
   min-width: 45px;
   min-height: 45px;
 
@@ -157,18 +161,12 @@ body {
   padding: 0.5em;
 }
 
-
-
 .grid-container {
   margin: auto;
   display: grid;
   grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
-  /*grid-gap: 2px;*/
-  background-color: #FF2079; /* #00b354;*/
-  /*border: 2px solid yellow;*/ /* for testing */
+  background-color: #FF2079;
   padding: 10px;
-  /*height: 900px;
-  width: 900px;*/
   min-height: 780px;
   min-width: 780px;
 
@@ -182,14 +180,13 @@ body {
 }
 
 .grid-container > div {
-  /*background-color: #008033;*/
   text-align: center;
   padding: 20px 0;
   font-size: 30px;
 }
 
 .item {
-  background-color: #0D0221; /*#713df5; */ /*#008033;*/
+  background-color: #0D0221;
   /* fancy adaptions . start */
   text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
   outline:none;
@@ -199,7 +196,7 @@ body {
 }
 
 .start-field{
-  background-color: #00ff00 ; /* #ff0000;*/
+  background-color: #00ff00 ;
 
   /* fancy adaptions . start */
   text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
@@ -210,7 +207,7 @@ body {
 }
 
 .end-field{
-  background-color: #8000ff; /*#ff6600;*/
+  background-color: #8000ff;
   /* fancy adaptions . start */
   text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
   outline:none;
@@ -220,7 +217,7 @@ body {
 }
 
 .point-field{
-  background-color: #2DE2E6; /* #0000e6;*/
+  background-color: #2DE2E6;
   /* fancy adaptions . start */
   text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
   outline:none;
@@ -230,7 +227,7 @@ body {
 }
 
 .cut-out-field{
-  background-color: #FF2079; /*#440bd4;*/
+  background-color: #FF2079;
   /* fancy adaptions . start */
   text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
   outline:none;
@@ -258,8 +255,7 @@ body {
   padding: auto;
   margin: auto;
   display: inline-block;
-  
-  background-color: white; /* Green */
+  background-color: white;
   border: none;
   color: black;
   padding: 15px 32px;
@@ -302,23 +298,26 @@ body {
 
 #reload-board-button, #start-game-button, #next-level-button{
   background-color: #0D0221;
+  /* fancy adaptions . start */
   text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #FF2079, 0 0 30px #FF2079, 0 0 40px #FF2079, 0 0 55px #FF2079, 0 0 75px #FF2079;
   outline:none;
        border-color: #F148FB;
        box-shadow: 0 0 16px #F148FB;
+  /* fancy adaptions . end */
   color: white;
   border-radius: 8px;
   font-size: 20px;
 }
 
-/* special css for better alert boxes 
-source: https://html-css-js.com/css/generator/text-shadow/ */
+/** REMARK!
+ * "confirm" CSS based on source: 
+ * https://www.tutorialspoint.com/How-to-create-and-apply-CSS-to-JavaScript-Alert-box
+ */
 .confirm-box {
   display: none;
   background-color: #0D0221;
   opacity: 100%;
   color: white;
-  text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
   border: 4px ;
   position: fixed;
   width: 450px;
@@ -327,11 +326,13 @@ source: https://html-css-js.com/css/generator/text-shadow/ */
   top: 40%;
   box-sizing: border-box;
   text-align: center;
+  /* fancy adaptions . start */
+  text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
   outline:none;
        border-color:#F148FB;
        box-shadow:0 0 20px #F148FB;
+  /* fancy adaptions . end */
 }
-
 
 #confirm button {
   background-color: #0D0221;
@@ -342,20 +343,23 @@ source: https://html-css-js.com/css/generator/text-shadow/ */
   text-align: center;
   width: 60px;
   cursor: pointer;
+  /* fancy adaptions . start */
   outline:none;
        border-color:#F148FB;
        box-shadow:0 0 10px #F148FB;
    color: white;
    text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #FF2079, 0 0 30px #FF2079, 0 0 40px #FF2079, 0 0 55px #FF2079, 0 0 75px #FF2079;
-   font-weight: bold;
+  /* fancy adaptions . end */
+  font-weight: bold;
 }
 
 #confirm .message {
   margin: 3em auto 2em auto;
-  /*text-align: left;*/
 }
 
-
+/* * * * * * * * * * * * * * * * * * * * *
+ *  special alert colors for final level *
+ * * * * * * * * * * * * * * * * * * * * */
 .red-alert{
   text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 55px #ff0000, 0 0 75px #ff0000;
   outline:none;
