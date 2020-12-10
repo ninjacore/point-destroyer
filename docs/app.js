@@ -629,7 +629,7 @@ const showFinalMessage = function(){
     You did it! Thank you for playing Point Destroyer.<br>
     We hope you had a fun time solving our puzzles. This game was created for a group project in our Web and Server-side programming class. It was a new and challenging experience for us, especially for our lead designer without much programming experience.
     </p>
-    <p>We wish you a nice day and now get out!</p>
+    <p>We wish you a nice day!</p>
     
     <p>Lead Programmer: Lucien A. Haeller<br>
     Lead Game Designer: Adrian W. Menti<br>
