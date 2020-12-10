@@ -1,16 +1,9 @@
 /****************************************
  *       DECLARATIONS - variables       *
  *                                      *
- ****************************************/ 
+ ****************************************/
 
-/* Game Values */
-/*
-let startFields = [7,10,70];
-let endFields = [31];
-let cutOutFields = [1,2,3,11,12,13,21,22,23,15,16,25,26,18,19,28,29,38,39,42,43,45,46,48,49,52,53,55,56,58,59,72,73,75,76,77,78,79,82,83,85,86,87,88,89];
-let pointFields = [14,40,66,90,93];
-*/
-
+/* level configs */
 let allStartFieldValues = [
     [91],
     [91],
@@ -55,26 +48,21 @@ let allPointFieldValues = [
     [4,7,12,26,30,41,43,48,52,55,60,67,69,71,80,84]
 ];
 
- /* Current Session Values */
+/* Current Session Values */
 let gameNumber = 0;
-
-var currentPathFields = [];
+let currentPathFields = [];
 let pointsDestroyed = [];
 let levelCleared = false;
 
 
 
-
-
-// DECLARATIONS - functions
+/****************************************
+ *       DECLARATIONS - functions      *
+ *                                      *
+ ****************************************/
 
 // automatically generate html for playboard
 const generatePlayboard = function(){
-
-    // for n fields set grid-lines 
-    /**  objective
-     *  { "grid-row-start" → "1", "grid-row-end" → "5", "grid-column-start" → "1", "grid-column-end" → "5" }
-     *  */ 
 
     // this is the pointer to the html playboard
     let playboard = document.getElementById("playboard");
@@ -82,38 +70,27 @@ const generatePlayboard = function(){
     // delete all child-elements of current playboard to load new game configs
     playboard.innerHTML = '';
 
-    // starting coordinates within grid-lines
-    let xCoordinate = 1;
-    let yCoordinate = 1;
-
-    // TODO: make this number choosable
+    // declare value for 10x10 fields
     let numberOfFields = 100;
-    let allFields = [];
 
     // create and add all the fields onto the playboard
     for(let field = 1;field <= numberOfFields;field++){
         let element = document.createElement('div');
         element.classList.add("item");
         element.id = `field-${field}`;
-        element.innerHTML = ``; //`${field}`;
+        element.innerHTML = ``; 
         playboard.appendChild(element);
     }
 
-    // define all the fields around each field
-    for(let field = 1;field <= numberOfFields;field++){
+    // define all the fields around each field 
+    /** was used for testing in the beginning
+     *  but is not used anymore 
+     **/ 
+    /*for(let field = 1;field <= numberOfFields;field++){
         let targetID = `field-${field}`;
         let targetElement = document.getElementById(targetID);
         findOutNeighbours(targetElement,field,numberOfFields);    
-    }
-
-    // set properties
-    /**
-     *  style.setProperty('grid-row-start',xStartNew);
-        style.setProperty('grid-row-end',yStartNew);
-        style.setProperty('grid-column-start',xEndNew);
-        style.setProperty('grid-column-end',yEndNew);
-     */
-
+    }*/
 }
 
 // mark fields according to game
@@ -209,6 +186,11 @@ const colorFieldsForFinalLevel = function(){
 
 // find out neighbours (of a field)
 const findOutNeighbours = function(element,fieldNumber,numberOfFields){
+
+    /** was used in generatePlayboard()
+     *  for testing in the beginning
+     *  but is not used anymore 
+     **/ 
 
     let id = element.id;
 
@@ -404,7 +386,7 @@ const startLevel = function(event){
 
                     // check if point destroyed
                     if(isPointField(fieldMovedInUpon.id)){
-                        // TODO: check if not destroyed already - just in case
+                        // save to game status array
                         pointsDestroyed.push(fieldMovedInUpon.id);
                     }
 
@@ -414,7 +396,7 @@ const startLevel = function(event){
                         // player has collected all points if both array have the same size
                         if(pointsDestroyed.length === allPointFieldValues[gameNumber].length){
 
-                            // TODO: disable drawing if level cleared
+                            // disable drawing if level cleared
                             levelCleared = true;
 
                             
