@@ -520,7 +520,7 @@ const loadNextGame = function(){
     // update and show level counter
     let levelCounter = document.getElementById("level-counter");
     if(gameNumber+1 != allStartFieldValues.length+1){
-        levelCounter.innerHTML = `<h2>GAME #${gameNumber+1} OF ${allStartFieldValues.length}</h2>`;
+        levelCounter.innerHTML = `<h2>GAME ${gameNumber+1} OF ${allStartFieldValues.length}</h2>`;
     }
 
 
@@ -562,7 +562,7 @@ const startGame = function(){
 
     // update and show level counter
     let levelCounter = document.getElementById("level-counter");
-    levelCounter.innerHTML = `<h2>GAME #${gameNumber+1} OF ${allStartFieldValues.length}</h2>`;
+    levelCounter.innerHTML = `<h2>GAME ${gameNumber+1} OF ${allStartFieldValues.length}</h2>`;
     
 }
 
