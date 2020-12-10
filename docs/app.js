@@ -1,6 +1,5 @@
 /****************************************
  *       DECLARATIONS - variables       *
- *                                      *
  ****************************************/
 
 /* level configs */
@@ -58,7 +57,6 @@ let levelCleared = false;
 
 /****************************************
  *       DECLARATIONS - functions      *
- *                                      *
  ****************************************/
 
 // automatically generate html for playboard
@@ -93,7 +91,7 @@ const generatePlayboard = function(){
     }*/
 }
 
-// mark fields according to game
+// mark fields according to game configs
 const markFields = function(startFields,endFields,cutOutFields,pointFields){
 
     // set start fields
@@ -103,13 +101,13 @@ const markFields = function(startFields,endFields,cutOutFields,pointFields){
         currentField.classList.add("start-field");
     }
 
-    // set end field
+    // set end fields
     for(let i = 0; i < endFields.length ;i++){
         let currentField = document.getElementById(`field-${endFields[i]}`);
         currentField.classList.add("end-field");
     }
 
-    // set cut-out fields
+    // set cut-out fields (in those the player cannot draw)
     for(let i = 0; i < cutOutFields.length; i++){
         let currentField = document.getElementById(`field-${cutOutFields[i]}`);
         currentField.classList.add('cut-out-field');        
@@ -121,13 +119,11 @@ const markFields = function(startFields,endFields,cutOutFields,pointFields){
         currentField.classList.add('point-field');
     }
 
-    // activate all event listeners on ready board
-    addAllEventListeners();
+    // activate event listeners on start-fields on ready playboard
+    addClickToStartEventListeners();
 
     // if final level, change colors
     if(gameNumber == 7){
-        // for testing:
-        console.log("FINAL LEVEL!!");
         colorFieldsForFinalLevel();
     }
 
@@ -152,7 +148,7 @@ const colorFieldsForFinalLevel = function(){
     Array.from(allStartFieldValues[gameNumber]).forEach(function(idNumber) {
         // get element by id
         let element = document.getElementById(`field-${idNumber}`);
-        // add classlist final-field...
+        // add final-field version to classlist
         element.classList.remove("final-item");
         element.classList.add("final-start-field");
     });
@@ -160,7 +156,7 @@ const colorFieldsForFinalLevel = function(){
     Array.from(allEndFieldValues[gameNumber]).forEach(function(idNumber) {
         // get element by id
         let element = document.getElementById(`field-${idNumber}`);
-        // add classlist final-field...
+        // add final-field version to classlist
         element.classList.remove("final-item");
         element.classList.add("final-end-field");
     });
@@ -168,7 +164,7 @@ const colorFieldsForFinalLevel = function(){
     Array.from(allCutOutFieldValues[gameNumber]).forEach(function(idNumber) {
         // get element by id
         let element = document.getElementById(`field-${idNumber}`);
-        // add classlist final-field...
+        // add final-field version to classlist
         element.classList.remove("final-item");
         element.classList.add("final-cut-out-field");
     });
@@ -176,7 +172,7 @@ const colorFieldsForFinalLevel = function(){
     Array.from(allPointFieldValues[gameNumber]).forEach(function(idNumber) {
         // get element by id
         let element = document.getElementById(`field-${idNumber}`);
-        // add classlist final-field...
+        // add final-field version to classlist
         element.classList.remove("final-item");
         element.classList.add("final-point-field");
     });
@@ -184,7 +180,7 @@ const colorFieldsForFinalLevel = function(){
 
 }
 
-// find out neighbours (of a field)
+// find out neighbours (of a field) - deprecated
 const findOutNeighbours = function(element,fieldNumber,numberOfFields){
 
     /** was used in generatePlayboard()
@@ -245,7 +241,7 @@ const findOutNeighbours = function(element,fieldNumber,numberOfFields){
 }
 
 
-const addAllEventListeners = function(){
+const addClickToStartEventListeners = function(){
     // event listener configurations
     let startElements = document.getElementsByClassName("start-field");
 
@@ -259,25 +255,19 @@ const startLevel = function(event){
     // start level
     console.log("Level started");
 
+    // mark start-field as path (visually and logically)
     event.target.classList.add('path-field');
     currentPathFields.push(event.target.id);
-
                 
 
     let fields = document.getElementsByClassName("item");
     let validFields = []
     Array.from(fields).forEach(function(field){
         
-        if(field.classList.contains("cut-out-field")){
-            // for testing
-            console.log("%c invalid field:","color: red; font-weight: bolld;");
-            console.table([field.classList]);
-        }else{
-            // for testing
-            console.log("%c valid field:","color: green; font-weight:bold;")
-            console.table([field.classList]);
-
+        // only fields that are not cut-out can be colored as path
+        if(!field.classList.contains("cut-out-field")){
             validFields.push(field);
+
         }
 
     })
@@ -285,11 +275,7 @@ const startLevel = function(event){
     // create "mouseover" event listener for each field that is not cut-out
     Array.from(validFields).forEach(function(field){
         field.addEventListener('mouseover', (ev) => {   
-            let numberOfPathFields = currentPathFields.length;
-
-            // TODO: check if field is neighbour to a 'path-field'
-            //  and only then:
-            
+            let numberOfPathFields = currentPathFields.length;           
             
             let lastIndex = numberOfPathFields-1;
 
@@ -300,29 +286,29 @@ const startLevel = function(event){
                 // player going backwards
                 console.log("going backwards");
                 if((currentPathFields[lastIndex] == fieldMovedOutFrom.id) && levelCleared == false){
-                    // levelCleared fixes the issue that you can still draw when the level has been completed
-                    let idLastElement = currentPathFields.pop();   // removes currentPathFields[lastIndex]
+                    /** checking for "levelCleared" fixes the issue that 
+                     * you can still draw when the level has been completed
+                     *  */ 
+                    // remove the field moved out from from the path (logically and visually)
+                    let idLastElement = currentPathFields.pop();
                     let undrawnElement = document.getElementById(idLastElement);
                     undrawnElement.classList.remove('path-field');
 
-                    // if point field is undrawn, remove for list
+                    // if point field is undrawn, remove from list of collected points
                     if(undrawnElement.classList.contains('point-field')){
                         // pop the latest point in the list since it must have been this one
                         pointsDestroyed.pop();
                     }
 
-
                     // for final level
                     if(gameNumber == 7){
                         undrawnElement.classList.remove('final-path-field');
                         
-                        // if not a marked field
+                        // if a normal field has been undrawn then it needs to keep the final level looks
                         if(!undrawnElement.classList.contains('start-field') && !undrawnElement.classList.contains('end-field') && !undrawnElement.classList.contains('point-field')){
                             undrawnElement.classList.add('final-item');                            
                         }
                     }
-                }else{
-                    console.log(`last element = ${currentPathFields[lastIndex]}, fieldMovedOutFrom.id = ${fieldMovedOutFrom.id}`);
                 }
 
             }else{
@@ -331,22 +317,20 @@ const startLevel = function(event){
 
                 // IDs for path checks
                 idTo = fieldMovedInUpon.id.split("field-");
-                // for testing
-                console.table([idTo]);
                 idTo = idTo[1];
                 idFrom = fieldMovedOutFrom.id.split("field-");
-                // for testing
-                console.table([idFrom]);
                 idFrom = Number(idFrom[1]);
 
-                // for testing
+                // for testing (can be removed anytime)
                 console.log(`idTo [${idTo}] == idFrom +1 [${idFrom +1}]`);
                 console.log(`idTo [${idTo}] == idFrom -1 [[${idFrom -1}]]`);
                 console.log(`idTo [${idTo}] == idFrom +10 [[${idFrom +10}]`);
                 console.log(`idTo [${idTo}] == idFrom -10 [[${idFrom +10}]`);
 
 
-                // skipping fields is not allowed, rule can be applied anytime due to new rules (+1, -1, +10, -10) below
+                /** "skipping fields is not allowed" rule can be applied
+                 * anytime due to new rules (+1, -1, +10, -10) below
+                 *  */ 
                 if(fieldMovedOutFrom.id != currentPathFields[lastIndex]){
                     console.log("skipping fields is not allowed");
                 }else if(fieldIsInPathAlready(fieldMovedInUpon.id)){
@@ -418,10 +402,8 @@ const startLevel = function(event){
                             }
 
 
-                            // TODO: add button to load next board
+                            // display button to load next board 
                             showButton("next-level-button");
-                            //gameNumber++;
-                            //loadNextGame();
 
                         }
                     }
@@ -435,6 +417,7 @@ const startLevel = function(event){
 
 }
 
+// function to change the text in the alert message box
 const setAlertMessage = function(message,confirmationText){
 
     let element = document.getElementById("confirm");
@@ -448,10 +431,9 @@ const showButton = function(buttonId){
     let nextLevelButton = document.getElementById(buttonId);
     nextLevelButton.style.visibility = 'visible';
 
-
-
 }
 
+// check if a field is an end-field
 const isEndField = function(fieldId){
 
     let isEndField = false;
@@ -465,6 +447,7 @@ const isEndField = function(fieldId){
 
 }
 
+// check if a field is a point-field
 const isPointField = function(fieldId){
 
     let fieldIsPoint = false;
@@ -516,13 +499,13 @@ const loadNextGame = function(){
 
     // the game is over if all levels have been cleared
     if(gameNumber > 7){
-        console.log("showFinalMessage:");
+        console.log("showing final message.");
         showFinalMessage();
     }else{
         // reset board
         generatePlayboard();
 
-        // draw fields
+        // draw fields according to game configs
         markFields(allStartFieldValues[gameNumber],allEndFieldValues[gameNumber],allCutOutFieldValues[gameNumber],allPointFieldValues[gameNumber]);    
   
     }
@@ -546,14 +529,10 @@ const loadNextGame = function(){
         let miniTutorialBox = document.getElementById("mini-tutorial");
         miniTutorialBox.innerHTML = '';
 
-        // show mean message
+        // show a mean message instead
         miniTutorialBox.innerHTML = "<div class='not-a-tutorial-box'>💀 YOU'RE ON <br>YOUR OWN NOW. <br>FIGHT FOR <br>YOUR LIFE!</div>";
 
     }
-
-    
-
-
 
 }
 
@@ -563,7 +542,8 @@ const startGame = function(){
 
     // element with id "playboard": remove class "text-container"
     playboardElement.classList.remove("text-container");
-    // element with id "playboard": remove class "grid-container"
+
+    // element with id "playboard": add class "grid-container"
     playboardElement.classList.add("grid-container");
 
     //  innerHtml = '' (removes content from tutorial)
@@ -574,7 +554,7 @@ const startGame = function(){
     let parent = nextLevelButton.parentElement;
     parent.removeChild(nextLevelButton);
 
-    // show mini tutorial
+    // show mini tutorial on the side
     showMiniTutorial();
     
     // show "reload board" button
@@ -586,6 +566,7 @@ const startGame = function(){
     
 }
 
+// used to show hints to the player while focusing on the level
 const showMiniTutorial = function(){
 
     let element = document.getElementById("mini-tutorial");
@@ -606,15 +587,14 @@ const showMiniTutorial = function(){
 
 }
 
+// can be used to hide any button
 const hideButton = function(buttonId){
-    // for testing
-    console.log(`hiding button, gameNumber is ${gameNumber}`);
 
     let nextLevelButton = document.getElementById(buttonId);
     nextLevelButton.style.visibility = 'hidden';
 }
 
-/* special function for better alert boxes 
+/* special function for better alert boxes (uses jQuery)
 source: https://www.tutorialspoint.com/How-to-create-and-apply-CSS-to-JavaScript-Alert-box */
 function functionAlert(msg, myYes) {
     var confirmBox = $("#confirm");
@@ -626,6 +606,7 @@ function functionAlert(msg, myYes) {
     confirmBox.show();
 }
 
+// show this message if all levels have been cleared
 const showFinalMessage = function(){
 
     let element = document.getElementById("playboard");
@@ -655,17 +636,10 @@ const showFinalMessage = function(){
     December 2020</p>`;
 }
 
+/************************************
+ *       GAME INITIALIZATON         *
+ ************************************/
 
 // MAIN 
 hideButton("next-level-button");
 hideButton("reload-board-button");
-
-// load first game
-
-
-
-// TODO: add classlist to id playboard "grid-container"
-
-// resetPlayboard();
-
-
