@@ -8,9 +8,9 @@ This game was created for a group project in our Web and Server-side programming
 It was a new and challenging experience for us, especially for our lead designer without much programming experience.
 
 - Lead Game Designer: Adrian W. Menti ( [Menti696](https://github.com/Menti696) )
-- Lead Programmer: Lucien A. Haeller ( [lhaeller](https://github.com/lhaeller) )
+- Lead Programmer: Lucien A. Haeller ( [DeleteAccess](https://github.com/DeleteAccess) )
 
-You can play the game on: [http://lucienhaeller.com/point-destroyer/](http://lucienhaeller.com/point-destroyer/)
+You can play the game on: **tbd**
 
 
 
