@@ -1,0 +1,140 @@
+swagger: "2.0"
+info:
+  version: "1.1"
+  title: "Point Destroyer API"
+host: "api.server.test"
+basePath: "/"
+paths:
+  /player-record:
+    post:
+      summary: "Save a record of the player"
+      description: "A player's performance is stored."
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Player record that needs to be added to the database"
+          required: true
+          schema:
+            $ref: "#/definitions/Player-Record"
+      responses:
+        "200":
+          description: "OK"
+        "503":
+          description: "Service unavailable"
+    
+    get:
+      summary: "Load record of a player"
+      description: "A player's performance gets loaded."
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Player record that needs to be load"
+          required: true
+          schema:
+            $ref: "#/definitions/Player-Record"
+      responses:
+          "200":
+            description: "OK"
+          "404":
+            description: "Leaderboard not found"
+
+    put:
+      summary: "Own player"
+      description: "Overwrite the message and emoji of a player you've beaten"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Updated player record that needs to be added to the database"
+          required: true
+          schema:
+            $ref: "#/definitions/Player-Record"
+      responses:
+        "200":
+          description: "OK"
+        "503":
+          description: "Service unavailable"
+
+  /emoji-list:
+    post:
+      summary: "Post emoji list to the database"
+      description: "The emoji list object is saved to the database"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "emoji list object"
+          required: true
+          schema:
+            $ref: "#/definitions/Emoji-List"
+      responses:
+        "200":
+          description: "OK"
+        "503":
+          description: "Service unavailable"
+
+    get:
+      summary: "Load emoji list from the database"
+      description: "The list of emojis gets provided by the database"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "emoji list object"
+          required: true
+          schema:
+            $ref: "#/definitions/Emoji-List"
+      responses:
+          "200":
+            description: "OK"
+          "404":
+            description: "Emoji list not found"
+
+    put:
+      summary: "Update emoji list on the database"
+      description: "The emoji list object is updated in the database"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "emoji list object"
+          required: true
+          schema:
+            $ref: "#/definitions/Emoji-List"
+      responses:
+        "200":
+          description: "OK"
+        "503":
+          description: "Service unavailable"
+      
+
+
+
+definitions:
+  Player-Record:
+    type: "object"
+    properties: 
+      id:
+        type: "string"
+      playername:
+        type: "string"
+      initialMessage:
+        type: "string"
+      ownedMessage:
+        type: "string"
+      intialPlaytime:
+        type: "string"
+        format: "date-time"
+      fasterTime:
+        type: "string"
+        format: "date-time"
+      emoji:
+        type: "string"
+  
+  Emoji-List:
+    type: "object"
+    properties: 
+      id:
+        type: "string"
+      emojis:
+          type: array
+          items:
+            type: string
+
+      
