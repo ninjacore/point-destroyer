@@ -1,4 +1,4 @@
-# Point Destroyer
+# Point Destroyer Version 2
 
 ## Intro
 
