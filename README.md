@@ -10,7 +10,7 @@ It was a new and challenging experience for us, especially for our lead designer
 - Lead Game Designer: Adrian W. Menti ( [Menti696](https://github.com/Menti696) )
 - Lead Programmer: Lucien A. Haeller ( [DeleteAccess](https://github.com/DeleteAccess) )
 
-You can play the game on: **tbd**
+You can play the game on: https://menti696.github.io/point-destroyer/
 
 
 
