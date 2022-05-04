@@ -1,10 +1,65 @@
+class APIService{
+
+    url = "https://"
+    emojiEndpoint = "/emoji-list"
+    playerEndpoint = "/player-record"
 
 
-let url = "https://343505-26.web.fhgr.ch/api/point-destroyer"
-let emojiEndpoint = "/emoji-list"
-let playerEndpoint = "/player-record"
+    constructor(serverIP){
+        // TODO: decide if member variables should go here
+        this.url += serverIP
+    }
 
-let emojis = {
+    connect(target,mode,data){
+
+        let url = this.url
+
+        switch (target) {
+            case 'player':
+                url += this.playerEndpoint                
+                break;
+
+            case 'emoji':
+                url += this.emojiEndpoint
+                break;
+        
+            default:
+                console.log("mode unkwown.")
+                break;
+        }
+
+        let options = {
+            method: mode,
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type':'application/json'
+            }
+        }
+
+        fetch(url, options)
+        .then(res => res.json())
+        .then(res => console.log(res)); // TODO: return data per default
+
+    }
+}
+
+let someEmojis = {
+    id : "1",
+    emojis: [
+        "🦑",
+        "🦄",
+        "👽"
+    ]
+}
+
+const apiDB = new APIService("343505-26.web.fhgr.ch/api/point-destroyer")
+
+apiDB.connect("emoji","PUT",someEmojis)
+
+
+/**
+ * 
+ * let emojis = {
     id : "1",
     emojis: [
         "🦑",
@@ -24,25 +79,22 @@ let player = {
 
 let data = emojis
 
-let options = {
-    method: 'PUT',
-    body: JSON.stringify(data),
-    headers: {
-        'Content-Type':'application/json'
-    }
-}
 
 fetch(url+emojiEndpoint, options)
 .then(res => res.json())
 .then(res => console.log(res));
 
+ * 
+ */
+
+
 
 // up to 500 loads per month. so be careful with reloading the page
-fetch(url+emojiEndpoint)
+/*fetch(url+emojiEndpoint)
 .then(response => response.json())
 .then(data => {
     console.log(data)
-})
+})*/
 
 
 /*fetch("https://reddit3.p.rapidapi.com/subreddit?url=https%3A%2F%2Fwww.reddit.com%2Fr%2Fwholesomememes%2F&filter=hot", {
