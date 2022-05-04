@@ -10,10 +10,17 @@ class APIService{
         this.url += serverIP
     }
 
-    connect(target,mode,data){
+    connect(target,mode,data = ''){
+
+        let hasData, targetKnown = true
+        let s = data // JSON.stringify(data)
+        console.log(`s = ${s} \n s is ${s.length} long`)
+        console.table([s])
+        s ? hasData = true : hasData = false
+        console.log(`hasData = ${hasData}`)
 
         let url = this.url
-
+        
         switch (target) {
             case 'player':
                 url += this.playerEndpoint                
@@ -24,7 +31,8 @@ class APIService{
                 break;
         
             default:
-                console.log("mode unkwown.")
+                console.log("target unkwown.")
+                targetKnown = false
                 break;
         }
 
@@ -35,10 +43,15 @@ class APIService{
                 'Content-Type':'application/json'
             }
         }
-
-        fetch(url, options)
-        .then(res => res.json())
-        .then(res => console.log(res)); // TODO: return data per default
+        if(hasData && targetKnown){
+            fetch(url, options)
+            .then(res => res.json())
+            .then(res => console.log(res)); // TODO: return data per default    
+        }else if(mode == 'GET' && targetKnown){
+            fetch(url)
+            .then(res => res.json())
+            .then(data => console.log(data)); // TODO: return data per default    
+        }
 
     }
 }
@@ -55,6 +68,11 @@ let someEmojis = {
 const apiDB = new APIService("343505-26.web.fhgr.ch/api/point-destroyer")
 
 apiDB.connect("emoji","PUT",someEmojis)
+
+apiDB.connect("player","GET")
+
+apiDB.connect("dieter","PUT",someEmojis)
+
 
 
 /**
@@ -77,48 +95,4 @@ let player = {
     emoji: "🍿"
 }
 
-let data = emojis
-
-
-fetch(url+emojiEndpoint, options)
-.then(res => res.json())
-.then(res => console.log(res));
-
- * 
- */
-
-
-
-// up to 500 loads per month. so be careful with reloading the page
-/*fetch(url+emojiEndpoint)
-.then(response => response.json())
-.then(data => {
-    console.log(data)
-})*/
-
-
-/*fetch("https://reddit3.p.rapidapi.com/subreddit?url=https%3A%2F%2Fwww.reddit.com%2Fr%2Fwholesomememes%2F&filter=hot", {
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-host": "reddit3.p.rapidapi.com",
-		"x-rapidapi-key": "b2f8c303b8msh2cff217b37e5046p17b161jsn1ccb241b3d3f"
-	}
-})*/
-    /*let posts = data.posts
-    console.table(posts)
-    console.log(posts)
-    console.log(Object.values(posts))
-    for(let i = 0; i < posts.length; i++){
-        let post = posts[i]
-
-        document.getElementById("container")
-        .innerHTML += `<div class="post">
-            <h3>${post.title}</h3>
-            <a href="${post.permalink}">
-            <img src="${post.url}" alt="${post.title}">
-            </a>
-            <p>by ${post.author}</p>
-        </div>`;
-    }*/
-
-
+*/
