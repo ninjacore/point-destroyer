@@ -637,19 +637,26 @@ const handleArcadeParameters = async function (){
     let startTime = performance.now()
     
     let emojiData = await apiDB.getEmojis()
-    console.log("The emoji data is:",emojiData)
-
+    
     // TODO: delete after testing
+    console.log("The emoji data is:",emojiData)
     let endTime = performance.now()
     console.log(`%c Call to database took ${endTime - startTime} milliseconds`,"color: green; font-weight:bold;")
 
-
     // clean up view
     let element = unloadPlayboard()
+    let list = ''
+
+    for(i = 0; i < emojiData.length; i++){
+        list += `<option>${emojiData[i]}</option>`
+    }
     
     element.innerHTML = `
     <form id="initialPlayerRecordForm">
         Write your message: <input type="text" id="initialMessageInput" name="initialMessageInput" required><br>
+        <select id="mySelect" size="${emojiData.length}">
+            ${list}
+        </select>
         Select a symbol: <input type="text" id="initialEmojiInput" name="initialEmojiInput" required><br><br>
         <input type="button" onclick="submitPlayerRecord()" value="submit">
     </form>`
@@ -673,7 +680,7 @@ const submitPlayerRecord = function(){
     let chosenEmoji = document.getElementById('initialEmojiInput').value
 
     console.log("initialMessageInput: ", initialMessage)
-    console.log("initialEmojiInput: ",chosenEmoji)
+    console.log("initialEmojiInput: ", chosenEmoji)
  
     // store message to DB
 

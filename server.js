@@ -120,7 +120,8 @@ class APIService {
     }
 }
 
-
+// TODO: delete once ready to publish
+// to reset emoji object
 let someEmojis = {
     id: "1",
     emojis: [
