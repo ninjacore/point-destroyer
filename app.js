@@ -633,8 +633,13 @@ const showFinalMessage = function(){
 const handleArcadeParameters = async function (){
     
     // load available emojis
-    let emojiData = await apiDB.connect("emoji","GET")
+    let startTime = performance.now()
+    let emojiData = await apiDB.getEmojis()
+    //let emojiData = await apiDB.connect("emoji","GET")
     console.log("The emoji data is:",emojiData)
+    let endTime = performance.now()
+    console.log(`%c Call to database took ${endTime - startTime} milliseconds`,"color: green; font-weight:bold;")
+
 
     // clean up view
     let element = unloadPlayboard()

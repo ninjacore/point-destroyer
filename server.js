@@ -1,16 +1,49 @@
-class APIService{
+class APIService {
 
     url = "https://"
     emojiEndpoint = "/emoji-list"
     playerEndpoint = "/player-record"
 
 
-    constructor(serverIP){
+    constructor(serverIP) {
         // TODO: decide if member variables should go here
         this.url += serverIP
     }
 
-    connect(target,mode,data = ''){
+    async getEmojis() {
+
+        let url = this.url + this.emojiEndpoint
+        let startTime = performance.now()
+
+        try {
+            let response = await fetch(url)
+            console.table(response)
+            let endTime = performance.now()
+            console.log(`%c Call to database took ${endTime - startTime} milliseconds`,"color: blue; font-weight:bold;")
+
+            let data = await response.json()
+            let allEmojis = data[0].emojis
+            console.table(allEmojis)
+            return allEmojis
+
+        } catch (error) {
+            return error.message
+        }
+        /*
+        fetch(url)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+
+                let endTime = performance.now()
+                console.log(`%c Call to database took ${endTime - startTime} milliseconds`,"color: blue; font-weight:bold;")
+
+                return data
+            });   
+        */
+    }
+
+    async connect(target, mode, data = '') {
 
         let hasData, targetKnown = true
 
@@ -21,16 +54,16 @@ class APIService{
         console.log(`hasData = ${hasData}`)
 
         let url = this.url
-        
+
         switch (target) {
             case 'player':
-                url += this.playerEndpoint                
+                url += this.playerEndpoint
                 break;
 
             case 'emoji':
                 url += this.emojiEndpoint
                 break;
-        
+
             default:
                 console.log("target unkwown.")
                 targetKnown = false
@@ -41,27 +74,27 @@ class APIService{
             method: mode,
             body: JSON.stringify(data),
             headers: {
-                'Content-Type':'application/json'
+                'Content-Type': 'application/json'
             }
         }
-        if(hasData && targetKnown){
+        if (hasData && targetKnown) {
             fetch(url, options)
-            .then(res => res.json())
-            .then(res => console.log(res)); // TODO: return data per default    
-        }else if(mode == 'GET' && targetKnown){
+                .then(res => res.json())
+                .then(res => console.log(res)); // TODO: return data per default    
+        } else if (mode == 'GET' && targetKnown) {
             fetch(url)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                return data
-            }); // TODO: return data per default    
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    return data
+                }); // TODO: return data per default    
         }
 
     }
 }
 
 let someEmojis = {
-    id : "1",
+    id: "1",
     emojis: [
         "🦑",
         "🦄",
