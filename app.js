@@ -633,10 +633,13 @@ const showFinalMessage = function(){
 const handleArcadeParameters = async function (){
     
     // load available emojis
+    // TODO: delete after testing
     let startTime = performance.now()
+    
     let emojiData = await apiDB.getEmojis()
-    //let emojiData = await apiDB.connect("emoji","GET")
     console.log("The emoji data is:",emojiData)
+
+    // TODO: delete after testing
     let endTime = performance.now()
     console.log(`%c Call to database took ${endTime - startTime} milliseconds`,"color: green; font-weight:bold;")
 
@@ -656,8 +659,6 @@ const handleArcadeParameters = async function (){
         // let them write a message
 
         // let player select their emoji
-
-
 }
 
 const submitPlayerRecord = function(){

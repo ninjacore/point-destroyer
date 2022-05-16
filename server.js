@@ -13,34 +13,61 @@ class APIService {
     async getEmojis() {
 
         let url = this.url + this.emojiEndpoint
+        
+        // TODO: delete after testing
         let startTime = performance.now()
 
         try {
             let response = await fetch(url)
             console.table(response)
+
+            // TODO: delete after testing
             let endTime = performance.now()
             console.log(`%c Call to database took ${endTime - startTime} milliseconds`,"color: blue; font-weight:bold;")
 
             let data = await response.json()
+            console.log("await response.json() = ",data)
+
             let allEmojis = data[0].emojis
-            console.table(allEmojis)
+
             return allEmojis
 
         } catch (error) {
             return error.message
         }
-        /*
-        fetch(url)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
+    }
 
-                let endTime = performance.now()
-                console.log(`%c Call to database took ${endTime - startTime} milliseconds`,"color: blue; font-weight:bold;")
+    async saveEmoji(emoji){
 
-                return data
-            });   
-        */
+        try {
+            console.log(`%c let currentEmojis = this.getEmojis() ....`,'color:white; font-weight:bold')
+            let emojis = await this.getEmojis()
+
+            // TODO: delete after testing
+            console.table(emojis)
+            console.log(typeof emojis)
+    
+            emojis.push(emoji)
+            
+            // TODO: delete after testing
+            console.log(`adding this emoji: ${emoji}`)
+            console.table(emojis)
+
+            let emojiObject = {
+                id: "1",
+                emojis
+            }
+
+            await this.connect("emoji","PUT",emojiObject)
+
+            
+        } catch (error) {
+            return error.message
+        }
+
+  
+
+        // TODO: PUSH call
     }
 
     async connect(target, mode, data = '') {
@@ -93,6 +120,7 @@ class APIService {
     }
 }
 
+
 let someEmojis = {
     id: "1",
     emojis: [
@@ -101,6 +129,7 @@ let someEmojis = {
         "👽"
     ]
 }
+
 
 const apiDB = new APIService("343505-26.web.fhgr.ch/api/point-destroyer")
 
@@ -111,6 +140,9 @@ apiDB.connect("player","GET")
 
 apiDB.connect("dieter","PUT",someEmojis)
 */
+
+// apiDB.connect("emoji","PUT",someEmojis)
+apiDB.connect("emoji","GET")
 
 
 /**
