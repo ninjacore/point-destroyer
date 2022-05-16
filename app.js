@@ -629,8 +629,14 @@ const showFinalMessage = function(){
     December 2020</p>`;
 }
 
-const handleArcadeParameters = function (){
+
+const handleArcadeParameters = async function (){
     
+    // load available emojis
+    let emojiData = await apiDB.connect("emoji","GET")
+    console.log("The emoji data is:",emojiData)
+
+    // clean up view
     let element = unloadPlayboard()
     
     element.innerHTML = `
