@@ -500,11 +500,11 @@ const loadNextGame = function(){
     // the game is over if all levels have been cleared
     if(gameNumber > 7){
         
-       // handleArcadeParameters();
+        handleArcadeParameters();
 
         // TODO: delete once new process confirmed
-          console.log("showing final message.");
-          showFinalMessage();
+          //console.log("showing final message.");
+          //showFinalMessage();
         
        
     }else{
@@ -615,7 +615,7 @@ function functionAlert(msg, myYes) {
 // show this message if all levels have been cleared
 const showFinalMessage = function(){
 
-    let element = resetPlayboardHTML()
+    let element = unloadPlayboard()
 
     // add final message
     element.innerHTML = `<p>
@@ -630,16 +630,45 @@ const showFinalMessage = function(){
 }
 
 const handleArcadeParameters = function (){
+    
+    let element = unloadPlayboard()
+    
+    element.innerHTML = `
+    <form id="initialPlayerRecordForm">
+        Write your message: <input type="text" id="initialMessageInput" name="initialMessageInput" required><br>
+        Select a symbol: <input type="text" id="initialEmojiInput" name="initialEmojiInput" required><br><br>
+        <input type="button" onclick="submitPlayerRecord()" value="submit">
+    </form>`
+
     // ask player to enter information
+        
+        // let them write a message
 
-    // let player select their emoji
+        // let player select their emoji
 
+
+}
+
+const submitPlayerRecord = function(){
+
+    console.log("submitPlayerRecord was run")
+
+    let initialForm = document.getElementById('initialPlayerRecordForm')
+    console.log("initalForm element = " )
+    console.table(initialForm)
+
+    let initialMessage = document.getElementById('initialMessageInput').value
+    let chosenEmoji = document.getElementById('initialEmojiInput').value
+
+    console.log("initialMessageInput: ", initialMessage)
+    console.log("initialEmojiInput: ",chosenEmoji)
+ 
     // store message to DB
 
     // load leaderboard
 }
 
-const resetPlayboardHTML = function(){
+const unloadPlayboard = function(){
     let element = document.getElementById("playboard");
 
     // element with id "playboard": remove classes "grid-container" and "final-border"
