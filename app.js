@@ -654,10 +654,9 @@ const handleArcadeParameters = async function (){
     element.innerHTML = `
     <form id="initialPlayerRecordForm">
         Write your message: <input type="text" id="initialMessageInput" name="initialMessageInput" required><br>
-        <select id="mySelect" size="${emojiData.length}">
+        <select id="initialEmojiInput" size="${emojiData.length}">
             ${list}
         </select>
-        Select a symbol: <input type="text" id="initialEmojiInput" name="initialEmojiInput" required><br><br>
         <input type="button" onclick="submitPlayerRecord()" value="submit">
     </form>`
 
