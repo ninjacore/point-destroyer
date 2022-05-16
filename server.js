@@ -13,6 +13,7 @@ class APIService{
     connect(target,mode,data = ''){
 
         let hasData, targetKnown = true
+
         let s = data // JSON.stringify(data)
         console.log(`s = ${s} \n s is ${s.length} long`)
         console.table([s])
@@ -50,7 +51,10 @@ class APIService{
         }else if(mode == 'GET' && targetKnown){
             fetch(url)
             .then(res => res.json())
-            .then(data => console.log(data)); // TODO: return data per default    
+            .then(data => {
+                console.log(data)
+                return data
+            }); // TODO: return data per default    
         }
 
     }
@@ -67,12 +71,13 @@ let someEmojis = {
 
 const apiDB = new APIService("343505-26.web.fhgr.ch/api/point-destroyer")
 
+/*
 apiDB.connect("emoji","PUT",someEmojis)
 
 apiDB.connect("player","GET")
 
 apiDB.connect("dieter","PUT",someEmojis)
-
+*/
 
 
 /**
