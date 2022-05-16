@@ -48,7 +48,7 @@ let allPointFieldValues = [
 ];
 
 /* Current Session Values */
-let gameNumber = 0;
+let gameNumber = 0; // set to 7 for testing...
 let currentPathFields = [];
 let pointsDestroyed = [];
 let levelCleared = false;
@@ -499,8 +499,14 @@ const loadNextGame = function(){
 
     // the game is over if all levels have been cleared
     if(gameNumber > 7){
-        console.log("showing final message.");
-        showFinalMessage();
+        
+       // handleArcadeParameters();
+
+        // TODO: delete once new process confirmed
+          console.log("showing final message.");
+          showFinalMessage();
+        
+       
     }else{
         // reset board
         generatePlayboard();
@@ -609,6 +615,31 @@ function functionAlert(msg, myYes) {
 // show this message if all levels have been cleared
 const showFinalMessage = function(){
 
+    let element = resetPlayboardHTML()
+
+    // add final message
+    element.innerHTML = `<p>
+    You did it! Thank you for playing Point Destroyer.<br>
+    We hope you had a fun time solving our puzzles. This game was created for a group project in our Web and Server-side programming class. It was a new and challenging experience for us, especially for our lead designer without much programming experience.
+    </p>
+    <p>We wish you a nice day!</p>
+    
+    <p>Lead Programmer: Lucien A. Haeller<br>
+    Lead Game Designer: Adrian W. Menti<br>
+    December 2020</p>`;
+}
+
+const handleArcadeParameters = function (){
+    // ask player to enter information
+
+    // let player select their emoji
+
+    // store message to DB
+
+    // load leaderboard
+}
+
+const resetPlayboardHTML = function(){
     let element = document.getElementById("playboard");
 
     // element with id "playboard": remove classes "grid-container" and "final-border"
@@ -624,16 +655,7 @@ const showFinalMessage = function(){
     let leftBox = document.getElementById("left-side");
     leftBox.innerHTML = '';
 
-    // add final message
-    element.innerHTML = `<p>
-    You did it! Thank you for playing Point Destroyer.<br>
-    We hope you had a fun time solving our puzzles. This game was created for a group project in our Web and Server-side programming class. It was a new and challenging experience for us, especially for our lead designer without much programming experience.
-    </p>
-    <p>We wish you a nice day!</p>
-    
-    <p>Lead Programmer: Lucien A. Haeller<br>
-    Lead Game Designer: Adrian W. Menti<br>
-    December 2020</p>`;
+    return element
 }
 
 /************************************
