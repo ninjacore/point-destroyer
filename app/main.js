@@ -2,6 +2,9 @@
  *       DECLARATIONS - variables       *
  ****************************************/
 
+/** playtime counter */
+let starttimeGame, endtimeGame, playtime;
+
 /* level configs */
 let allStartFieldValues = [
     [91],
@@ -499,6 +502,13 @@ const loadNextGame = function(){
 
     // the game is over if all levels have been cleared
     if(gameNumber > 7){
+
+        endtimeGame = performance.now()
+        playtime = endtimeGame - starttimeGame
+
+        // TODO: delete after testing
+        console.table(endtimeGame)
+        console.log(`%c It took you ${endtimeGame} milliseconds to finish this game.`,"color: orange; font-weight:bold;")
         
         handleArcadeParameters();
 
@@ -543,6 +553,7 @@ const loadNextGame = function(){
 }
 
 const startGame = function(){
+
     // element with id "playboard":
     let playboardElement = document.getElementById("playboard");
 
@@ -569,6 +580,9 @@ const startGame = function(){
     // update and show level counter
     let levelCounter = document.getElementById("level-counter");
     levelCounter.innerHTML = `<h2>GAME ${gameNumber+1} OF ${allStartFieldValues.length}</h2>`;
+
+    // start playtime counter
+    starttimeGame = performance.now()
     
 }
 
