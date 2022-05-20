@@ -146,6 +146,18 @@ apiDB.connect("dieter","PUT",someEmojis)
 apiDB.connect("emoji","GET")
 
 
+let somePlayer = {
+    emoji: "🦑",
+    fasterTime: null,
+    id: "1",
+    initialMessage: "I am THE ONE!",
+    initialPlaytime: "99364.5",
+    ownedMessage: "",
+    playername: "Bilbo"
+}
+// apiDB.connect("player","PUT",somePlayer)
+apiDB.connect("player","GET")
+
 /**
  * 
  * let emojis = {

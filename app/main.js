@@ -507,8 +507,8 @@ const loadNextGame = function(){
         playtime = endtimeGame - starttimeGame
 
         // TODO: delete after testing
-        console.table(endtimeGame)
-        console.log(`%c It took you ${endtimeGame} milliseconds to finish this game.`,"color: orange; font-weight:bold;")
+        console.table(playtime)
+        console.log(`%c It took you ${playtime} milliseconds to finish this game.`,"color: orange; font-weight:bold;")
         
         handleArcadeParameters();
 
@@ -649,6 +649,9 @@ const handleArcadeParameters = async function (){
     // load available emojis
     // TODO: delete after testing
     let startTime = performance.now()
+
+    // TODO: delete after testing
+    apiDB.connect("player","GET")
     
     let emojiData = await apiDB.getEmojis()
     
@@ -667,7 +670,9 @@ const handleArcadeParameters = async function (){
     
     element.innerHTML = `
     <form id="initialPlayerRecordForm">
-        Write your message: <input type="text" id="initialMessageInput" name="initialMessageInput" required><br>
+        Write your message: 
+        <input type="text" id="initialPlayerName" name="initialPlayerName" required><br>
+        <input type="text" id="initialMessageInput" name="initialMessageInput" required><br>
         <select id="initialEmojiInput" size="${emojiData.length}">
             ${list}
         </select>
@@ -689,13 +694,30 @@ const submitPlayerRecord = function(){
     console.log("initalForm element = " )
     console.table(initialForm)
 
-    let initialMessage = document.getElementById('initialMessageInput').value
-    let chosenEmoji = document.getElementById('initialEmojiInput').value
+    
+    let nameOfInitialPlayer = document.getElementById('initialPlayerName').value.toString();
+    let initialMessageFromPlayer = document.getElementById('initialMessageInput').value.toString();
+    let chosenEmoji = document.getElementById('initialEmojiInput').value.toString();
+    let deliverPlaytime = playtime.toString();
+    let randomID = "1" // TODO: make random
 
-    console.log("initialMessageInput: ", initialMessage)
+    console.log("initialMessageInput: ", initialMessageFromPlayer)
     console.log("initialEmojiInput: ", chosenEmoji)
  
     // store message to DB
+    // TODO: id anpassen
+    let player = {
+        id: randomID,
+        playername: nameOfInitialPlayer,
+        initialMessage: initialMessageFromPlayer,
+        ownedMessage: "",
+        initialPlaytime: deliverPlaytime,
+        fasterTime: null,
+        emoji: chosenEmoji
+    }
+    apiDB.connect("player","PUT",player)
+    //apiDB.connect("player","POST",player)
+
 
     // load leaderboard
 }
