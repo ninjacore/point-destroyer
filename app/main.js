@@ -699,7 +699,8 @@ const submitPlayerRecord = function(){
     let initialMessageFromPlayer = document.getElementById('initialMessageInput').value.toString();
     let chosenEmoji = document.getElementById('initialEmojiInput').value.toString();
     let deliverPlaytime = playtime.toString();
-    let randomID = "1" // TODO: make random
+    let randomID = Math.random();
+    randomID = randomID.toString().substring(2) + nameOfInitialPlayer;
 
     console.log("initialMessageInput: ", initialMessageFromPlayer)
     console.log("initialEmojiInput: ", chosenEmoji)
@@ -715,8 +716,8 @@ const submitPlayerRecord = function(){
         fasterTime: null,
         emoji: chosenEmoji
     }
-    apiDB.connect("player","PUT",player)
-    //apiDB.connect("player","POST",player)
+    //apiDB.connect("player","PUT",player)
+    apiDB.connect("player","POST",player)
 
 
     // load leaderboard
