@@ -1,0 +1,48 @@
+<head>
+    <meta charset="utf-8">
+    <title>Point Destroyer</title>
+    <meta name="author" content="Adrian Menti, Lucien Haeller">
+    <meta name="description" content="WEBP Projekt">
+    <meta name="keywords" content="">
+    <meta name="date" content="">
+    <meta name="viewport" content=" width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+</head>
+
+<body>
+    <h1>P O I N T &nbsp; D E S T R O Y E R</h1>
+    <div id="container">
+        <div class="left-side" id="left-side"></div>
+        <div class="text-container" id="playboard">
+
+
+            <!-- change the design below -->
+            <form id="initialPlayerRecordForm">
+                <input type="text" id="initialPlayerName" name="initialPlayerName" required="" placeholder="enter your name"><br><br>
+                <input type="text" id="initialMessageInput" name="initialMessageInput" required="" placeholder="write a message"><br>   
+                <p class="small-text">Select an emoji as your coat of arms</p>
+                <select id="initialEmojiInput" size="4">
+                    <option>🦑</option>
+                    <option>🦄</option>
+                    <option>👽</option>
+                    <option>💀</option>
+                </select>
+                <input type="button" onclick="submitPlayerRecord()" value="submit">
+            </form>
+            <!-- change the design above -->
+
+        </div>
+        <div class="right-side" id="right-side">
+            <button id="test-game-button" type="button" class="button"
+                onclick="handleArcadeParameters()">TESTING</button>
+            <button id="start-game-button" type="button" class="button" onclick="startGame()">START GAME</button>
+            <button id="next-level-button" type="button" class="button" onclick="loadNextGame()"
+                style="visibility: hidden;">NEXT LEVEL</button>
+        </div>
+    </div>
+
+    <div id="confirm" class="confirm-box"></div>
+
+
+
+</body>
