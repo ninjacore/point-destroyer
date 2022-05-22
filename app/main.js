@@ -647,19 +647,8 @@ const showFinalMessage = function () {
 const handleArcadeParameters = async function () {
 
     // load available emojis
-    let emojiData
-    try {
-        emojiData = await apiDB.getEmojis()
-    } catch (error) {
-        console.log(`emojiPromise: ${typeof emojiPromise}`)
-        console.table(emojiPromise)
-        console.log(`%c couldn't load emojis. Got ${error}`)
-        console.table(error)
-        // TODO: handle error
-        console.log("retrying in 5 seconds...")
-        setTimeout(reject,5000)                    
-    }
-
+    let emojiData = await apiDB.getEmojis()
+    
     // clean up view
     let element = unloadPlayboard()
     let list = ''
