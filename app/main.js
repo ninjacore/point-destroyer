@@ -807,6 +807,6 @@ let bilbo =
     "emoji": "🩸"
 }
 loadLeaderboard(bilbo)*/
-loadLeaderboard()
+//loadLeaderboard()
 
 
