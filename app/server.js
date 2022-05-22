@@ -29,10 +29,7 @@ class APIService {
         } catch (error) {
             console.log(`%c couldn't load emojis. Got ${error}`,"color:red; font-weight:bold;")
             console.table(error)
-            
             // if we got the Random error, we just try again
-            console.log("retrying in 2 seconds...")
-            await this.delayCall(2000)
             return this.getEmojis()
         }
 
@@ -72,9 +69,7 @@ class APIService {
             // TODO: handle error
 
             // try again
-            console.log("retrying in 2 seconds...")
-            await this.delayCall(2000)
-            this.saveEmoji(emoji)
+            setTimeout(this.saveEmoji(emoji),5000);
         }
 
     }
@@ -123,9 +118,9 @@ class APIService {
                 .catch(error => {
                     console.log(`%c couldn't ${mode} ${target}. Got ${error}`,"color:red; font-weight:bold;")
                     console.table(error)
-                    console.log("retrying in 2 seconds...")
-                    await this.delayCall(2000)        
-                    this.connect(target,mode,data)
+                    // TODO: handle error
+                    console.log("retrying in 5 seconds...")
+                    setTimeout(()=>{this.connect(target,mode,data)},5000)
                 })
         } else if (mode == 'GET' && targetKnown) {
             console.log(`=> GET && targetKown (${target})`)
@@ -144,9 +139,8 @@ class APIService {
                     console.log(`%c couldn't ${mode} ${target}. Got ${error}`,"color:red; font-weight:bold;")
                     console.table(error)
                     // TODO: handle error
-                    console.log("retrying in 2 seconds...")
-                    await this.delayCall(2000)        
-                    this.connect(target,mode)
+                    console.log("retrying in 5 seconds...")
+                    setTimeout(()=>{this.connect(target,mode)},5000)
                 })
         }   
     }
