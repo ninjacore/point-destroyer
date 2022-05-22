@@ -706,32 +706,27 @@ const submitPlayerRecord = function () {
     apiDB.connect("player", "POST", player)
 
     // load leaderboard
-    loadLeaderboard()
+    loadLeaderboard(player)
 
 }
-const loadLeaderboard = async function (){
-    let element = unloadPlayboard()
-    
+const loadLeaderboard = async function (currentPlayer = ''){
+    let playFinished = true
     let allPlayerRecords = await apiDB.connect("player", "GET")
+
+    // make sure current player is shown in view but eliminate duplicates if server was fast
+    currentPlayer ? allPlayerRecords.push(currentPlayer) : playFinished = false
+    let playerRecordsJSON = allPlayerRecords.map(JSON.stringify)
+    let recordsAsSet = new Set(playerRecordsJSON)
+    allPlayerRecords = Array.from(recordsAsSet).map(JSON.parse)
+    
     console.table(allPlayerRecords)
 
     let leaderboard = []
-    /*allPlayerRecords.forEach(record => {
-        let recordTime = record.initialPlaytime
-        leaderboard.push({recordTime,record})
-        //console.log(`leaderboard.push:`)        
-        //console.table(leaderboard)
-    });
-    /*for (let index = 0; index < allPlayerRecords.length; index++) {
-        let recordTime = allPlayerRecords[index].initialPlaytime
-        let record = allPlayerRecords[index]
-        leaderboard.push({recordTime,record})
-        console.log(`leaderboard.push ${record}`)
-    }*/
-
     leaderboard = allPlayerRecords.sort((r1,r2)=>{
         return r1.initialPlaytime - r2.initialPlaytime
     })
+
+    let element = unloadPlayboard()
 
     let recordHTML = `<ol class="playerRecordsDisplay">`
     // TODO: if 'owwwEEDD' change values!
@@ -780,4 +775,19 @@ hideButton("next-level-button");
 hideButton("reload-board-button");
 
 // FOR TESTING
+/*
+let bilbo = 
+{
+    "id": "9349553567702911lefthanded",
+    "playername": "lefthanded",
+    "initialMessage": "slow start. fast finish.",
+    "ownedMessage": "",
+    "initialPlaytime": "284057.1000000015",
+    "fasterTime": null,
+    "emoji": "🩸"
+}
+loadLeaderboard(bilbo)*/
 //loadLeaderboard()
+
+
+
