@@ -651,7 +651,13 @@ const handleArcadeParameters = async function () {
     try {
         emojiData = await apiDB.getEmojis()
     } catch (error) {
-        
+        console.log(`emojiPromise: ${typeof emojiPromise}`)
+        console.table(emojiPromise)
+        console.log(`%c couldn't load emojis. Got ${error}`)
+        console.table(error)
+        // TODO: handle error
+        console.log("retrying in 5 seconds...")
+        setTimeout(reject,5000)                    
     }
 
     // clean up view
@@ -748,7 +754,3 @@ const unloadPlayboard = function () {
 // MAIN 
 hideButton("next-level-button");
 hideButton("reload-board-button");
-
-
-// testing 
-handleArcadeParameters();
