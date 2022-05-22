@@ -647,18 +647,12 @@ const showFinalMessage = function () {
 const handleArcadeParameters = async function () {
 
     // load available emojis
-    // TODO: delete after testing
-    let startTime = performance.now()
-
-    // TODO: delete after testing
-    apiDB.connect("player", "GET")
-
-    let emojiData = await apiDB.getEmojis()
-
-    // TODO: delete after testing
-    console.log("The emoji data is:", emojiData)
-    let endTime = performance.now()
-    console.log(`%c Call to database took ${endTime - startTime} milliseconds`, "color: green; font-weight:bold;")
+    let emojiData
+    try {
+        emojiData = await apiDB.getEmojis()
+    } catch (error) {
+        
+    }
 
     // clean up view
     let element = unloadPlayboard()
@@ -716,8 +710,16 @@ const submitPlayerRecord = function () {
     //apiDB.connect("player","PUT",player)
     apiDB.connect("player", "POST", player)
 
-
     // load leaderboard
+    loadLeaderboard()
+
+}
+const loadLeaderboard = async function (){
+    let allPlayerRecords = await apiDB.connect("player", "GET")
+    console.table(allPlayerRecords)
+    let display = document.getElementById("playboard")
+    display.innerHTML = ''
+
 }
 
 const unloadPlayboard = function () {
@@ -746,3 +748,7 @@ const unloadPlayboard = function () {
 // MAIN 
 hideButton("next-level-button");
 hideButton("reload-board-button");
+
+
+// testing 
+handleArcadeParameters();

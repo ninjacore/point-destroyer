@@ -10,31 +10,36 @@ class APIService {
         this.url += serverIP
     }
 
+    async delayCall(millisecondsToWait) {
+        await new Promise(res => setTimeout(res, millisecondsToWait))
+    } 
+
     async getEmojis() {
 
         let url = this.url + this.emojiEndpoint
-        
-        // TODO: delete after testing
-        let startTime = performance.now()
 
+        let emojiPromise
         try {
-            let response = await fetch(url)
-            console.table(response)
-
-            // TODO: delete after testing
-            let endTime = performance.now()
-            console.log(`%c Call to database took ${endTime - startTime} milliseconds`,"color: blue; font-weight:bold;")
-
-            let data = await response.json()
-            console.log("await response.json() = ",data)
-
-            let allEmojis = data[0].emojis
-
-            return allEmojis
-
+            emojiPromise = await new Promise((resolve, reject) => {
+                fetch(url)
+                .then(res => res.json())
+                .then(resolve)
+                .catch(reject)
+            })
         } catch (error) {
-            return error.message
+            console.log(`%c couldn't load emojis. Got ${error}`,"color:red; font-weight:bold;")
+            console.table(error)
+            
+            // if we got the Random error, we just try again
+            console.log("retrying in 2 seconds...")
+            await this.delayCall(2000)
+            return this.getEmojis()
         }
+
+        // once we got the data we need to extrapolate it
+        let activeEmojis = emojiPromise[0].emojis
+        return activeEmojis
+
     }
 
     async saveEmoji(emoji){
@@ -62,12 +67,16 @@ class APIService {
 
             
         } catch (error) {
-            return error.message
+            console.log(`%c couldn't save emoji. Got ${error}`,"color:red; font-weight:bold;")
+            console.table(error)
+            // TODO: handle error
+
+            // try again
+            console.log("retrying in 2 seconds...")
+            await this.delayCall(2000)
+            this.saveEmoji(emoji)
         }
 
-  
-
-        // TODO: PUSH call
     }
 
     async connect(target, mode, data = '') {
@@ -104,21 +113,51 @@ class APIService {
                 'Content-Type': 'application/json'
             }
         }
+    
         if (hasData && targetKnown) {
+            console.log(`=> hasData && targetKnown (${target})`)
+            console.log(`fetch ${mode} from url ${url}`)
             fetch(url, options)
                 .then(res => res.json())
-                .then(res => console.log(res)); // TODO: return data per default    
+                .then(res => console.log(res))
+                .catch(error => {
+                    console.log(`%c couldn't ${mode} ${target}. Got ${error}`,"color:red; font-weight:bold;")
+                    console.table(error)
+                    console.log("retrying in 2 seconds...")
+                    await this.delayCall(2000)        
+                    this.connect(target,mode,data)
+                })
         } else if (mode == 'GET' && targetKnown) {
+            console.log(`=> GET && targetKown (${target})`)
+            console.log(`fetch ${mode} from url ${url}`)
             fetch(url)
-                .then(res => res.json())
+                .then(res => {
+                    console.log(`res is ${res} aka...`)
+                    console.table(res)
+                    return res.json()
+                })
                 .then(data => {
-                    console.log(data)
+                    console.log(`got data ${typeof data}:`,data)
                     return data
-                }); // TODO: return data per default    
-        }
-
+                })
+                .catch(error => {
+                    console.log(`%c couldn't ${mode} ${target}. Got ${error}`,"color:red; font-weight:bold;")
+                    console.table(error)
+                    // TODO: handle error
+                    console.log("retrying in 2 seconds...")
+                    await this.delayCall(2000)        
+                    this.connect(target,mode)
+                })
+        }   
     }
 }
+
+
+// connect to database
+const apiDB = new APIService("343505-26.web.fhgr.ch/api/point-destroyer")
+
+
+
 
 // TODO: delete once ready to publish
 // to reset emoji object
@@ -143,20 +182,19 @@ let someEmojis = {
         "💀"
     ]
 }
-
-
-const apiDB = new APIService("343505-26.web.fhgr.ch/api/point-destroyer")
+// let emojidata = apiDB.connect("emoji","PUT",someEmojis)
+// console.log("emojidata:",emojidata)
+//apiDB.connect("player","GET")
+// apiDB.connect("emoji","GET")
 
 /*
 apiDB.connect("player","GET")
-
-apiDB.connect("emoji","PUT",someEmojis)
 
 apiDB.connect("dieter","PUT",someEmojis)
 */
 
 // apiDB.connect("emoji","PUT",someEmojis)
-apiDB.connect("emoji","GET")
+//apiDB.connect("emoji","GET")
 
 
 let somePlayer = {
@@ -169,8 +207,6 @@ let somePlayer = {
     playername: "Bilbo"
 }
 // apiDB.connect("player","PUT",somePlayer)
-apiDB.connect("player","GET")
-
 /**
  * 
  * let emojis = {
