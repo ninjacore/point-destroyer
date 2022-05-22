@@ -83,6 +83,9 @@ const generatePlayboard = function () {
         playboard.appendChild(element);
     }
 
+    // "reload board" button must be visible for each game
+    showButton("reload-board-button");
+
     // define all the fields around each field 
     /** was used for testing in the beginning
      *  but is not used anymore 
@@ -386,6 +389,8 @@ const startLevel = function (event) {
                             // disable drawing if level cleared
                             levelCleared = true;
 
+                            // hide "reload board" button
+                            hideButton("reload-board-button");
 
                             // special text for last level
                             if (gameNumber == 7) {
