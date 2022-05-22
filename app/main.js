@@ -710,10 +710,45 @@ const submitPlayerRecord = function () {
 
 }
 const loadLeaderboard = async function (){
+    let element = unloadPlayboard()
+    
     let allPlayerRecords = await apiDB.connect("player", "GET")
     console.table(allPlayerRecords)
-    let display = document.getElementById("playboard")
-    display.innerHTML = ''
+
+    let leaderboard = []
+    /*allPlayerRecords.forEach(record => {
+        let recordTime = record.initialPlaytime
+        leaderboard.push({recordTime,record})
+        //console.log(`leaderboard.push:`)        
+        //console.table(leaderboard)
+    });
+    /*for (let index = 0; index < allPlayerRecords.length; index++) {
+        let recordTime = allPlayerRecords[index].initialPlaytime
+        let record = allPlayerRecords[index]
+        leaderboard.push({recordTime,record})
+        console.log(`leaderboard.push ${record}`)
+    }*/
+
+    leaderboard = allPlayerRecords.sort((r1,r2)=>{
+        return r1.initialPlaytime - r2.initialPlaytime
+    })
+
+    let recordHTML = `<ol class="playerRecordsDisplay">`
+    // TODO: if 'owwwEEDD' change values!
+    // TODO: show playtime as minutes (and hours if any)
+    for (let i = 0; i < leaderboard.length; i++) {
+        recordHTML += `
+        <li>
+        <span class="coatOfArms">${leaderboard[i].emoji} </span>
+        <span class="playerTitle">${leaderboard[i].playername}</span> <br>
+        <span class="commandment">${leaderboard[i].initialMessage}</span> <br> 
+        <span class="recordedPlaytime">${leaderboard[i].initialPlaytime.split(".",1)}</span> | 
+
+        <input type="button" onclick="tbd" value="own">
+        </li>`                
+    }
+    recordHTML += `</ol>`
+    element.innerHTML = recordHTML
 
 }
 
@@ -743,3 +778,6 @@ const unloadPlayboard = function () {
 // MAIN 
 hideButton("next-level-button");
 hideButton("reload-board-button");
+
+// FOR TESTING
+//loadLeaderboard()
