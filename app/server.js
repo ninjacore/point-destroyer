@@ -125,9 +125,22 @@ class APIService {
 let someEmojis = {
     id: "1",
     emojis: [
-        "🦑",
+        "🏳️‍⚧️",
+        "🐯",
+        "🤡",
+        "🐤",
+        "🍄",
         "🦄",
-        "👽"
+        "👹",
+        "👻",
+        "🩸",
+        "🎩",
+        "🐹",
+        "🌈",
+        "🦑",
+        "👽",
+        "🇯🇵",
+        "💀"
     ]
 }
 
@@ -135,9 +148,9 @@ let someEmojis = {
 const apiDB = new APIService("343505-26.web.fhgr.ch/api/point-destroyer")
 
 /*
-apiDB.connect("emoji","PUT",someEmojis)
-
 apiDB.connect("player","GET")
+
+apiDB.connect("emoji","PUT",someEmojis)
 
 apiDB.connect("dieter","PUT",someEmojis)
 */
