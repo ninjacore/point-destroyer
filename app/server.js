@@ -125,6 +125,28 @@ class APIService {
         } else if (mode == 'GET' && targetKnown) {
             console.log(`=> GET && targetKown (${target})`)
             console.log(`fetch ${mode} from url ${url}`)
+
+
+            let fetchPromise
+            try {
+                fetchPromise = await new Promise((resolve, reject) => {
+                    fetch(url)
+                    .then(res => res.json())
+                    .then(resolve)
+                    .catch(reject)
+                })
+            } catch (error) {
+                console.log(`%c couldn't load from ${target}. Got ${error}`,"color:red; font-weight:bold;")
+                console.table(error)
+                // if we got the Random error, we just try again
+                console.log(`%c retrying...`,"color:red; font-weight:bold;")
+                return this.connect(target,mode)
+            }
+            // return promise for actual data
+            return fetchPromise
+            
+            /*
+
             fetch(url)
                 .then(res => {
                     console.log(`res is ${res} aka...`)
@@ -140,8 +162,10 @@ class APIService {
                     console.table(error)
                     // TODO: handle error
                     console.log("retrying in 5 seconds...")
-                    setTimeout(()=>{this.connect(target,mode)},5000)
+                    return this.connect(target,mode)
+                    //setTimeout(()=>{this.connect(target,mode)},5000)
                 })
+                */
         }   
     }
 }
