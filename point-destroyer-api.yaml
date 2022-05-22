@@ -120,10 +120,8 @@ definitions:
         type: "string"
       intialPlaytime:
         type: "string"
-        format: "date-time"
       fasterTime:
         type: "string"
-        format: "date-time"
       emoji:
         type: "string"
   

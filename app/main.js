@@ -2,53 +2,56 @@
  *       DECLARATIONS - variables       *
  ****************************************/
 
+/** playtime counter */
+let starttimeGame, endtimeGame, playtime;
+
 /* level configs */
 let allStartFieldValues = [
     [91],
     [91],
-    [7,10,70],
-    [64,100],
-    [10,91],
-    [44,46],
-    [1,41],
-    [64,87]
+    [7, 10, 70],
+    [64, 100],
+    [10, 91],
+    [44, 46],
+    [1, 41],
+    [64, 87]
 ];
 
 let allEndFieldValues = [
     [10],
     [10],
     [31],
-    [4,40],
-    [3,70],
-    [1,10,91,100],
-    [95,99],
-    [34,37]
+    [4, 40],
+    [3, 70],
+    [1, 10, 91, 100],
+    [95, 99],
+    [34, 37]
 ];
 
 let allCutOutFieldValues = [
-    [12,13,15,16,18,19,22,23,25,26,28,29,42,43,45,46,48,49,52,53,55,56,58,59,72,73,75,76,78,79,82,83,85,86,88,89],
-    [1,2,3,11,12,13,21,22,23,15,16,25,26,18,19,28,29,38,39,42,43,45,46,48,49,52,53,55,56,58,59,72,73,75,76,77,78,79,82,83,85,86,87,88,89],
-    [1,2,3,11,12,13,21,22,23,15,16,25,26,18,19,28,29,38,39,42,43,45,46,48,49,52,53,55,56,58,59,72,73,75,76,77,78,79,82,83,85,86,87,88,89],
-    [8,9,10,12,13,15,16,18,19,20,22,23,25,26,28,29,30,42,43,45,46,48,49,52,53,55,56,58,59,71,72,73,75,76,78,79,81,82,83,85,86,88,89,91,92,93],
-    [1,2,9,11,12,14,15,17,21,24,25,29,33,34,35,37,38,39,42,43,44,45,47,48,49,52,53,54,55,57,58,59,72,73,75,76,78,79,80,82,83,85,86,88,89,90,98,99,100],
-    [12,14,15,16, 18,19,25,26,29,33,34,35,36,37,45,49,52,54,55,56,58,59,65,66,72,73,75,76,78,79,82,83,85,86,88,89],
-    [10,12,14,16,18,20,32,33,35,37,39,52,54,56,58,60,71,73,75,77,86,89,91,92,94,98],
-    [1,2,9,10,11,20,23,24,27,28,33,38,63,65,68,73,74,75,76,77,78,81,83,86,88,90,91,100]
+    [12, 13, 15, 16, 18, 19, 22, 23, 25, 26, 28, 29, 42, 43, 45, 46, 48, 49, 52, 53, 55, 56, 58, 59, 72, 73, 75, 76, 78, 79, 82, 83, 85, 86, 88, 89],
+    [1, 2, 3, 11, 12, 13, 21, 22, 23, 15, 16, 25, 26, 18, 19, 28, 29, 38, 39, 42, 43, 45, 46, 48, 49, 52, 53, 55, 56, 58, 59, 72, 73, 75, 76, 77, 78, 79, 82, 83, 85, 86, 87, 88, 89],
+    [1, 2, 3, 11, 12, 13, 21, 22, 23, 15, 16, 25, 26, 18, 19, 28, 29, 38, 39, 42, 43, 45, 46, 48, 49, 52, 53, 55, 56, 58, 59, 72, 73, 75, 76, 77, 78, 79, 82, 83, 85, 86, 87, 88, 89],
+    [8, 9, 10, 12, 13, 15, 16, 18, 19, 20, 22, 23, 25, 26, 28, 29, 30, 42, 43, 45, 46, 48, 49, 52, 53, 55, 56, 58, 59, 71, 72, 73, 75, 76, 78, 79, 81, 82, 83, 85, 86, 88, 89, 91, 92, 93],
+    [1, 2, 9, 11, 12, 14, 15, 17, 21, 24, 25, 29, 33, 34, 35, 37, 38, 39, 42, 43, 44, 45, 47, 48, 49, 52, 53, 54, 55, 57, 58, 59, 72, 73, 75, 76, 78, 79, 80, 82, 83, 85, 86, 88, 89, 90, 98, 99, 100],
+    [12, 14, 15, 16, 18, 19, 25, 26, 29, 33, 34, 35, 36, 37, 45, 49, 52, 54, 55, 56, 58, 59, 65, 66, 72, 73, 75, 76, 78, 79, 82, 83, 85, 86, 88, 89],
+    [10, 12, 14, 16, 18, 20, 32, 33, 35, 37, 39, 52, 54, 56, 58, 60, 71, 73, 75, 77, 86, 89, 91, 92, 94, 98],
+    [1, 2, 9, 10, 11, 20, 23, 24, 27, 28, 33, 38, 63, 65, 68, 73, 74, 75, 76, 77, 78, 81, 83, 86, 88, 90, 91, 100]
 ];
 
 let allPointFieldValues = [
-    [9,35,62,87,92],
-    [5,35,62,68,97],
-    [14,40,66,90,93],
-    [1,34,61,70,96],
-    [19,22,26,65,93],
-    [3,9,31,38,62,67,70,84,96],
-    [3,6,9,21,27,40,43,46,48,61,65,69,82,85,88],
-    [4,7,12,26,30,41,43,48,52,55,60,67,69,71,80,84]
+    [9, 35, 62, 87, 92],
+    [5, 35, 62, 68, 97],
+    [14, 40, 66, 90, 93],
+    [1, 34, 61, 70, 96],
+    [19, 22, 26, 65, 93],
+    [3, 9, 31, 38, 62, 67, 70, 84, 96],
+    [3, 6, 9, 21, 27, 40, 43, 46, 48, 61, 65, 69, 82, 85, 88],
+    [4, 7, 12, 26, 30, 41, 43, 48, 52, 55, 60, 67, 69, 71, 80, 84]
 ];
 
 /* Current Session Values */
-let gameNumber = 0;
+let gameNumber = 0; // set to 7 for testing...
 let currentPathFields = [];
 let pointsDestroyed = [];
 let levelCleared = false;
@@ -60,7 +63,7 @@ let levelCleared = false;
  ****************************************/
 
 // automatically generate html for playboard
-const generatePlayboard = function(){
+const generatePlayboard = function () {
 
     // this is the pointer to the html playboard
     let playboard = document.getElementById("playboard");
@@ -72,18 +75,18 @@ const generatePlayboard = function(){
     let numberOfFields = 100;
 
     // create and add all the fields onto the playboard
-    for(let field = 1;field <= numberOfFields;field++){
+    for (let field = 1; field <= numberOfFields; field++) {
         let element = document.createElement('div');
         element.classList.add("item");
         element.id = `field-${field}`;
-        element.innerHTML = ``; 
+        element.innerHTML = ``;
         playboard.appendChild(element);
     }
 
     // define all the fields around each field 
     /** was used for testing in the beginning
      *  but is not used anymore 
-     **/ 
+     **/
     /*for(let field = 1;field <= numberOfFields;field++){
         let targetID = `field-${field}`;
         let targetElement = document.getElementById(targetID);
@@ -92,29 +95,29 @@ const generatePlayboard = function(){
 }
 
 // mark fields according to game configs
-const markFields = function(startFields,endFields,cutOutFields,pointFields){
+const markFields = function (startFields, endFields, cutOutFields, pointFields) {
 
     // set start fields
-    for(let i = 0; i < startFields.length;i++){
-        console.log(`%c field-${startFields[i]}`,'color:blue;font-weight:bold;');
+    for (let i = 0; i < startFields.length; i++) {
+        console.log(`%c field-${startFields[i]}`, 'color:blue;font-weight:bold;');
         let currentField = document.getElementById(`field-${startFields[i]}`);
         currentField.classList.add("start-field");
     }
 
     // set end fields
-    for(let i = 0; i < endFields.length ;i++){
+    for (let i = 0; i < endFields.length; i++) {
         let currentField = document.getElementById(`field-${endFields[i]}`);
         currentField.classList.add("end-field");
     }
 
     // set cut-out fields (in those the player cannot draw)
-    for(let i = 0; i < cutOutFields.length; i++){
+    for (let i = 0; i < cutOutFields.length; i++) {
         let currentField = document.getElementById(`field-${cutOutFields[i]}`);
-        currentField.classList.add('cut-out-field');        
+        currentField.classList.add('cut-out-field');
     }
 
     // set point fields
-    for(let i = 0; i < pointFields.length; i++){
+    for (let i = 0; i < pointFields.length; i++) {
         let currentField = document.getElementById(`field-${pointFields[i]}`);
         currentField.classList.add('point-field');
     }
@@ -123,29 +126,29 @@ const markFields = function(startFields,endFields,cutOutFields,pointFields){
     addClickToStartEventListeners();
 
     // if final level, change colors
-    if(gameNumber == 7){
+    if (gameNumber == 7) {
         colorFieldsForFinalLevel();
     }
 
 }
 
-const colorFieldsForFinalLevel = function(){
+const colorFieldsForFinalLevel = function () {
 
     // change border color
     let playboardElement = document.getElementById("playboard");
     playboardElement.classList.add("final-border");
-    
+
     // change default fields
     let allItems = document.getElementsByClassName("item");
-    Array.from(allItems).forEach(function(element){
+    Array.from(allItems).forEach(function (element) {
 
         element.classList.add("final-item");
 
-    });   
-    
+    });
+
     // change color of all marked fields
     console.table([allStartFieldValues[gameNumber]]);
-    Array.from(allStartFieldValues[gameNumber]).forEach(function(idNumber) {
+    Array.from(allStartFieldValues[gameNumber]).forEach(function (idNumber) {
         // get element by id
         let element = document.getElementById(`field-${idNumber}`);
         // add final-field version to classlist
@@ -153,7 +156,7 @@ const colorFieldsForFinalLevel = function(){
         element.classList.add("final-start-field");
     });
 
-    Array.from(allEndFieldValues[gameNumber]).forEach(function(idNumber) {
+    Array.from(allEndFieldValues[gameNumber]).forEach(function (idNumber) {
         // get element by id
         let element = document.getElementById(`field-${idNumber}`);
         // add final-field version to classlist
@@ -161,7 +164,7 @@ const colorFieldsForFinalLevel = function(){
         element.classList.add("final-end-field");
     });
 
-    Array.from(allCutOutFieldValues[gameNumber]).forEach(function(idNumber) {
+    Array.from(allCutOutFieldValues[gameNumber]).forEach(function (idNumber) {
         // get element by id
         let element = document.getElementById(`field-${idNumber}`);
         // add final-field version to classlist
@@ -169,7 +172,7 @@ const colorFieldsForFinalLevel = function(){
         element.classList.add("final-cut-out-field");
     });
 
-    Array.from(allPointFieldValues[gameNumber]).forEach(function(idNumber) {
+    Array.from(allPointFieldValues[gameNumber]).forEach(function (idNumber) {
         // get element by id
         let element = document.getElementById(`field-${idNumber}`);
         // add final-field version to classlist
@@ -181,12 +184,12 @@ const colorFieldsForFinalLevel = function(){
 }
 
 // find out neighbours (of a field) - deprecated
-const findOutNeighbours = function(element,fieldNumber,numberOfFields){
+const findOutNeighbours = function (element, fieldNumber, numberOfFields) {
 
     /** was used in generatePlayboard()
      *  for testing in the beginning
      *  but is not used anymore 
-     **/ 
+     **/
 
     let id = element.id;
 
@@ -197,31 +200,31 @@ const findOutNeighbours = function(element,fieldNumber,numberOfFields){
     let bottomNeighbour;
 
     // every multiple of 10 has no right neighbour (e.g. 30)
-    if(fieldNumber%10 == 0){
+    if (fieldNumber % 10 == 0) {
         rightNeighbour = null;
-    }else{
-        rightNeighbour = (fieldNumber +1);
+    } else {
+        rightNeighbour = (fieldNumber + 1);
     }
 
     // same for left neighbour but -1
-    if((fieldNumber-1)%10 == 0){
+    if ((fieldNumber - 1) % 10 == 0) {
         leftNeighbour = null;
 
-    }else{
-        leftNeighbour = (fieldNumber -1);
+    } else {
+        leftNeighbour = (fieldNumber - 1);
     }
 
     // first row has no neighbours on top
-    if(fieldNumber-10 <= 0){
+    if (fieldNumber - 10 <= 0) {
         topNeighbour = null;
-    }else{
+    } else {
         topNeighbour = fieldNumber - 10;
     }
 
     // last row has no neighbours bellow
-    if(fieldNumber + 10 > numberOfFields){
+    if (fieldNumber + 10 > numberOfFields) {
         bottomNeighbour = null;
-    }else{
+    } else {
         bottomNeighbour = fieldNumber + 10;
     }
 
@@ -241,31 +244,31 @@ const findOutNeighbours = function(element,fieldNumber,numberOfFields){
 }
 
 
-const addClickToStartEventListeners = function(){
+const addClickToStartEventListeners = function () {
     // event listener configurations
     let startElements = document.getElementsByClassName("start-field");
 
-    Array.from(startElements).forEach(function(startElement) {
+    Array.from(startElements).forEach(function (startElement) {
         startElement.addEventListener('click', startLevel);
     });
 }
 
 
-const startLevel = function(event){
+const startLevel = function (event) {
     // start level
     console.log("Level started");
 
     // mark start-field as path (visually and logically)
     event.target.classList.add('path-field');
     currentPathFields.push(event.target.id);
-                
+
 
     let fields = document.getElementsByClassName("item");
     let validFields = []
-    Array.from(fields).forEach(function(field){
-        
+    Array.from(fields).forEach(function (field) {
+
         // only fields that are not cut-out can be colored as path
-        if(!field.classList.contains("cut-out-field")){
+        if (!field.classList.contains("cut-out-field")) {
             validFields.push(field);
 
         }
@@ -273,45 +276,45 @@ const startLevel = function(event){
     })
 
     // create "mouseover" event listener for each field that is not cut-out
-    Array.from(validFields).forEach(function(field){
-        field.addEventListener('mouseover', (ev) => {   
-            let numberOfPathFields = currentPathFields.length;           
-            
-            let lastIndex = numberOfPathFields-1;
+    Array.from(validFields).forEach(function (field) {
+        field.addEventListener('mouseover', (ev) => {
+            let numberOfPathFields = currentPathFields.length;
+
+            let lastIndex = numberOfPathFields - 1;
 
             let fieldMovedInUpon = ev.target;
             let fieldMovedOutFrom = ev.relatedTarget;
 
-            if(fieldMovedInUpon.id == currentPathFields[lastIndex-1]){
+            if (fieldMovedInUpon.id == currentPathFields[lastIndex - 1]) {
                 // player going backwards
                 console.log("going backwards");
-                if((currentPathFields[lastIndex] == fieldMovedOutFrom.id) && levelCleared == false){
+                if ((currentPathFields[lastIndex] == fieldMovedOutFrom.id) && levelCleared == false) {
                     /** checking for "levelCleared" fixes the issue that 
                      * you can still draw when the level has been completed
-                     *  */ 
+                     *  */
                     // remove the field moved out from from the path (logically and visually)
                     let idLastElement = currentPathFields.pop();
                     let undrawnElement = document.getElementById(idLastElement);
                     undrawnElement.classList.remove('path-field');
 
                     // if point field is undrawn, remove from list of collected points
-                    if(undrawnElement.classList.contains('point-field')){
+                    if (undrawnElement.classList.contains('point-field')) {
                         // pop the latest point in the list since it must have been this one
                         pointsDestroyed.pop();
                     }
 
                     // for final level
-                    if(gameNumber == 7){
+                    if (gameNumber == 7) {
                         undrawnElement.classList.remove('final-path-field');
-                        
+
                         // if a normal field has been undrawn then it needs to keep the final level looks
-                        if(!undrawnElement.classList.contains('start-field') && !undrawnElement.classList.contains('end-field') && !undrawnElement.classList.contains('point-field')){
-                            undrawnElement.classList.add('final-item');                            
+                        if (!undrawnElement.classList.contains('start-field') && !undrawnElement.classList.contains('end-field') && !undrawnElement.classList.contains('point-field')) {
+                            undrawnElement.classList.add('final-item');
                         }
                     }
                 }
 
-            }else{
+            } else {
                 // player going forward
                 console.log("going forward");
 
@@ -330,30 +333,30 @@ const startLevel = function(event){
 
                 /** "skipping fields is not allowed" rule can be applied
                  * anytime due to new rules (+1, -1, +10, -10) below
-                 *  */ 
-                if(fieldMovedOutFrom.id != currentPathFields[lastIndex]){
+                 *  */
+                if (fieldMovedOutFrom.id != currentPathFields[lastIndex]) {
                     console.log("skipping fields is not allowed");
-                }else if(fieldIsInPathAlready(fieldMovedInUpon.id)){
+                } else if (fieldIsInPathAlready(fieldMovedInUpon.id)) {
                     console.log("field is already in path, cannot cross path!");
 
                     // special text for last level
-                    if(gameNumber == 7){
-                        setAlertMessage("💀 YOU FOOL! YOU CANNOT <br>CROSS PATHS IN THIS GAME!","Sorry");
+                    if (gameNumber == 7) {
+                        setAlertMessage("💀 YOU FOOL! YOU CANNOT <br>CROSS PATHS IN THIS GAME!", "Sorry");
 
-                    }else{
-                        setAlertMessage("🧚 Listen! You cannot cross paths in this game!","OK");
+                    } else {
+                        setAlertMessage("🧚 Listen! You cannot cross paths in this game!", "OK");
                     }
 
                     // show the alert box
                     functionAlert();
 
-                    if(gameNumber == 7){
+                    if (gameNumber == 7) {
                         // red text for final level
                         let alertText = document.getElementById("confirm");
                         alertText.classList.add("red-alert");
                     }
 
-                }else if(levelCleared == false && (idTo == idFrom +1 || idTo == idFrom -1 || idTo == idFrom +10 || idTo == idFrom -10)){
+                } else if (levelCleared == false && (idTo == idFrom + 1 || idTo == idFrom - 1 || idTo == idFrom + 10 || idTo == idFrom - 10)) {
                     // this condition above fixes the issue of skipping fields or drawing diagonally. 
                     // levelCleared fixes the issue that you can still draw when the level has been completed
 
@@ -363,39 +366,39 @@ const startLevel = function(event){
                     fieldMovedInUpon.classList.add('path-field');
 
                     // for final level
-                    if(gameNumber == 7){
+                    if (gameNumber == 7) {
                         fieldMovedInUpon.classList.remove('final-item');
                         fieldMovedInUpon.classList.add('final-path-field');
                     }
 
                     // check if point destroyed
-                    if(isPointField(fieldMovedInUpon.id)){
+                    if (isPointField(fieldMovedInUpon.id)) {
                         // save to game status array
                         pointsDestroyed.push(fieldMovedInUpon.id);
                     }
 
                     // check if end-field
-                    else if(isEndField(fieldMovedInUpon.id)){
-                        
+                    else if (isEndField(fieldMovedInUpon.id)) {
+
                         // player has collected all points if both array have the same size
-                        if(pointsDestroyed.length === allPointFieldValues[gameNumber].length){
+                        if (pointsDestroyed.length === allPointFieldValues[gameNumber].length) {
 
                             // disable drawing if level cleared
                             levelCleared = true;
 
-                            
-                            // special text for last level
-                            if(gameNumber == 7){
-                                setAlertMessage("💀 YOU'VE BESTED ME!<br>GO ON, CHAMPION!","THX");
 
-                            }else{
-                                setAlertMessage("You've cleared the level! <br>Well done!!","THX");
+                            // special text for last level
+                            if (gameNumber == 7) {
+                                setAlertMessage("💀 YOU'VE BESTED ME!<br>GO ON, CHAMPION!", "THX");
+
+                            } else {
+                                setAlertMessage("You've cleared the level! <br>Well done!!", "THX");
                             }
 
                             // show the alert box
                             functionAlert();
 
-                            if(gameNumber == 7){
+                            if (gameNumber == 7) {
                                 // golden text if final level cleared
                                 let alertText = document.getElementById("confirm");
                                 alertText.classList.add("golden-alert");
@@ -410,7 +413,7 @@ const startLevel = function(event){
 
                 }
             }
-            
+
         });
 
     });
@@ -418,7 +421,7 @@ const startLevel = function(event){
 }
 
 // function to change the text in the alert message box
-const setAlertMessage = function(message,confirmationText){
+const setAlertMessage = function (message, confirmationText) {
 
     let element = document.getElementById("confirm");
     element.innerHTML = `<div class="message">${message}</div><br><button class="yes">${confirmationText}</button>`;
@@ -426,7 +429,7 @@ const setAlertMessage = function(message,confirmationText){
 }
 
 
-const showButton = function(buttonId){
+const showButton = function (buttonId) {
 
     let nextLevelButton = document.getElementById(buttonId);
     nextLevelButton.style.visibility = 'visible';
@@ -434,12 +437,12 @@ const showButton = function(buttonId){
 }
 
 // check if a field is an end-field
-const isEndField = function(fieldId){
+const isEndField = function (fieldId) {
 
     let isEndField = false;
 
     let element = document.getElementById(fieldId);
-    if(element.classList.contains("end-field")){
+    if (element.classList.contains("end-field")) {
         isEndField = true;
     }
 
@@ -448,24 +451,24 @@ const isEndField = function(fieldId){
 }
 
 // check if a field is a point-field
-const isPointField = function(fieldId){
+const isPointField = function (fieldId) {
 
     let fieldIsPoint = false;
 
     let element = document.getElementById(fieldId);
-    if(element.classList.contains("point-field")){
+    if (element.classList.contains("point-field")) {
         fieldIsPoint = true;
     }
 
     return fieldIsPoint;
 }
 
-const fieldIsInPathAlready = function(fieldId){
+const fieldIsInPathAlready = function (fieldId) {
 
     let fieldIsInPath = false;
 
-    Array.from(currentPathFields).forEach(function(pathFieldId){
-        if(fieldId == pathFieldId){
+    Array.from(currentPathFields).forEach(function (pathFieldId) {
+        if (fieldId == pathFieldId) {
             fieldIsInPath = true;
         }
     })
@@ -473,7 +476,7 @@ const fieldIsInPathAlready = function(fieldId){
     return fieldIsInPath;
 }
 
-const resetPlayboard = function(){
+const resetPlayboard = function () {
 
     // reset variables
     currentPathFields = [];
@@ -481,14 +484,14 @@ const resetPlayboard = function(){
 
     // reset view        
     generatePlayboard();
-    markFields(allStartFieldValues[gameNumber],allEndFieldValues[gameNumber],allCutOutFieldValues[gameNumber],allPointFieldValues[gameNumber]);
+    markFields(allStartFieldValues[gameNumber], allEndFieldValues[gameNumber], allCutOutFieldValues[gameNumber], allPointFieldValues[gameNumber]);
 
     // hide next level button
     let nextLevelButton = document.getElementById("next-level-button");
     nextLevelButton.style.visibility = 'hidden';
 }
 
-const loadNextGame = function(){
+const loadNextGame = function () {
     // reset variables
     currentPathFields = [];
     pointsDestroyed = [];
@@ -498,16 +501,29 @@ const loadNextGame = function(){
     gameNumber++;
 
     // the game is over if all levels have been cleared
-    if(gameNumber > 7){
-        console.log("showing final message.");
-        showFinalMessage();
-    }else{
+    if (gameNumber > 7) {
+
+        endtimeGame = performance.now()
+        playtime = endtimeGame - starttimeGame
+
+        // TODO: delete after testing
+        console.table(playtime)
+        console.log(`%c It took you ${playtime} milliseconds to finish this game.`, "color: orange; font-weight:bold;")
+
+        handleArcadeParameters();
+
+        // TODO: delete once new process confirmed
+        //console.log("showing final message.");
+        //showFinalMessage();
+
+
+    } else {
         // reset board
         generatePlayboard();
 
         // draw fields according to game configs
-        markFields(allStartFieldValues[gameNumber],allEndFieldValues[gameNumber],allCutOutFieldValues[gameNumber],allPointFieldValues[gameNumber]);    
-  
+        markFields(allStartFieldValues[gameNumber], allEndFieldValues[gameNumber], allCutOutFieldValues[gameNumber], allPointFieldValues[gameNumber]);
+
     }
 
     // hide next level button
@@ -519,12 +535,12 @@ const loadNextGame = function(){
 
     // update and show level counter
     let levelCounter = document.getElementById("level-counter");
-    if(gameNumber+1 != allStartFieldValues.length+1){
+    if (gameNumber + 1 != allStartFieldValues.length + 1) {
         levelCounter.innerHTML = `<h2>GAME ${gameNumber+1} OF ${allStartFieldValues.length}</h2>`;
     }
 
 
-    if(gameNumber > 6 && gameNumber < 8){
+    if (gameNumber > 6 && gameNumber < 8) {
         // don't show tutorial box if final level and don't show it beyond that, too
         let miniTutorialBox = document.getElementById("mini-tutorial");
         miniTutorialBox.innerHTML = '';
@@ -536,7 +552,8 @@ const loadNextGame = function(){
 
 }
 
-const startGame = function(){
+const startGame = function () {
+
     // element with id "playboard":
     let playboardElement = document.getElementById("playboard");
 
@@ -556,18 +573,21 @@ const startGame = function(){
 
     // show mini tutorial on the side
     showMiniTutorial();
-    
+
     // show "reload board" button
     showButton("reload-board-button");
 
     // update and show level counter
     let levelCounter = document.getElementById("level-counter");
     levelCounter.innerHTML = `<h2>GAME ${gameNumber+1} OF ${allStartFieldValues.length}</h2>`;
-    
+
+    // start playtime counter
+    starttimeGame = performance.now()
+
 }
 
 // used to show hints to the player while focusing on the level
-const showMiniTutorial = function(){
+const showMiniTutorial = function () {
 
     let element = document.getElementById("mini-tutorial");
     element.classList.add('mini-text-container');
@@ -588,7 +608,7 @@ const showMiniTutorial = function(){
 }
 
 // can be used to hide any button
-const hideButton = function(buttonId){
+const hideButton = function (buttonId) {
 
     let nextLevelButton = document.getElementById(buttonId);
     nextLevelButton.style.visibility = 'hidden';
@@ -599,30 +619,17 @@ source: https://www.tutorialspoint.com/How-to-create-and-apply-CSS-to-JavaScript
 function functionAlert(msg, myYes) {
     var confirmBox = $("#confirm");
     confirmBox.find(".message").text(msg);
-    confirmBox.find(".yes").unbind().click(function() {
-    confirmBox.hide();
+    confirmBox.find(".yes").unbind().click(function () {
+        confirmBox.hide();
     });
     confirmBox.find(".yes").click(myYes);
     confirmBox.show();
 }
 
 // show this message if all levels have been cleared
-const showFinalMessage = function(){
+const showFinalMessage = function () {
 
-    let element = document.getElementById("playboard");
-
-    // element with id "playboard": remove classes "grid-container" and "final-border"
-    element.classList.remove("grid-container");
-    element.classList.remove("final-border");
-    
-    // element with id "playboard": remove class "text-container"
-    element.classList.add( "text-container");
-
-    // delete all fields
-    element.innerHTML = '';
-
-    let leftBox = document.getElementById("left-side");
-    leftBox.innerHTML = '';
+    let element = unloadPlayboard()
 
     // add final message
     element.innerHTML = `<p>
@@ -636,6 +643,149 @@ const showFinalMessage = function(){
     December 2020</p>`;
 }
 
+
+const handleArcadeParameters = async function () {
+
+    // load available emojis
+    let emojiData = await apiDB.getEmojis()
+    
+    // clean up view
+    let element = unloadPlayboard()
+    let list = ''
+
+    for (i = 0; i < emojiData.length; i++) {
+        list += `<option>${emojiData[i]}</option>`
+    }
+
+    // ask player to enter information
+    // let them write a message
+    // let player select their emoji
+    element.innerHTML = `
+    <form id="initialPlayerRecordForm">
+        <input type="text" id="initialPlayerName" name="initialPlayerName" required="" placeholder="enter your name"><br><br>
+        <input type="text" id="initialMessageInput" name="initialMessageInput" required="" placeholder="write a message"><br>   
+        <p class="small-text">Select an emoji as your coat of arms</p>
+        <select id="initialEmojiInput" size="${emojiData.length}">
+            ${list}
+        </select>
+        <input type="button" onclick="submitPlayerRecord()" value="submit">
+    </form>`
+}
+
+const submitPlayerRecord = function () {
+
+    console.log("submitPlayerRecord was run")
+
+    let initialForm = document.getElementById('initialPlayerRecordForm')
+    console.log("initalForm element = ")
+    console.table(initialForm)
+
+
+    let nameOfInitialPlayer = document.getElementById('initialPlayerName').value.toString();
+    let initialMessageFromPlayer = document.getElementById('initialMessageInput').value.toString();
+    let chosenEmoji = document.getElementById('initialEmojiInput').value.toString();
+    let deliverPlaytime = playtime.toString();
+    let randomID = Math.random();
+    randomID = randomID.toString().substring(2) + nameOfInitialPlayer;
+
+    console.log("initialMessageInput: ", initialMessageFromPlayer)
+    console.log("initialEmojiInput: ", chosenEmoji)
+
+    // store message to DB
+    // TODO: id anpassen
+    let player = {
+        id: randomID,
+        playername: nameOfInitialPlayer,
+        initialMessage: initialMessageFromPlayer,
+        ownedMessage: "",
+        initialPlaytime: deliverPlaytime,
+        fasterTime: null,
+        emoji: chosenEmoji
+    }
+    //apiDB.connect("player","PUT",player)
+    apiDB.connect("player", "POST", player)
+
+    // load leaderboard
+    loadLeaderboard(player)
+
+}
+const loadLeaderboard = async function (currentPlayer = ''){
+    let playFinished = true
+    let allPlayerRecords = await apiDB.connect("player", "GET")
+
+    // make sure current player is shown in view but eliminate duplicates if server was fast
+    currentPlayer ? allPlayerRecords.push(currentPlayer) : playFinished = false
+    let playerRecordsJSON = allPlayerRecords.map(JSON.stringify)
+    let recordsAsSet = new Set(playerRecordsJSON)
+    allPlayerRecords = Array.from(recordsAsSet).map(JSON.parse)
+    
+    console.table(allPlayerRecords)
+
+    let leaderboard = []
+    leaderboard = allPlayerRecords.sort((r1,r2)=>{
+        return r1.initialPlaytime - r2.initialPlaytime
+    })
+
+    // playtime to show
+    
+
+    leaderboard.forEach(entry => {
+        let playtimeToShow
+        if(entry.fasterTime != null && entry.initialPlaytime > entry.fasterTime){
+            playtimeToShow = entry.fasterTime
+            console.log("true faster time")
+        }else{
+            playtimeToShow = entry.initialPlaytime
+            console.log("no faster time", playtimeToShow)
+        }
+        
+        let minutes =  Math.floor(playtimeToShow / 60000)
+        let seconds = ((playtimeToShow % 60000) / 1000).toFixed(0)
+        let playtimeDisplayed = minutes + ":" + seconds
+        entry.time = playtimeDisplayed.split(".",1).toString()
+        
+    });
+    console.table(leaderboard)
+
+    let element = unloadPlayboard()
+
+    let recordHTML = `<ol class="playerRecordsDisplay">`
+    // TODO: if 'owwwEEDD' change values!
+    // TODO: show playtime as minutes (and hours if any)
+    for (let i = 0; i < leaderboard.length; i++) {
+        recordHTML += `
+        <li>
+        <span class="recordedPlaytime">${leaderboard[i].time}</span> |
+        <span class="playerTitle">${leaderboard[i].playername}</span>
+        <span class="coatOfArms">${leaderboard[i].emoji}</span> 
+        <input type="button" onclick="tbd" value="own"> <br>
+        <span class="commandment">${leaderboard[i].initialMessage}</span> <br> 
+        </li>`                
+    }
+    recordHTML += `</ol>`
+    element.innerHTML = recordHTML
+
+}
+
+const unloadPlayboard = function () {
+    let element = document.getElementById("playboard");
+
+    // element with id "playboard": remove classes "grid-container" and "final-border"
+    element.classList.remove("grid-container");
+    element.classList.remove("final-border");
+
+    // element with id "playboard": remove class "text-container"
+    element.classList.add("text-container");
+
+    // delete all fields
+    element.innerHTML = '';
+
+    let leftBox = document.getElementById("left-side");
+    leftBox.innerHTML = '';
+
+    return element
+}
+
 /************************************
  *       GAME INITIALIZATON         *
  ************************************/
@@ -643,3 +793,20 @@ const showFinalMessage = function(){
 // MAIN 
 hideButton("next-level-button");
 hideButton("reload-board-button");
+
+// FOR TESTING
+/*
+let bilbo = 
+{
+    "id": "9349553567702911lefthanded",
+    "playername": "lefthanded",
+    "initialMessage": "slow start. fast finish.",
+    "ownedMessage": "",
+    "initialPlaytime": "284057.1000000015",
+    "fasterTime": null,
+    "emoji": "🩸"
+}
+loadLeaderboard(bilbo)*/
+//loadLeaderboard()
+
+
