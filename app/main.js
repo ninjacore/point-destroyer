@@ -726,6 +726,27 @@ const loadLeaderboard = async function (currentPlayer = ''){
         return r1.initialPlaytime - r2.initialPlaytime
     })
 
+    // playtime to show
+    
+
+    leaderboard.forEach(entry => {
+        let playtimeToShow
+        if(entry.fasterTime != null && entry.initialPlaytime > entry.fasterTime){
+            playtimeToShow = entry.fasterTime
+            console.log("true faster time")
+        }else{
+            playtimeToShow = entry.initialPlaytime
+            console.log("no faster time", playtimeToShow)
+        }
+        
+        let minutes =  Math.floor(playtimeToShow / 60000)
+        let seconds = ((playtimeToShow % 60000) / 1000).toFixed(0)
+        let playtimeDisplayed = minutes + ":" + seconds
+        entry.time = playtimeDisplayed.split(".",1).toString()
+        
+    });
+    console.table(leaderboard)
+
     let element = unloadPlayboard()
 
     let recordHTML = `<ol class="playerRecordsDisplay">`
@@ -734,12 +755,11 @@ const loadLeaderboard = async function (currentPlayer = ''){
     for (let i = 0; i < leaderboard.length; i++) {
         recordHTML += `
         <li>
-        <span class="coatOfArms">${leaderboard[i].emoji} </span>
-        <span class="playerTitle">${leaderboard[i].playername}</span> <br>
+        <span class="recordedPlaytime">${leaderboard[i].time}</span> |
+        <span class="playerTitle">${leaderboard[i].playername}</span>
+        <span class="coatOfArms">${leaderboard[i].emoji}</span> 
+        <input type="button" onclick="tbd" value="own"> <br>
         <span class="commandment">${leaderboard[i].initialMessage}</span> <br> 
-        <span class="recordedPlaytime">${leaderboard[i].initialPlaytime.split(".",1)}</span> | 
-
-        <input type="button" onclick="tbd" value="own">
         </li>`                
     }
     recordHTML += `</ol>`
@@ -787,7 +807,6 @@ let bilbo =
     "emoji": "🩸"
 }
 loadLeaderboard(bilbo)*/
-//loadLeaderboard()
-
+loadLeaderboard()
 
 
