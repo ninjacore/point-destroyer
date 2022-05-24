@@ -380,3 +380,88 @@ h1 {
 .golden-alert{
   text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #ff0, 0 0 30px #ff0, 0 0 40px #ff0, 0 0 55px #ff0, 0 0 75px #ff0; 
 }
+
+
+/* * * * * * * * * * * * * * * * * * * * *
+ *design for player input and leaderboard*
+ * * * * * * * * * * * * * * * * * * * * */
+
+
+ /* design for form */
+
+form {
+  color: white;
+}
+
+label {
+    width: 15em;
+    display: block;
+    margin-top: 15px;
+    font-size: 20px;
+}
+
+legend {
+  font-size: 30px;
+}
+
+
+#submit-button, #own-button {
+  background-color: #ff0;
+  text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #FF2079, 0 0 30px #FF2079, 0 0 40px #FF2079, 0 0 55px #FF2079, 0 0 75px #FF2079;
+  outline:none;
+       border-color: #F148FB;
+       box-shadow: 0 0 16px #F148FB;
+  color: black;
+  border-radius: 8px;
+  font-size: 20px;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  margin-left: auto;
+}
+
+#initialPlayerName, #initialMessageInput, #initialEmojiInput {
+  background-color: #ff0;
+  font-size: 15px;
+  margin-top: 15px;
+  text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #FF2079, 0 0 30px #FF2079, 0 0 40px #FF2079, 0 0 55px #FF2079, 0 0 75px #FF2079;
+  border-color: #F148FB;
+  box-shadow: 0 0 16px #F148FB;
+}
+
+
+fieldset {
+  background-color: black;
+  font-size: 15px;
+  margin-top: 15px;
+  font-color:  white;
+  border: 0px;
+}
+
+option {
+  width: 50px;
+  list-style-type: none;
+  padding-right: 10px;
+list-style-position: inside;
+}
+
+#custom-select {
+width: 30px;
+width: auto;
+}
+
+ /* design for leaderboard */
+ .playerTitle, .commandment, .coatOfArms, .recordedPlaytime {
+  margin-right: 15px;
+  margin-bottom: 30px;
+ }
+
+#own-button { 
+  background-color: #ff0;
+  text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #FF2079, 0 0 30px #FF2079, 0 0 40px #FF2079, 0 0 55px #FF2079, 0 0 75px #FF2079;
+  outline:none;
+       border-color: #F148FB;
+       box-shadow: 0 0 16px #F148FB;
+  color: black;
+  border-radius: 8px;
+  font-size: 20px;
+}
