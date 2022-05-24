@@ -20,22 +20,39 @@
             <form id="initialPlayerRecordForm" name="PlayerRecord", action="" method="get" enctype="text/html">
             <fieldset>
                 <legend>Register yourself on the leaderboard of Point Destoyer</legend>
-                <p>
-                <label>What you will be remembered by</label>
-                <input type="text" id="initialPlayerName" name="initialPlayerName" required="" placeholder="enter your name" maxlength="30"><br><br>
-                </p>
-                <p>
-                <label>Your message to your fellow players</label>
-                <input type="text" id="initialMessageInput" name="initialMessageInput" required="" placeholder="write a message" maxlength="50"><br>
-                </p>   
-                <p class="small-text">Select an emoji as your coat of arms</p>
-                <select id="initialEmojiInput" size="4">
-                    <option>🦑</option>
-                    <option>🦄</option>
-                    <option>👽</option>
-                    <option>💀</option>
-                </select>
-                <input type="button" onclick="submitPlayerRecord()" value="submit">
+                <div>
+                    <label for="initialPlayerName" >What you will be remembered by: </label>
+                    <textarea id="initialPlayerName" name="initialPlayerName" required="" placeholder="Enter your name" maxlength="20"></textarea> 
+                </div>
+                <div>
+                    <label for="initialMessageInput">Your message to your fellow players: </label>
+                    <textarea id="initialMessageInput" name="initialMessageInput" required="" placeholder="Write a message" maxlength="20"></textarea> 
+                </div>
+                <div id="custom-select">
+                    <label for="initialEmojiInput">Select an emoji as your coat of arms: </label>
+                    <select id="initialEmojiInput" size="4">
+                       <option>🦑</option>
+                        <option>🦄</option>
+                        <option>👽</option>
+                        <option>💀</option>
+                        <option>🦑</option>
+                        <option>🦄</option>
+                        <option>👽</option>
+                        <option>💀</option>
+                        <option>🦑</option>
+                        <option>🦄</option>
+                        <option>👽</option>
+                        <option>💀</option>
+                        <option>🦑</option>
+                        <option>🦄</option> 
+                        <option>👽</option>
+                        <option>💀</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="submit-button"></label>
+                    <button id="submit-button" type="button" class="button"onclick="tbd">submit</button>
+                </div>
             </fieldset>
             </form>
             <!-- change the design above -->
