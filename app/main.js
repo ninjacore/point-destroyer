@@ -582,6 +582,8 @@ const startGame = function () {
     // show "reload board" button
     showButton("reload-board-button");
 
+    hideButton("show-leaderboard-button");
+
     // update and show level counter
     let levelCounter = document.getElementById("level-counter");
     levelCounter.innerHTML = `<h2>GAME ${gameNumber+1} OF ${allStartFieldValues.length}</h2>`;
@@ -665,15 +667,29 @@ const handleArcadeParameters = async function () {
     // ask player to enter information
     // let them write a message
     // let player select their emoji
-    element.innerHTML = `
-    <form id="initialPlayerRecordForm">
-        <input type="text" id="initialPlayerName" name="initialPlayerName" required="" placeholder="enter your name"><br><br>
-        <input type="text" id="initialMessageInput" name="initialMessageInput" required="" placeholder="write a message"><br>   
-        <p class="small-text">Select an emoji as your coat of arms</p>
-        <select id="initialEmojiInput" size="${emojiData.length}">
-            ${list}
-        </select>
-        <input type="button" onclick="submitPlayerRecord()" value="submit">
+    element.innerHTML = 
+    `<form id="initialPlayerRecordForm" name="PlayerRecord", action="" method="get" enctype="text/html">
+    <fieldset>
+        <legend>Register yourself on the leaderboard of Point Destoyer</legend>
+        <div>
+            <label for="initialPlayerName" >What you will be remembered by: </label>
+            <textarea id="initialPlayerName" name="initialPlayerName" required="" placeholder="Enter your name" maxlength="10"></textarea> 
+        </div>
+        <div>
+            <label for="initialMessageInput">Your message to your fellow players: </label>
+            <textarea id="initialMessageInput" name="initialMessageInput" required="" placeholder="Write a message" maxlength="15"></textarea> 
+        </div>
+        <div id="custom-select">
+            <label for="initialEmojiInput">Select an emoji as your coat of arms: </label>
+            <select id="initialEmojiInput" size="2">
+                ${list}
+            </select>
+        </div>
+        <div>
+            <label for="submit-button"></label>
+            <button id="submit-button" type="button" class="button"onclick="tbd">Submit</button>
+        </div>
+    </fieldset>
     </form>`
 }
 
@@ -718,6 +734,8 @@ const loadLeaderboard = async function (currentPlayer = ''){
     let playFinished = true
     let allPlayerRecords = await apiDB.connect("player", "GET")
 
+    hideButton("show-leaderboard-button");
+
     // make sure current player is shown in view but eliminate duplicates if server was fast
     currentPlayer ? allPlayerRecords.push(currentPlayer) : playFinished = false
     let playerRecordsJSON = allPlayerRecords.map(JSON.stringify)
@@ -754,18 +772,29 @@ const loadLeaderboard = async function (currentPlayer = ''){
 
     let element = unloadPlayboard()
 
-    let recordHTML = `<ol class="playerRecordsDisplay">`
+    let recordHTML = `  <h2>Leaderboard</h2>
+    <div id="leaderboardtext1">Welcome to the leaderboard of Point Destroyer. Here you can see the time and messages of the other players. If you want, you can try to own a player with a better score than you.</div>
+    <div id="leaderboardtext2">If you manage to beat their time, you can rewrite their message and change their coat of arms. Good luck and have fun owning people or play again for a better time.</div>
+    <p></p> 
+    <div class="flex-container">
+        <div class="playerName">Title</div>
+        <div class="Message">Commandment</div>
+        <div class="emojiLeaderboard">Coat of Arms</div>  
+        <div class="playtimeforGame">Time</div>
+        <div class="ownAplayer">Own a Player</div>
+    </div>`
     // TODO: if 'owwwEEDD' change values!
     // TODO: show playtime as minutes (and hours if any)
     for (let i = 0; i < leaderboard.length; i++) {
         recordHTML += `
-        <li>
-        <span class="recordedPlaytime">${leaderboard[i].time}</span> |
-        <span class="playerTitle">${leaderboard[i].playername}</span>
-        <span class="coatOfArms">${leaderboard[i].emoji}</span> 
-        <input type="button" onclick="tbd" value="own"> <br>
-        <span class="commandment">${leaderboard[i].initialMessage}</span> <br> 
-        </li>`                
+
+        <div class="flex-container">
+            <span class="playerTitle">${leaderboard[i].playername}</span>
+            <span class="commandment">${leaderboard[i].initialMessage}</span>
+            <span class="coatOfArms">${leaderboard[i].emoji}</span>  
+            <span class="recordedPlaytime">${leaderboard[i].time}</span>
+            <button class="button own-button" type="button" "onclick="tbd">Own</button>
+        </div>`                
     }
     recordHTML += `</ol>`
     element.innerHTML = recordHTML

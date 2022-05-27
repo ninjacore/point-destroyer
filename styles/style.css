@@ -306,7 +306,7 @@ h1 {
   background-color: #69871324;
 }
 
-#reload-board-button, #start-game-button, #next-level-button, #test-game-button{
+#reload-board-button, #start-game-button, #next-level-button, #test-game-button, #show-leaderboard-button{
   background-color: #0D0221;
   /* fancy adaptions . start */
   text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #FF2079, 0 0 30px #FF2079, 0 0 40px #FF2079, 0 0 55px #FF2079, 0 0 75px #FF2079;
@@ -465,7 +465,7 @@ select {
  /* design for leaderboard */
 
 
-#own-button { 
+.own-button { 
   background-color:   #FFD700;
   text-shadow: 0 0 5px #FFD700, 0 0 15px #FFD700, 0 0 20px #FFD700, 0 0 20px #FF2079, 0 0 30px #FF2079, 0 0 40px #FF2079, 0 0 55px #FF2079, 0 0 75px #FF2079;
   outline:none;
@@ -512,11 +512,11 @@ span {
 } /* Used for centering the results of the games and API's. */
 
 
-#playerName, #Message, #emojiLeaderboard, #playtimeforGame, #ownAplayer {
+.playerName, .Message, .emojiLeaderboard, .playtimeforGame, .ownAplayer {
  width: 180px;
 } 
 
-.coatOfArms, .playerTitle, .commandment, .recordedPlaytime, #own-button {
+.coatOfArms, .playerTitle, .commandment, .recordedPlaytime, .own-button {
   width:  180px;
   margin-left: auto;
   margin-right: auto;
