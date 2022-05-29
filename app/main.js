@@ -515,15 +515,7 @@ const loadNextGame = function () {
         endtimeGame = performance.now()
         playtime = endtimeGame - starttimeGame
 
-        // TODO: delete after testing
-        console.table(playtime)
-        console.log(`%c It took you ${playtime} milliseconds to finish this game.`, "color: orange; font-weight:bold;")
-
         handleArcadeParameters();
-
-        // TODO: delete once new process confirmed
-        //console.log("showing final message.");
-        //showFinalMessage();
 
 
     } else {
@@ -678,7 +670,7 @@ const handleArcadeParameters = async function () {
     }
 
     if(ownedGame){
-        // TODO: add playtime
+    
         let playtimeToBeat = recordToOwn.initialPlaytime
         let wasFaster = false
         if(playtimeToBeat > playtime){
@@ -748,7 +740,6 @@ const handleArcadeParameters = async function () {
    
 }
 
-// TODO: update record with owned message
 const submitOwnedPlayerRecord = function () {
 
     // get new data
@@ -813,7 +804,7 @@ const submitPlayerRecord = function () {
 
 }
 const loadLeaderboard = async function (currentPlayer = ''){
-    let playFinished = true
+
     let allPlayerRecords = await apiDB.connect("player", "GET")
 
     hideButton("show-leaderboard-button");
@@ -872,8 +863,7 @@ const loadLeaderboard = async function (currentPlayer = ''){
         <div class="playtimeforGame">Time</div>
         <div class="ownAplayer">Own a Player</div>
     </div>`
-    // TODO: if 'owwwEEDD' change values!
-    // TODO: show playtime as minutes (and hours if any)
+
     for (let i = 0; i < leaderboard.length; i++) {
 
         if(leaderboard[i].isOwned){
@@ -915,7 +905,6 @@ const startOwnedPlay = function(record) {
     gameNumber = 0
 
     startGame()
-
 
 }
 
