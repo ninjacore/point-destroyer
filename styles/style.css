@@ -478,7 +478,12 @@ select {
   font-weight: bold;
   margin-bottom: 15px;
   margin-left: auto;
-} 
+}
+
+.owned-button {
+  background-color:   #ff0000;
+  text-shadow: 0 0 5px #FFD700, 0 0 15px #FFD700, 0 0 20px #FFD700, 0 0 20px #FF2079, 0 0 30px #FF2079, 0 0 40px #FF2079, 0 0 55px #FF2079, 0 0 75px #FF2079;
+}
 
 .flex-container {
   display: flex;

@@ -835,14 +835,19 @@ const loadLeaderboard = async function (currentPlayer = ''){
     
 
     leaderboard.forEach(entry => {
-        let playtimeToShow
-        if(entry.fasterTime != null && entry.initialPlaytime > entry.fasterTime){
-            playtimeToShow = entry.fasterTime
-            console.log("true faster time")
-        }else{
-            playtimeToShow = entry.initialPlaytime
-            console.log("no faster time", playtimeToShow)
-        }
+        let playtimeToShow = entry.initialPlaytime
+        entry.isOwned = false
+        entry.textToShow = entry.ownedMessage
+
+        if(entry.fasterTime != null && Number(entry.initialPlaytime) > Number(entry.fasterTime)){
+            console.log("%c true faster time","color:green")
+            
+            //playtimeToShow = entry.fasterTime
+            entry.isOwned = true
+            entry.textToShow = entry.ownedMessage
+            
+        } 
+        
         
         let minutes =  Math.floor(playtimeToShow / 60000)
         minutes = ("0" + minutes).slice(-2)
@@ -870,16 +875,32 @@ const loadLeaderboard = async function (currentPlayer = ''){
     // TODO: if 'owwwEEDD' change values!
     // TODO: show playtime as minutes (and hours if any)
     for (let i = 0; i < leaderboard.length; i++) {
-    
-        recordHTML += `
 
-        <div class="flex-container">
-            <span class="playerTitle">${leaderboard[i].playername}</span>
-            <span class="commandment">${leaderboard[i].initialMessage}</span>
-            <span class="coatOfArms">${leaderboard[i].emoji}</span>  
-            <span class="recordedPlaytime">${leaderboard[i].time}</span>
-            <button class="button own-button" type="button" onclick='startOwnedPlay(${JSON.stringify(leaderboard[i])})'>Own</button>
-        </div>`                
+        if(leaderboard[i].isOwned){
+
+            recordHTML += `
+
+            <div class="flex-container">
+                <span class="playerTitle"><del>${leaderboard[i].playername}</del></span>
+                <span class="commandment">${leaderboard[i].ownedMessage}</span>
+                <span class="coatOfArms"><del>${leaderboard[i].emoji}</del></span>  
+                <span class="recordedPlaytime"><del>${leaderboard[i].time}</del></span>
+                <button class="button own-button owned-button" type="button"><del>Owned</del></button>
+                
+            </div>` 
+
+        }else{    
+    
+            recordHTML += `
+
+            <div class="flex-container">
+                <span class="playerTitle">${leaderboard[i].playername}</span>
+                <span class="commandment">${leaderboard[i].initialMessage}</span>
+                <span class="coatOfArms">${leaderboard[i].emoji}</span>  
+                <span class="recordedPlaytime">${leaderboard[i].time}</span>
+                <button class="button own-button" type="button" onclick='startOwnedPlay(${JSON.stringify(leaderboard[i])})'>Own</button>
+            </div>`     
+        }           
     }
     recordHTML += `</ol>`
     element.innerHTML = recordHTML
