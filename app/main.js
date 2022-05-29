@@ -687,7 +687,7 @@ const handleArcadeParameters = async function () {
         </div>
         <div>
             <label for="submit-button"></label>
-            <button id="submit-button" type="button" class="button"onclick="tbd">Submit</button>
+            <button id="submit-button" type="button" class="button"onclick="submitPlayerRecord()">Submit</button>
         </div>
     </fieldset>
     </form>`
@@ -763,7 +763,9 @@ const loadLeaderboard = async function (currentPlayer = ''){
         }
         
         let minutes =  Math.floor(playtimeToShow / 60000)
+        minutes = ("0" + minutes).slice(-2)
         let seconds = ((playtimeToShow % 60000) / 1000).toFixed(0)
+        seconds = ("0" + seconds).slice(-2)
         let playtimeDisplayed = minutes + ":" + seconds
         entry.time = playtimeDisplayed.split(".",1).toString()
         
