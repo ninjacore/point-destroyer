@@ -559,6 +559,9 @@ const loadNextGame = function () {
 
 const startGame = function () {
 
+    // make sure html is correct
+    reloadContainer();
+
     // element with id "playboard":
     let playboardElement = document.getElementById("playboard");
 
@@ -570,6 +573,12 @@ const startGame = function () {
 
     //  innerHtml = '' (removes content from tutorial)
     resetPlayboard();
+
+    // set up box on the left
+    let leftBox = document.getElementById("left-side");
+    leftBox.innerHTML = `<button id="reload-board-button" type="button" class="button" onclick="resetPlayboard()">RELOAD BOARD</button>
+    <div id="mini-tutorial"></div>
+    <div id="level-counter"></div>`;
 
     // delete "start-game" button
     let nextLevelButton = document.getElementById("start-game-button");
@@ -713,7 +722,6 @@ const submitPlayerRecord = function () {
     console.log("initialEmojiInput: ", chosenEmoji)
 
     // store message to DB
-    // TODO: id anpassen
     let player = {
         id: randomID,
         playername: nameOfInitialPlayer,
@@ -821,6 +829,45 @@ const unloadPlayboard = function () {
 
     return element
 }
+
+const reloadContainer = function () {
+    let element = document.getElementById("container");
+
+    // delete all fields
+    element.innerHTML = `<div class="left-side" id="left-side">
+            <button id="reload-board-button" type="button" class="button" onclick="resetPlayboard()">RELOAD BOARD</button>
+            <div id="mini-tutorial"></div>
+            <div id="level-counter"></div>
+        </div>
+        <div class="text-container" id="playboard">
+            <div class="tutorial-box">
+                <div class="proto-start-field"></div>
+                <div class="tutorial-text">THIS IS THE <b>START</b> FIELD. CLICK ON IT.</div>
+            </div>
+            <div class="tutorial-box">
+                <div class="proto-end-field"></div>
+                <div class="tutorial-text">THIS IS THE <b>END</b> FIELD.</div>
+            </div>
+            <div class="tutorial-box">
+                <div class="proto-point-field"></div>
+                <div class="tutorial-text">THESE ARE THE <b>POINTS</b>. YOU NEED TO COLLECT THEM ALL.</div>
+            </div>	
+            <div>
+                MAKE SURE TO USE CHROMIUM-BASED BROWSERS <br>LIKE GOOGLE CHROME, BRAVE OR MICROSOFT EDGE <br>FOR THE BEST PERFORMANCE.
+            </div>
+
+        </div>
+        <div class="right-side" id="right-side">
+            <!--<button id="test-game-button" type="button" class="button" onclick="handleArcadeParameters()">TESTING</button>-->
+            <button id="start-game-button" type="button" class="button" onclick="startGame()">START GAME</button>
+            <button id="next-level-button" type="button" class="button" onclick="loadNextGame()">NEXT LEVEL</button>
+            <button id="show-leaderboard-button" type="button" class="button" onclick="loadLeaderboard()">LEADERBOARD</button>
+            
+        </div>`;
+
+    return element
+}
+
 
 /************************************
  *       GAME INITIALIZATON         *
