@@ -880,7 +880,22 @@ const loadLeaderboard = async function (currentPlayer = ''){
             </div>` 
 
         }else{    
-    
+
+            // special html for first record
+            if(i == 0){
+
+            recordHTML += `
+
+            <div class="flex-container">
+                <span class="playerTitle">${leaderboard[i].playername}</span>
+                <span class="commandment">${leaderboard[i].initialMessage}</span>
+                <span class="coatOfArms">${leaderboard[i].emoji}</span>  
+                <span class="recordedPlaytime">${leaderboard[i].time}</span>
+                <button class="button top-player" type="button">Is King</button>
+            </div>`  
+
+            }else{       
+
             recordHTML += `
 
             <div class="flex-container">
@@ -889,7 +904,8 @@ const loadLeaderboard = async function (currentPlayer = ''){
                 <span class="coatOfArms">${leaderboard[i].emoji}</span>  
                 <span class="recordedPlaytime">${leaderboard[i].time}</span>
                 <button class="button own-button" type="button" onclick='startOwnedPlay(${JSON.stringify(leaderboard[i])})'>Own</button>
-            </div>`     
+            </div>`   
+            }  
         }           
     }
     recordHTML += `</ol>`
