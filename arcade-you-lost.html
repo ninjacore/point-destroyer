@@ -19,30 +19,35 @@
             <!-- change the design below -->
 
 
-            <div>
-                <p>You Lost!</p>
-                <p>Your time: ${playtime} ms</p>
-                <p>Initial playtime: ${playtimeToBeat} ms</p>
-                <p>Better luck next time!</p>
+
+
+            <div class="owned-play-input">
+                <h2>You lost against that player!</h2>
+                <p>Your time: <span class="you-lost">${playtime} ms</span></p>
+                <p>Initial playtime: <span class="you-won">${playtimeToBeat} ms</span></p>
+     
+                <p >Better luck next time!</p>
                 <button id="start-game-button" type="button" class="button" onclick="startGame()">START GAME</button>
-                <button id="show-leaderboard-button" type="button" class="button" onclick="loadLeaderboard()">LEADERBOARD</button>
-                </div>
-      
-
-<!-- change the design above -->
+                <button id="show-leaderboard-button" type="button" class="button"
+                    onclick="loadLeaderboard()">LEADERBOARD</button>
+            </div>
 
 
-</div>
-<div class="right-side" id="right-side">
-    <button id="test-game-button" type="button" class="button"
-        onclick="handleArcadeParameters()" style="visibility: hidden;">TESTING</button>
-    <button id="start-game-button" type="button" class="button" onclick="startGame()" style="visibility: hidden;">START GAME</button>
-    <button id="next-level-button" type="button" class="button" onclick="loadNextGame()"
-        style="visibility: hidden;">NEXT LEVEL</button>
-</div>
-</div>
+            <!-- change the design above -->
 
-<div id="confirm" class="confirm-box"></div>
+
+        </div>
+        <div class="right-side" id="right-side">
+            <button id="test-game-button" type="button" class="button" onclick="handleArcadeParameters()"
+                style="visibility: hidden;">TESTING</button>
+            <button id="start-game-button" type="button" class="button" onclick="startGame()"
+                style="visibility: hidden;">START GAME</button>
+            <button id="next-level-button" type="button" class="button" onclick="loadNextGame()"
+                style="visibility: hidden;">NEXT LEVEL</button>
+        </div>
+    </div>
+
+    <div id="confirm" class="confirm-box"></div>
 
 
 

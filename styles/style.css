@@ -394,7 +394,7 @@ h1 {
  /* design for form */
 
 label {
-    width: 15em;
+    /*width: 15em;*/
     display: block;
     margin-top: 15px;
     font-size: 20px;
@@ -406,6 +406,27 @@ label {
 legend {
   font-size: 30px;
 }
+
+.owned-play-input {
+  font-size: 20px;
+  padding: 5%;
+  outline:none;
+}
+
+.you-won{
+  text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #ff0, 0 0 30px #ff0, 0 0 40px #ff0, 0 0 55px #ff0, 0 0 75px #ff0; 
+}
+
+.you-lost{
+  text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #FF2079, 0 0 30px #FF2079, 0 0 40px #FF2079, 0 0 55px #FF2079, 0 0 75px #FF2079;
+}
+
+.neutral {
+  text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #FFF, 0 0 30px #FFF, 0 0 40px #FFF, 0 0 55px #FFF, 0 0 75px #FFF;
+}
+
+
+
 
 
 #submit-button {
@@ -425,7 +446,7 @@ legend {
  /* The same button like the others, just with a diffrent back-ground color. */
 
 
-#initialPlayerName, #initialMessageInput, #initialEmojiInput {
+#initialPlayerName, #initialMessageInput, #initialEmojiInput, #ownedMessage {
   background-color: #ff0;
   font-size: 15px;
   margin-top: 15px;

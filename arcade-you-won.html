@@ -19,39 +19,42 @@
             <!-- change the design below -->
 
 
-<div>
-<p>You Won!</p>
-<p>Your time: ${playtime} ms</p>
-<p>Initial playtime: ${playtimeToBeat} ms</p>
-<form id="ownedPlayerRecordForm" name="PlayerRecord", action="" method="get" enctype="text/html">
-<fieldset>
-    <div>
-        <label for="ownedMessage" >What you will be remembered by: </label>
-        <textarea id="ownedMessage" name="ownedMessage" required="" placeholder="Write a new message" maxlength="10"></textarea> 
+            <div class="owned-play-input">
+                <form id="ownedPlayerRecordForm" name="PlayerRecord" , action="" method="get" enctype="text/html">
+
+                    <div>
+                        <h2>YOU'VE OWNED THAT PLAYER !</h2>
+                        <p>Your time: <span class="you-won">${playtime} ms</span></p>
+                        <p>Initial playtime: <span class="neutral"> ${playtimeToBeat} ms</span></p>
+
+                        <textarea id="ownedMessage" name="ownedMessage" required="" placeholder="Write a new message"
+                            maxlength="10"></textarea>
+
+                        <div>
+                            <label for="submit-button"></label>
+                            <button id="submit-button" type="button" class="button"
+                                onclick="submitOwnedPlayerRecord()">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+            <!-- change the design above -->
+
+
+        </div>
+        <div class="right-side" id="right-side">
+            <button id="test-game-button" type="button" class="button" onclick="handleArcadeParameters()"
+                style="visibility: hidden;">TESTING</button>
+            <button id="start-game-button" type="button" class="button" onclick="startGame()"
+                style="visibility: hidden;">START GAME</button>
+            <button id="next-level-button" type="button" class="button" onclick="loadNextGame()"
+                style="visibility: hidden;">NEXT LEVEL</button>
+        </div>
     </div>
-    <div>
-        <label for="submit-button"></label>
-        <button id="submit-button" type="button" class="button"onclick="submitOwnedPlayerRecord()">Submit</button>
-    </div>
-</fieldset>
-</form>
-</div>
-      
 
-<!-- change the design above -->
-
-
-</div>
-<div class="right-side" id="right-side">
-    <button id="test-game-button" type="button" class="button"
-        onclick="handleArcadeParameters()" style="visibility: hidden;">TESTING</button>
-    <button id="start-game-button" type="button" class="button" onclick="startGame()" style="visibility: hidden;">START GAME</button>
-    <button id="next-level-button" type="button" class="button" onclick="loadNextGame()"
-        style="visibility: hidden;">NEXT LEVEL</button>
-</div>
-</div>
-
-<div id="confirm" class="confirm-box"></div>
+    <div id="confirm" class="confirm-box"></div>
 
 
 
