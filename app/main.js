@@ -683,8 +683,8 @@ const handleArcadeParameters = async function () {
             <form id="ownedPlayerRecordForm" name="PlayerRecord" , action="" method="get" enctype="text/html">
                     <div>
                         <h2>YOU'VE OWNED THAT PLAYER !</h2>
-                        <p>Your time: <span class="you-won">${playtime} ms</span></p>
-                        <p>Initial playtime: <span class="neutral"> ${playtimeToBeat} ms</span></p>
+                        <p>Your time: <span class="you-won">${playtime.toString().split(".", 1).toString()} ms</span></p>
+                        <p>Initial playtime: <span class="neutral"> ${playtimeToBeat.toString().split(".", 1).toString()} ms</span></p>
 
                         <textarea id="ownedMessage" name="ownedMessage" required="" placeholder="Write a new message"
                             maxlength="10"></textarea>
@@ -702,8 +702,8 @@ const handleArcadeParameters = async function () {
             element.innerHTML = `
             <div class="owned-play-input">
                 <h2>You lost against that player!</h2>
-                <p>Your time: <span class="you-lost">${playtime} ms</span></p>
-                <p>Initial playtime: <span class="you-won">${playtimeToBeat} ms</span></p>
+                <p>Your time: <span class="you-lost">${playtime.toString().split(".", 1).toString()} ms</span></p>
+                <p>Initial playtime: <span class="you-won">${playtimeToBeat.toString().split(".", 1).toString()} ms</span></p>
 
                 <p>Better luck next time!</p>
                 <button id="start-game-button" type="button" class="button" onclick="startGame()">START GAME</button>
