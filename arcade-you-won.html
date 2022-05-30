@@ -1,0 +1,58 @@
+<head>
+    <meta charset="utf-8">
+    <title>Point Destroyer</title>
+    <meta name="author" content="Adrian Menti, Lucien Haeller">
+    <meta name="description" content="WEBP Projekt">
+    <meta name="keywords" content="">
+    <meta name="date" content="">
+    <meta name="viewport" content=" width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+</head>
+
+<body>
+    <h1>P O I N T &nbsp; D E S T R O Y E R</h1>
+    <div id="container">
+        <div class="left-side" id="left-side"></div>
+        <div class="text-container" id="playboard">
+
+
+            <!-- change the design below -->
+
+
+<div>
+<p>You Won!</p>
+<p>Your time: ${playtime} ms</p>
+<p>Initial playtime: ${playtimeToBeat} ms</p>
+<form id="ownedPlayerRecordForm" name="PlayerRecord", action="" method="get" enctype="text/html">
+<fieldset>
+    <div>
+        <label for="ownedMessage" >What you will be remembered by: </label>
+        <textarea id="ownedMessage" name="ownedMessage" required="" placeholder="Write a new message" maxlength="10"></textarea> 
+    </div>
+    <div>
+        <label for="submit-button"></label>
+        <button id="submit-button" type="button" class="button"onclick="submitOwnedPlayerRecord()">Submit</button>
+    </div>
+</fieldset>
+</form>
+</div>
+      
+
+<!-- change the design above -->
+
+
+</div>
+<div class="right-side" id="right-side">
+    <button id="test-game-button" type="button" class="button"
+        onclick="handleArcadeParameters()" style="visibility: hidden;">TESTING</button>
+    <button id="start-game-button" type="button" class="button" onclick="startGame()" style="visibility: hidden;">START GAME</button>
+    <button id="next-level-button" type="button" class="button" onclick="loadNextGame()"
+        style="visibility: hidden;">NEXT LEVEL</button>
+</div>
+</div>
+
+<div id="confirm" class="confirm-box"></div>
+
+
+
+</body>
