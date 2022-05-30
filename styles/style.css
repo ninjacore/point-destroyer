@@ -306,7 +306,7 @@ h1 {
   background-color: #69871324;
 }
 
-#reload-board-button, #start-game-button, #next-level-button, #test-game-button{
+#reload-board-button, #start-game-button, #next-level-button, #test-game-button, #show-leaderboard-button{
   background-color: #0D0221;
   /* fancy adaptions . start */
   text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #FF2079, 0 0 30px #FF2079, 0 0 40px #FF2079, 0 0 55px #FF2079, 0 0 75px #FF2079;
@@ -317,6 +317,10 @@ h1 {
   color: white;
   border-radius: 8px;
   font-size: 20px;
+}
+
+#show-leaderboard-button{
+  margin-top: 30px;
 }
 
 /** REMARK!
@@ -379,4 +383,191 @@ h1 {
 
 .golden-alert{
   text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #ff0, 0 0 30px #ff0, 0 0 40px #ff0, 0 0 55px #ff0, 0 0 75px #ff0; 
+}
+
+
+/* * * * * * * * * * * * * * * * * * * * *
+ *design for player input and leaderboard*
+ * * * * * * * * * * * * * * * * * * * * */
+
+
+ /* design for form */
+
+label {
+    /*width: 15em;*/
+    display: block;
+    margin-top: 15px;
+    font-size: 20px;
+}
+
+ /* keeps the layout of the form to the left and in order. */
+
+
+legend {
+  font-size: 30px;
+}
+
+.owned-play-input {
+  font-size: 20px;
+  padding: 5%;
+  outline:none;
+}
+
+.you-won{
+  text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #ff0, 0 0 30px #ff0, 0 0 40px #ff0, 0 0 55px #ff0, 0 0 75px #ff0; 
+}
+
+.you-lost{
+  text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #FF2079, 0 0 30px #FF2079, 0 0 40px #FF2079, 0 0 55px #FF2079, 0 0 75px #FF2079;
+}
+
+.neutral {
+  text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #FFF, 0 0 30px #FFF, 0 0 40px #FFF, 0 0 55px #FFF, 0 0 75px #FFF;
+}
+
+
+
+
+
+#submit-button {
+  background-color: #ff0;
+  text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #FF2079, 0 0 30px #FF2079, 0 0 40px #FF2079, 0 0 55px #FF2079, 0 0 75px #FF2079;
+  outline:none;
+       border-color: #F148FB;
+       box-shadow: 0 0 16px #F148FB;
+  color: black;
+  border-radius: 8px;
+  font-size: 20px;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  margin-left: auto;
+}
+
+ /* The same button like the others, just with a diffrent back-ground color. */
+
+
+#initialPlayerName, #initialMessageInput, #initialEmojiInput, #ownedMessage {
+  background-color: #ff0;
+  font-size: 15px;
+  margin-top: 15px;
+  text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #FF2079, 0 0 30px #FF2079, 0 0 40px #FF2079, 0 0 55px #FF2079, 0 0 75px #FF2079;
+  border-color: #F148FB;
+  box-shadow: 0 0 16px #F148FB;
+}
+
+ /* Changes the color of the fields to golden with different shadow effects. */
+
+
+fieldset {
+  background-color: black;
+  font-size: 15px;
+  margin-top: 15px;
+  border: 0px; /* Keeping the border at 0px makes the border of the fieldset invisible. */
+}
+
+option {
+  margin-top: 8px;
+  list-style-type: none;
+  list-style-position: inside;
+  height: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#custom-select select option{
+  display:inline-block; /* This allows the emojis to be displayed horizontally. The basis was taken from: https://www.w3schools.com/css/css_inline-block.asp */
+}
+
+ 
+select {
+  overflow-y: auto; /* This takes away the scrollbar of the select field. The basis was taken from: https://www.w3schools.com/cssref/css3_pr_overflow-y.asp */
+}
+
+
+
+ /* design for leaderboard */
+
+
+.own-button { 
+  background-color:   #FFD700;
+  text-shadow: 0 0 5px #FFD700, 0 0 15px #FFD700, 0 0 20px #FFD700, 0 0 20px #FF2079, 0 0 30px #FF2079, 0 0 40px #FF2079, 0 0 55px #FF2079, 0 0 75px #FF2079;
+  outline:none;
+       border-color: #FF3131;
+       box-shadow: 0 0 16px #FF3131;
+  color: black;
+  border-radius: 8px;
+  font-size: 20px;
+  align-content: center;
+  font-weight: bold;
+  margin-bottom: 15px;
+  margin-left: auto;
+}
+
+.owned-button {
+  background-color:   #ff0000;
+  text-shadow: 0 0 5px #FFD700, 0 0 15px #FFD700, 0 0 20px #FFD700, 0 0 20px #FF2079, 0 0 30px #FF2079, 0 0 40px #FF2079, 0 0 55px #FF2079, 0 0 75px #FF2079;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: nowrap;
+  background-color: black;
+  flex-direction: row;
+  width: auto;
+  justify-content: center;
+}  
+
+.flex-container > div {
+  background-color: black;
+  text-align: center;
+  line-height: 30px;
+  font-size: 25px;
+  border-bottom: 3px solid white;
+} /* These are the titles for the leaderboard and are based on old arcade highscore boards. The basis was taken from: https://www.w3schools.com/css/css3_flexbox_container.asp*/
+
+.flex-container1 {
+  display: flex;
+  flex-wrap: nowrap;
+  background-color: black;
+  flex-direction: row;
+}
+
+
+span {
+  text-align: center;
+  line-height: 35px;
+  font-size: 20px;
+} /* Used for centering the results of the games and API's. */
+
+
+.playerName, .Message, .emojiLeaderboard, .playtimeforGame, .ownAplayer {
+ width: 180px;
+} 
+
+.coatOfArms, .playerTitle, .commandment, .recordedPlaytime, .own-button, .top-player{
+  width:  180px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+} /* This is used to align the elements of the leaderboard. */
+
+.coatOfArms, .playerTitle, .commandment, .recordedPlaytime {
+margin-top: 23px;
+} /* This specific margin is used to align the text of the results with the text of the own-button. */
+
+#leaderboardtext1, #leaderboardtext2{
+  font-size: 20px;
+}
+
+.top-player{
+  background-color: #ff0;
+  outline:none;
+    border-color: #ff0;
+    box-shadow: 0 -1px 4px #FFF, 0 -2px 10px #ff0, 0 -10px 20px #ff8000, 0 -10px 40px #F00;
+  text-shadow: 0;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bolder;
+  color: black;
 }

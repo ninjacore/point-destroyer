@@ -2,8 +2,12 @@
  *       DECLARATIONS - variables       *
  ****************************************/
 
-/** playtime counter */
+/* playtime counter */
 let starttimeGame, endtimeGame, playtime;
+
+/*  everything for replay */
+let ownedGame = false
+let recordToOwn
 
 /* level configs */
 let allStartFieldValues = [
@@ -82,6 +86,9 @@ const generatePlayboard = function () {
         element.innerHTML = ``;
         playboard.appendChild(element);
     }
+
+    // "reload board" button must be visible for each game
+    showButton("reload-board-button");
 
     // define all the fields around each field 
     /** was used for testing in the beginning
@@ -386,6 +393,8 @@ const startLevel = function (event) {
                             // disable drawing if level cleared
                             levelCleared = true;
 
+                            // hide "reload board" button
+                            hideButton("reload-board-button");
 
                             // special text for last level
                             if (gameNumber == 7) {
@@ -506,15 +515,7 @@ const loadNextGame = function () {
         endtimeGame = performance.now()
         playtime = endtimeGame - starttimeGame
 
-        // TODO: delete after testing
-        console.table(playtime)
-        console.log(`%c It took you ${playtime} milliseconds to finish this game.`, "color: orange; font-weight:bold;")
-
         handleArcadeParameters();
-
-        // TODO: delete once new process confirmed
-        //console.log("showing final message.");
-        //showFinalMessage();
 
 
     } else {
@@ -554,6 +555,9 @@ const loadNextGame = function () {
 
 const startGame = function () {
 
+    // make sure html is correct
+    reloadContainer();
+
     // element with id "playboard":
     let playboardElement = document.getElementById("playboard");
 
@@ -566,6 +570,12 @@ const startGame = function () {
     //  innerHtml = '' (removes content from tutorial)
     resetPlayboard();
 
+    // set up box on the left
+    let leftBox = document.getElementById("left-side");
+    leftBox.innerHTML = `<button id="reload-board-button" type="button" class="button" onclick="resetPlayboard()">RELOAD BOARD</button>
+    <div id="mini-tutorial"></div>
+    <div id="level-counter"></div>`;
+
     // delete "start-game" button
     let nextLevelButton = document.getElementById("start-game-button");
     let parent = nextLevelButton.parentElement;
@@ -576,6 +586,8 @@ const startGame = function () {
 
     // show "reload board" button
     showButton("reload-board-button");
+
+    hideButton("show-leaderboard-button");
 
     // update and show level counter
     let levelCounter = document.getElementById("level-counter");
@@ -648,7 +660,7 @@ const handleArcadeParameters = async function () {
 
     // load available emojis
     let emojiData = await apiDB.getEmojis()
-    
+
     // clean up view
     let element = unloadPlayboard()
     let list = ''
@@ -657,24 +669,112 @@ const handleArcadeParameters = async function () {
         list += `<option>${emojiData[i]}</option>`
     }
 
-    // ask player to enter information
-    // let them write a message
-    // let player select their emoji
-    element.innerHTML = `
-    <form id="initialPlayerRecordForm">
-        <input type="text" id="initialPlayerName" name="initialPlayerName" required="" placeholder="enter your name"><br><br>
-        <input type="text" id="initialMessageInput" name="initialMessageInput" required="" placeholder="write a message"><br>   
-        <p class="small-text">Select an emoji as your coat of arms</p>
-        <select id="initialEmojiInput" size="${emojiData.length}">
-            ${list}
-        </select>
-        <input type="button" onclick="submitPlayerRecord()" value="submit">
-    </form>`
+    if (ownedGame) {
+
+        let playtimeToBeat = recordToOwn.initialPlaytime
+        let wasFaster = false
+        if (playtimeToBeat > playtime) {
+            wasFaster = true
+        }
+
+        if (wasFaster) {
+            element.innerHTML = `            
+            <div class="owned-play-input">
+            <form id="ownedPlayerRecordForm" name="PlayerRecord" , action="" method="get" enctype="text/html">
+                    <div>
+                        <h2>YOU'VE OWNED THAT PLAYER !</h2>
+                        <p>Your time: <span class="you-won">${playtime.toString().split(".", 1).toString()} ms</span></p>
+                        <p>Initial playtime: <span class="neutral"> ${playtimeToBeat.toString().split(".", 1).toString()} ms</span></p>
+
+                        <textarea id="ownedMessage" name="ownedMessage" required="" placeholder="Write a new message"
+                            maxlength="10"></textarea>
+
+                        <div>
+                            <label for="submit-button"></label>
+                            <button id="submit-button" type="button" class="button"
+                                onclick="submitOwnedPlayerRecord()">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            `
+        } else {
+            element.innerHTML = `
+            <div class="owned-play-input">
+                <h2>You lost against that player!</h2>
+                <p>Your time: <span class="you-lost">${playtime.toString().split(".", 1).toString()} ms</span></p>
+                <p>Initial playtime: <span class="you-won">${playtimeToBeat.toString().split(".", 1).toString()} ms</span></p>
+
+                <p>Better luck next time!</p>
+                <button id="start-game-button" type="button" class="button" onclick="startGame()">START GAME</button>
+                <button id="show-leaderboard-button" type="button" class="button"
+                    onclick="loadLeaderboard()">LEADERBOARD</button>
+            </div
+            `
+        }
+
+    } else {
+        // ask player to enter information
+        // let them write a message
+        // let player select their emoji
+        element.innerHTML =
+            `<form id="initialPlayerRecordForm" name="PlayerRecord", action="" method="get" enctype="text/html">
+        <fieldset>
+            <legend>Register yourself on the leaderboard of Point Destoyer</legend>
+            <div>
+                <label for="initialPlayerName" >What you will be remembered by: </label>
+                <textarea id="initialPlayerName" name="initialPlayerName" required="" placeholder="Enter your name" maxlength="10"></textarea> 
+            </div>
+            <div>
+                <label for="initialMessageInput">Your message to your fellow players: </label>
+                <textarea id="initialMessageInput" name="initialMessageInput" required="" placeholder="Write a message" maxlength="15"></textarea> 
+            </div>
+            <div id="custom-select">
+                <label for="initialEmojiInput">Select an emoji as your coat of arms: </label>
+                <select id="initialEmojiInput" size="2">
+                    ${list}
+                </select>
+            </div>
+            <div>
+                <label for="submit-button"></label>
+                <button id="submit-button" type="button" class="button"onclick="submitPlayerRecord()">Submit</button>
+            </div>
+        </fieldset>
+        </form>`
+    }
+
+}
+
+const submitOwnedPlayerRecord = function () {
+
+    // get new data
+    let form = document.getElementById('ownedPlayerRecordForm')
+    let ownedMessageInput = document.getElementById('ownedMessage').value.toString();
+    let fasterTimeDelivered = playtime.toString();
+
+    // store message to DB
+    let player = {
+        id: recordToOwn.id,
+        playername: recordToOwn.playername,
+        initialMessage: recordToOwn.initialMessage,
+        ownedMessage: ownedMessageInput,
+        initialPlaytime: recordToOwn.initialPlaytime,
+        fasterTime: fasterTimeDelivered,
+        emoji: recordToOwn.emoji
+    }
+    console.log("%c PLAYER RECORD TO OWN!!!!", "color:yellow; font-weight:bold;")
+    console.table(player)
+
+    apiDB.connect("player", "PUT", player)
+    //apiDB.connect("player", "POST", player)
+
+    // load leaderboard
+    loadLeaderboard(player)
+
+
 }
 
 const submitPlayerRecord = function () {
-
-    console.log("submitPlayerRecord was run")
 
     let initialForm = document.getElementById('initialPlayerRecordForm')
     console.log("initalForm element = ")
@@ -692,7 +792,6 @@ const submitPlayerRecord = function () {
     console.log("initialEmojiInput: ", chosenEmoji)
 
     // store message to DB
-    // TODO: id anpassen
     let player = {
         id: randomID,
         playername: nameOfInitialPlayer,
@@ -709,61 +808,124 @@ const submitPlayerRecord = function () {
     loadLeaderboard(player)
 
 }
-const loadLeaderboard = async function (currentPlayer = ''){
-    let playFinished = true
+const loadLeaderboard = async function (currentPlayer = '') {
+
     let allPlayerRecords = await apiDB.connect("player", "GET")
+
+    hideButton("show-leaderboard-button");
 
     // make sure current player is shown in view but eliminate duplicates if server was fast
     currentPlayer ? allPlayerRecords.push(currentPlayer) : playFinished = false
     let playerRecordsJSON = allPlayerRecords.map(JSON.stringify)
     let recordsAsSet = new Set(playerRecordsJSON)
     allPlayerRecords = Array.from(recordsAsSet).map(JSON.parse)
-    
+
     console.table(allPlayerRecords)
 
     let leaderboard = []
-    leaderboard = allPlayerRecords.sort((r1,r2)=>{
+    leaderboard = allPlayerRecords.sort((r1, r2) => {
         return r1.initialPlaytime - r2.initialPlaytime
     })
 
     // playtime to show
-    
+
 
     leaderboard.forEach(entry => {
-        let playtimeToShow
-        if(entry.fasterTime != null && entry.initialPlaytime > entry.fasterTime){
-            playtimeToShow = entry.fasterTime
-            console.log("true faster time")
-        }else{
-            playtimeToShow = entry.initialPlaytime
-            console.log("no faster time", playtimeToShow)
+        let playtimeToShow = entry.initialPlaytime
+        entry.isOwned = false
+        entry.textToShow = entry.ownedMessage
+
+        if (entry.fasterTime != null && Number(entry.initialPlaytime) > Number(entry.fasterTime)) {
+            console.log("%c true faster time", "color:green")
+
+            //playtimeToShow = entry.fasterTime
+            entry.isOwned = true
+            entry.textToShow = entry.ownedMessage
+
         }
-        
-        let minutes =  Math.floor(playtimeToShow / 60000)
+
+
+        let minutes = Math.floor(playtimeToShow / 60000)
+        minutes = ("0" + minutes).slice(-2)
         let seconds = ((playtimeToShow % 60000) / 1000).toFixed(0)
+        seconds = ("0" + seconds).slice(-2)
         let playtimeDisplayed = minutes + ":" + seconds
-        entry.time = playtimeDisplayed.split(".",1).toString()
-        
+        entry.time = playtimeDisplayed.split(".", 1).toString()
+
     });
-    console.table(leaderboard)
+    //console.table(leaderboard)
 
     let element = unloadPlayboard()
 
-    let recordHTML = `<ol class="playerRecordsDisplay">`
-    // TODO: if 'owwwEEDD' change values!
-    // TODO: show playtime as minutes (and hours if any)
+    let recordHTML = `  <h2>Leaderboard</h2>
+    <div id="leaderboardtext1">Welcome to the leaderboard of Point Destroyer. Here you can see the time and messages of the other players. If you want, you can try to own a player with a better score than you.</div>
+    <div id="leaderboardtext2">If you manage to beat their time, you can rewrite their message and change their coat of arms. Good luck and have fun owning people or play again for a better time.</div>
+    <p></p> 
+    <div class="flex-container">
+        <div class="playerName">Title</div>
+        <div class="Message">Commandment</div>
+        <div class="emojiLeaderboard">Coat of Arms</div>  
+        <div class="playtimeforGame">Time</div>
+        <div class="ownAplayer">Own a Player</div>
+    </div>`
+
     for (let i = 0; i < leaderboard.length; i++) {
-        recordHTML += `
-        <li>
-        <span class="recordedPlaytime">${leaderboard[i].time}</span> |
-        <span class="playerTitle">${leaderboard[i].playername}</span>
-        <span class="coatOfArms">${leaderboard[i].emoji}</span> 
-        <input type="button" onclick="tbd" value="own"> <br>
-        <span class="commandment">${leaderboard[i].initialMessage}</span> <br> 
-        </li>`                
+
+        if (leaderboard[i].isOwned) {
+
+            recordHTML += `
+
+            <div class="flex-container">
+                <span class="playerTitle"><del>${leaderboard[i].playername}</del></span>
+                <span class="commandment">${leaderboard[i].ownedMessage}</span>
+                <span class="coatOfArms"><del>${leaderboard[i].emoji}</del></span>  
+                <span class="recordedPlaytime"><del>${leaderboard[i].time}</del></span>
+                <button class="button own-button owned-button" type="button"><del>Owned</del></button>
+                
+            </div>`
+
+        } else {
+
+            // special html for first record
+            if (i == 0) {
+
+                recordHTML += `
+
+            <div class="flex-container">
+                <span class="playerTitle">${leaderboard[i].playername}</span>
+                <span class="commandment">${leaderboard[i].initialMessage}</span>
+                <span class="coatOfArms">${leaderboard[i].emoji}</span>  
+                <span class="recordedPlaytime">${leaderboard[i].time}</span>
+                <button class="button top-player" type="button">Is King</button>
+            </div>`
+
+            } else {
+
+                recordHTML += `
+
+            <div class="flex-container">
+                <span class="playerTitle">${leaderboard[i].playername}</span>
+                <span class="commandment">${leaderboard[i].initialMessage}</span>
+                <span class="coatOfArms">${leaderboard[i].emoji}</span>  
+                <span class="recordedPlaytime">${leaderboard[i].time}</span>
+                <button class="button own-button" type="button" onclick='startOwnedPlay(${JSON.stringify(leaderboard[i])})'>Own</button>
+            </div>`
+            }
+        }
     }
     recordHTML += `</ol>`
     element.innerHTML = recordHTML
+
+}
+
+const startOwnedPlay = function (record) {
+
+    // set up global for special play
+    recordToOwn = record
+    ownedGame = true
+    gameNumber = 0
+
+    startGame()
 
 }
 
@@ -785,6 +947,45 @@ const unloadPlayboard = function () {
 
     return element
 }
+
+const reloadContainer = function () {
+    let element = document.getElementById("container");
+
+    // delete all fields
+    element.innerHTML = `<div class="left-side" id="left-side">
+            <button id="reload-board-button" type="button" class="button" onclick="resetPlayboard()">RELOAD BOARD</button>
+            <div id="mini-tutorial"></div>
+            <div id="level-counter"></div>
+        </div>
+        <div class="text-container" id="playboard">
+            <div class="tutorial-box">
+                <div class="proto-start-field"></div>
+                <div class="tutorial-text">THIS IS THE <b>START</b> FIELD. CLICK ON IT.</div>
+            </div>
+            <div class="tutorial-box">
+                <div class="proto-end-field"></div>
+                <div class="tutorial-text">THIS IS THE <b>END</b> FIELD.</div>
+            </div>
+            <div class="tutorial-box">
+                <div class="proto-point-field"></div>
+                <div class="tutorial-text">THESE ARE THE <b>POINTS</b>. YOU NEED TO COLLECT THEM ALL.</div>
+            </div>	
+            <div>
+                MAKE SURE TO USE CHROMIUM-BASED BROWSERS <br>LIKE GOOGLE CHROME, BRAVE OR MICROSOFT EDGE <br>FOR THE BEST PERFORMANCE.
+            </div>
+
+        </div>
+        <div class="right-side" id="right-side">
+            <!--<button id="test-game-button" type="button" class="button" onclick="handleArcadeParameters()">TESTING</button>-->
+            <button id="start-game-button" type="button" class="button" onclick="startGame()">START GAME</button>
+            <button id="next-level-button" type="button" class="button" onclick="loadNextGame()">NEXT LEVEL</button>
+            <button id="show-leaderboard-button" type="button" class="button" onclick="loadLeaderboard()">LEADERBOARD</button>
+            
+        </div>`;
+
+    return element
+}
+
 
 /************************************
  *       GAME INITIALIZATON         *
@@ -808,5 +1009,3 @@ let bilbo =
 }
 loadLeaderboard(bilbo)*/
 //loadLeaderboard()
-
-
