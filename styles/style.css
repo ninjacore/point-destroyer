@@ -319,6 +319,10 @@ h1 {
   font-size: 20px;
 }
 
+#show-leaderboard-button{
+  margin-top: 30px;
+}
+
 /** REMARK!
  * "confirm" CSS based on source: 
  * https://www.tutorialspoint.com/How-to-create-and-apply-CSS-to-JavaScript-Alert-box
@@ -437,7 +441,7 @@ fieldset {
   background-color: black;
   font-size: 15px;
   margin-top: 15px;
-  font-color:  white;
+  color:  white;
   border: 0px; /* Keeping the border at 0px makes the border of the fieldset invisible. */
 }
 
