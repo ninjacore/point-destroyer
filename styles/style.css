@@ -441,7 +441,6 @@ fieldset {
   background-color: black;
   font-size: 15px;
   margin-top: 15px;
-  color:  white;
   border: 0px; /* Keeping the border at 0px makes the border of the fieldset invisible. */
 }
 
